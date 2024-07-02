@@ -1,6 +1,6 @@
+using Api.Scrutor;
 using App.Core;
 using App.EF;
-using App.EF.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +12,24 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddAutoMapper(typeof(Program));
+
+//services
+var assembly = typeof(Program).Assembly;
+
+builder.Services.Scan(s => s.FromAssemblies(assembly)
+.AddClasses(c => c.AssignableTo<ITransientService>())
+.AsImplementedInterfaces()
+.WithTransientLifetime());
+
+builder.Services.Scan(s => s.FromAssemblies(assembly)
+.AddClasses(c => c.AssignableTo<ISingletonService>())
+.AsImplementedInterfaces()
+.WithSingletonLifetime());
+
+builder.Services.Scan(s => s.FromAssemblies(assembly)
+.AddClasses(c => c.AssignableTo<IScopedService>())
+.AsImplementedInterfaces()
+.WithScopedLifetime());
 
 builder.Services.AddControllers().ConfigureApiBehaviorOptions(options =>
 {

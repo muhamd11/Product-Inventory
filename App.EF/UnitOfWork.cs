@@ -1,10 +1,8 @@
 ﻿using App.Core;
 using App.Core.Interfaces;
-using App.Core.Models.UnitModule;
-using App.EF.Data;
 using App.EF.Repositories;
-using App.Shared.Models.ColorModule;
-using App.Shared.Models.ProductModule;
+using App.Shared.Models.AdditionsModules.ColorModule;
+using App.Shared.Models.AdditionsModules.UnitModule;
 using System.Threading.Tasks;
 
 namespace App.EF
@@ -13,17 +11,23 @@ namespace App.EF
     {
         private readonly ApplicationDbContext _context;
 
-        public IBaseRepository<Unit> Units { get; private set; }
+        #region AdditionsModules
+
         public IBaseRepository<Color> Colors { get; private set; }
-        public IBaseRepository<Product> Products { get; private set; }
+        public IBaseRepository<Unit> Units { get; private set; }
+
+        #endregion AdditionsModules
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
 
-            Units = new BaseRepository<Unit>(_context);
+            #region AdditionsModules
+
             Colors = new BaseRepository<Color>(_context);
-            Products = new BaseRepository<Product>(_context);
+            Units = new BaseRepository<Unit>(_context);
+
+            #endregion AdditionsModules
         }
 
         public async Task<int> CommitAsync()

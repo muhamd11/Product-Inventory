@@ -1,6 +1,7 @@
 ﻿using App.Core.Interfaces;
-using App.EF.Data;
 using App.Shared.Models.General;
+using App.Shared.Models.General.LocalModels;
+using App.Shared.Models.General.PaginationModule;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -24,9 +25,9 @@ namespace App.EF.Repositories
             return _context.Set<T>().ToList();
         }
 
-        public async Task<(IEnumerable<TResult>, Pagination pagination)> GetAllAsync<TResult>(
+        public async Task<BaseGetDataWithPagnation<TResult>> GetAllAsync<TResult>(
                                                                      Expression<Func<T, TResult>> selection,
-                                                                     Expression<Func<T, bool>>? criteria = null,
+                                                                     List<Expression<Func<T, bool>>>? criteria = null,
                                                                      PaginationRequest? paginationRequest = null)
         {
             Pagination pagination = new();
@@ -37,7 +38,10 @@ namespace App.EF.Repositories
             IQueryable<T> query = _context.Set<T>().AsQueryable();
 
             if (criteria != null)
-                query = query.Where(criteria);
+            {
+                foreach (var item in criteria)
+                    query = query.Where(item);
+            }
 
             result.totalItems = await query.CountAsync();
 
@@ -65,18 +69,13 @@ namespace App.EF.Repositories
 
             result.lastPage = result.totalPages;
 
-            //if (true)
-            //{
-            //    result.selfPage = 1;
-            //    result.firstPage = 1;
-            //    result.nextPage = 1;
-            //    result.prevPage = 1;
-            //    result.lastPage = 1;
-            //    result.totalPages = 1;
-            //    result.countItemsInPage = result.totalItems;
-            //}
+            var fullData = await query.Select(selection).ToListAsync();
 
-            return (await query.Select(selection).ToListAsync(), result);
+            return new BaseGetDataWithPagnation<TResult>()
+            {
+                Data = fullData,
+                Pagination = result
+            };
         }
 
         public T FirstOrDefault(Expression<Func<T, bool>> criteria, string[] includes = null)
@@ -198,6 +197,12 @@ namespace App.EF.Repositories
         }
 
         public T Update(T entity)
+        {
+            _context.Update(entity);
+            return entity;
+        }
+
+        public async Task<T> UpdateAsync(T entity)
         {
             _context.Update(entity);
             return entity;
