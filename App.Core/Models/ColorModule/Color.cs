@@ -5,9 +5,15 @@ namespace App.Shared.Models.ColorModule
 {
     public class Color
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string HexCode { get; set; }
+        public Color()
+        {
+            productStoreData = new HashSet<ProductStore>();
+
+        }
+        public int colorId { get; set; }
+        public string colorName { get; set; }
+        public string colorHexCode { get; set; }
+        public ICollection<ProductStore> productStoreData { get; set; }
 
     }
 }

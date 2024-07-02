@@ -36,7 +36,7 @@ namespace Api.Controllers.ColorModule
             paginationRequest = paginationRequest ?? new PaginationRequest();
 
             if (!string.IsNullOrEmpty(textSearch))
-                criteria = (x) => EF.Functions.Like(x.Name, $"%{textSearch}%");
+                criteria = (x) => EF.Functions.Like(x.colorName, $"%{textSearch}%");
 
             var (Colors, pagination) = await _unitOfWork.Colors.GetAllAsync(selectionColorInfo(), criteria, paginationRequest);
 
@@ -45,7 +45,7 @@ namespace Api.Controllers.ColorModule
 
         public async Task<ColorInfoDetails> GetDetails(int id)
         {
-            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.Id == id, selectionColorInfoDetails());
+            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == id, selectionColorInfoDetails());
             return colorInfo;
         }
 
@@ -54,27 +54,27 @@ namespace Api.Controllers.ColorModule
             var color = _mapper.Map<Color>(colorDto);
             await _unitOfWork.Colors.AddAsync(color);
             await _unitOfWork.CommitAsync();
-            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.Id == color.Id, selectionColorInfoDetails());
+            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == color.colorId, selectionColorInfoDetails());
             return colorInfo;
         }
 
         public async Task<ColorInfoDetails> DeleteAsync(int id)
         {
-            var color = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.Id == id);
+            var color = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == id);
             _unitOfWork.Colors.Delete(color);
             await _unitOfWork.CommitAsync();
-            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.Id == color.Id, selectionColorInfoDetails());
+            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == color.colorId, selectionColorInfoDetails());
             return colorInfo;
         }
 
         public async Task<ColorInfoDetails> UpdateAsync(UpdateColorDTO colorDto)
         {
-            var color = _unitOfWork.Colors.FirstOrDefault(x => x.Id == colorDto.Id);
-            color.Name = colorDto.Name;
-            color.HexCode = colorDto.HexCode;
+            var color = _unitOfWork.Colors.FirstOrDefault(x => x.colorId == colorDto.Id);
+            color.colorName = colorDto.Name;
+            color.colorHexCode = colorDto.HexCode;
             _unitOfWork.Colors.Update(color);
             await _unitOfWork.CommitAsync();
-            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.Id == color.Id, selectionColorInfoDetails());
+            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == color.colorId, selectionColorInfoDetails());
             return colorInfo;
         }
 
@@ -82,8 +82,8 @@ namespace Api.Controllers.ColorModule
         {
             return x => new ColorInfo
             {
-                Id = x.Id,
-                colorName = x.Name,
+                Id = x.colorId,
+                colorName = x.colorName,
             };
         }
 
@@ -91,9 +91,9 @@ namespace Api.Controllers.ColorModule
         {
             return x => new ColorInfoDetails
             {
-                Id = x.Id,
-                colorName = x.Name,
-                colorHexCode = x.HexCode
+                Id = x.colorId,
+                colorName = x.colorName,
+                colorHexCode = x.colorHexCode
             };
         }
 

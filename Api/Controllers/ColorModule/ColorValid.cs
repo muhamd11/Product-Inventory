@@ -33,9 +33,9 @@ namespace Api.Controllers.ColorModule
             if (!ValidationClass.IsValidId(colorId))
                 return BaseValid.createBaseValid(GeneralMessages.errorIdIsRequired, EnumStatus.error);
 
-            var color = _unitOfWork.Colors.FirstOrDefault(x => x.Id == colorId);
+            var color = _unitOfWork.Colors.FirstOrDefault(x => x.colorId == colorId);
 
-            if (color == null || color.Id != colorId)
+            if (color == null || color.colorId != colorId)
                 return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
 
             return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
@@ -52,10 +52,10 @@ namespace Api.Controllers.ColorModule
             if (!ValidationClass.IsValidHexCode(colorDto.HexCode))
                 return BaseValid.createBaseValid(ColorsMessages.errorHexCodeFormat, EnumStatus.error);
 
-            if (_unitOfWork.Colors.Any(x => x.HexCode == colorDto.HexCode))
+            if (_unitOfWork.Colors.Any(x => x.colorHexCode == colorDto.HexCode))
                 return BaseValid.createBaseValid(ColorsMessages.errorHexCodeWasAddedBefore, EnumStatus.error);
 
-            var color = _unitOfWork.Colors.FirstOrDefault(x => x.Name == colorDto.Name || x.HexCode == colorDto.HexCode);
+            var color = _unitOfWork.Colors.FirstOrDefault(x => x.colorName == colorDto.Name || x.colorHexCode == colorDto.HexCode);
 
             if (color != null)
                 return BaseValid.createBaseValid(GeneralMessages.wasAddedBefore, EnumStatus.error);
@@ -74,15 +74,15 @@ namespace Api.Controllers.ColorModule
             if (!ValidationClass.IsValidHexCode(colorDto.HexCode))
                 return BaseValid.createBaseValid(ColorsMessages.errorHexCodeFormat, EnumStatus.error);
 
-            var color = _unitOfWork.Colors.FirstOrDefault(x => x.Id == colorDto.Id);
+            var color = _unitOfWork.Colors.FirstOrDefault(x => x.colorId == colorDto.Id);
 
             if (color == null)
                 return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
 
-            if (_unitOfWork.Colors.Any(x => x.Name == colorDto.Name && x.Id != colorDto.Id))
+            if (_unitOfWork.Colors.Any(x => x.colorName == colorDto.Name && x.colorId != colorDto.Id))
                 return BaseValid.createBaseValid(GeneralMessages.wasAddedBefore, EnumStatus.error);
 
-            if (_unitOfWork.Colors.Any(x => x.HexCode == colorDto.HexCode && x.Id != colorDto.Id))
+            if (_unitOfWork.Colors.Any(x => x.colorHexCode == colorDto.HexCode && x.colorId != colorDto.Id))
                 return BaseValid.createBaseValid(ColorsMessages.errorHexCodeWasAddedBefore, EnumStatus.error);
 
             return BaseValid.createBaseValid(GeneralMessages.updateSuccess, EnumStatus.success);

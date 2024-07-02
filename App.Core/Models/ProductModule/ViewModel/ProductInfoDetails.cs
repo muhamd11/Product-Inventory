@@ -11,5 +11,9 @@ namespace App.Shared.Models.ProductModule.ViewModel
     {
         [JsonPropertyOrder(3)]
         public string productDescription { get; set; }
+
+        [JsonPropertyOrder(4)]
+        public ICollection<ProductStoreInfo> productStoreInfoData { get; set; }
+
     }
 }

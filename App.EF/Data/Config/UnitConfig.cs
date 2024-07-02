@@ -8,10 +8,10 @@ namespace App.EF.Data.Config
     {
         public void Configure(EntityTypeBuilder<Unit> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.HasKey(x => x.unitId);
+            builder.Property(x => x.unitId).ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Description).HasMaxLength(500);
+            builder.Property(x => x.unitDescription).HasMaxLength(500);
         }
     }
 }

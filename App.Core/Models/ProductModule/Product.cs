@@ -1,12 +1,20 @@
 ﻿
 
+using System.Collections;
+using System.Collections.Generic;
+
 namespace App.Shared.Models.ProductModule
 {
     public class Product
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public Product()
+        {
+            productStoreData = new HashSet<ProductStore>();
+        }
+        public int productId { get; set; }
+        public string productName { get; set; }
+        public string productDescription { get; set; }
 
+        public ICollection<ProductStore> productStoreData { get; set; } 
     }
 }

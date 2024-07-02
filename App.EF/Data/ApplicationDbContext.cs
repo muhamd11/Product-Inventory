@@ -1,4 +1,8 @@
-﻿using App.Core.Models.UnitModule;
+﻿
+
+using App.Core.Models.UnitModule;
+using App.Shared.Models.ColorModule;
+using App.Shared.Models.ProductModule;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.EF.Data
@@ -15,5 +19,8 @@ namespace App.EF.Data
         }
 
         public DbSet<Unit> Units { get; set; }
+        public DbSet<Color> Colors { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductStore> ProductStores { get; set; }
     }
 }

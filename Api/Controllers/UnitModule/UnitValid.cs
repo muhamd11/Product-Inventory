@@ -33,9 +33,9 @@ namespace Api.Controllers.UnitModule
             if (!ValidationClass.IsValidId(unitId))
                 return BaseValid.createBaseValid(GeneralMessages.errorIdIsRequired, EnumStatus.error);
 
-            var unit = _unitOfWork.Units.FirstOrDefault(x => x.Id == unitId);
+            var unit = _unitOfWork.Units.FirstOrDefault(x => x.unitId == unitId);
 
-            if (unit == null || unit.Id != unitId)
+            if (unit == null || unit.unitId != unitId)
                 return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
 
             return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
@@ -49,7 +49,7 @@ namespace Api.Controllers.UnitModule
             if (!ValidationClass.IsValidStringLength(unitDto.Name, 100))
                 return BaseValid.createBaseValid(UnitsMessages.errorNameLength, EnumStatus.error);
 
-            var unit = _unitOfWork.Units.FirstOrDefault(x => x.Name == unitDto.Name);
+            var unit = _unitOfWork.Units.FirstOrDefault(x => x.unitName == unitDto.Name);
 
             if (unit != null)
                 return BaseValid.createBaseValid(GeneralMessages.wasAddedBefore, EnumStatus.error);
@@ -65,12 +65,12 @@ namespace Api.Controllers.UnitModule
             if (!ValidationClass.IsValidStringLength(unitDto.Name, (int)EnumMaxLength.nameMaxLength))
                 return BaseValid.createBaseValid(UnitsMessages.errorNameLength, EnumStatus.error);
 
-            var unit = _unitOfWork.Units.FirstOrDefault(x => x.Id == unitDto.Id);
+            var unit = _unitOfWork.Units.FirstOrDefault(x => x.unitId == unitDto.Id);
 
             if (unit == null)
                 return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
 
-            if (_unitOfWork.Units.Any(x => x.Name == unitDto.Name && x.Id != unitDto.Id))
+            if (_unitOfWork.Units.Any(x => x.unitName == unitDto.Name && x.unitId != unitDto.Id))
                 return BaseValid.createBaseValid(GeneralMessages.wasAddedBefore, EnumStatus.error);
 
             return BaseValid.createBaseValid(GeneralMessages.updateSuccess, EnumStatus.success);

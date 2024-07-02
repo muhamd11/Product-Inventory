@@ -38,7 +38,7 @@ namespace Api.Controllers.ProductModule
             paginationRequest = paginationRequest ?? new PaginationRequest();
 
             if (!string.IsNullOrEmpty(textSearch))
-                criteria = (x) => EF.Functions.Like(x.Name, $"%{textSearch}%");
+                criteria = (x) => EF.Functions.Like(x.productName, $"%{textSearch}%");
 
             var (Colors, pagination) = await _unitOfWork.Products.GetAllAsync(selectionProductInfo(), criteria, paginationRequest);
 
@@ -47,7 +47,7 @@ namespace Api.Controllers.ProductModule
 
         public async Task<ProductInfoDetails> GetDetails(int id)
         {
-            var productInfo = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.Id == id, selectionProductInfoDetails());
+            var productInfo = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.productId == id, selectionProductInfoDetails());
             return productInfo;
         }
 
@@ -56,27 +56,27 @@ namespace Api.Controllers.ProductModule
             var product = _mapper.Map<Product>(productDto);
             await _unitOfWork.Products.AddAsync(product);
             await _unitOfWork.CommitAsync();
-            var productInfo = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.Id == product.Id, selectionProductInfoDetails());
+            var productInfo = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.productId == product.productId, selectionProductInfoDetails());
             return productInfo;
         }
 
         public async Task<ProductInfoDetails> DeleteAsync(int id)
         {
-            var product = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.Id == id);
+            var product = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.productId == id);
             _unitOfWork.Products.Delete(product);
             await _unitOfWork.CommitAsync();
-            var productInfo = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.Id == product.Id, selectionProductInfoDetails());
+            var productInfo = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.productId == product.productId, selectionProductInfoDetails());
             return productInfo;
         }
 
         public async Task<ProductInfoDetails> UpdateAsync(UpdateProductDTO productDto)
         {
-            var product = _unitOfWork.Products.FirstOrDefault(x => x.Id == productDto.Id);
-            product.Name = product.Name;
-            product.Description = product.Description;
+            var product = _unitOfWork.Products.FirstOrDefault(x => x.productId == productDto.Id);
+            product.productName = product.productName;
+            product.productDescription = product.productDescription;
             _unitOfWork.Products.Update(product);
             await _unitOfWork.CommitAsync();
-            var productInfo = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.Id == product.Id, selectionProductInfoDetails());
+            var productInfo = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.productId == product.productId, selectionProductInfoDetails());
             return productInfo;
         }
 
@@ -84,8 +84,8 @@ namespace Api.Controllers.ProductModule
         {
             return x => new ProductInfo
             {
-                Id = x.Id,
-                productName = x.Name,
+                Id = x.productId,
+                productName = x.productName,
             };
         }
 
@@ -93,9 +93,9 @@ namespace Api.Controllers.ProductModule
         {
             return x => new ProductInfoDetails
             {
-                Id = x.Id,
-                productName = x.Name,
-                productDescription = x.Description
+                Id = x.productId,
+                productName = x.productName,
+                productDescription = x.productDescription
             };
         }
 

@@ -8,11 +8,11 @@ namespace App.EF.Data.Config
     {
         public void Configure(EntityTypeBuilder<Color> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.HasKey(x => x.colorId);
+            builder.Property(x => x.colorId).ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Name).HasMaxLength(100);
-            builder.Property(x => x.HexCode).HasMaxLength(8);
+            builder.Property(x => x.colorName).HasMaxLength(100);
+            builder.Property(x => x.colorHexCode).HasMaxLength(8);
         }
     }
 }

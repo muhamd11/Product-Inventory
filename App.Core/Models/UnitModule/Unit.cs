@@ -5,8 +5,15 @@ namespace App.Core.Models.UnitModule
 {
     public class Unit
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public Unit()
+        {
+            productStoreData = new HashSet<ProductStore>();
+        }
+        public int unitId { get; set; }
+        public string unitName { get; set; }
+        public string unitSympol { get; set; }
+        public string unitDescription { get; set; }
+        public ICollection<ProductStore> productStoreData { get; set; }
+
     }
 }

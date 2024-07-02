@@ -3,6 +3,7 @@ using App.EF.Consts;
 using App.Shared.Models.General;
 using App.Shared.Models.UnitModule.Contracts.DTO;
 using App.Shared.Models.UnitModule.Contracts.VM;
+using App.Shared.Models.UnitModule.ViewModel;
 using App.Shared.Resources.General;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -42,57 +43,60 @@ namespace Api.Controllers.UnitModule
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll([FromQuery] string? textSearch = null, [FromQuery] PaginationRequest? paginationRequest = null)
         {
+            string moduleName = "unitsInfoData";
             paginationRequest = paginationRequest ?? new PaginationRequest();
-            UnitGetAllResponse unitGetAllResponse = new();
-
+            BaseGetAllResponse<UnitInfo> response = new();
             var watch = Stopwatch.StartNew();
             try
             {
-                var (units, pagination) = await _unitServices.GetAllAsync(textSearch, paginationRequest);
-
-                unitGetAllResponse = unitGetAllResponse.CreateResponseSuccessOrNoContent(units, pagination);
+                var getAllData = await _unitServices.GetAllAsync(textSearch, paginationRequest);
+                response = new BaseGetAllResponse<UnitInfo>().CreateResponseSuccessOrNoContent(getAllData.data, getAllData.pagination, moduleName);
             }
             catch (Exception ex)
             {
-                unitGetAllResponse = unitGetAllResponse.CreateResponseError(GeneralMessages.errorSomthingWrong);
+                response = response.CreateResponseError(GeneralMessages.errorSomthingWrong, EnumStatus.catchStatus, moduleName);
                 string message = $"An error occurred in GetAll: {ex.Message}";
                 _logger.LogError(ex, message);
             }
             finally
             {
                 watch.Stop();
-                unitGetAllResponse.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
             }
-            return Ok(unitGetAllResponse);
+
+            return Ok(response);
         }
 
         [HttpGet("GetUnitDetails")]
         public async Task<IActionResult> GetUnitDetails([FromQuery] int id)
         {
-            UnitGetDetailsResponse unitGetDetailsResponse = new UnitGetDetailsResponse();
+            string moduleName = "unitInfoData";
+            BaseGetDetailsResponse<UnitInfoDetails> response = new();
             var watch = Stopwatch.StartNew();
             try
             {
                 var isValidUnit = _unitValid.ValidUnit(id);
 
                 if (isValidUnit.Status != EnumStatus.success)
-                    unitGetDetailsResponse = unitGetDetailsResponse.CreateResponse(isValidUnit.Message, isValidUnit.Status);
-
-                var unit = await _unitServices.GetDetails(id);
-                unitGetDetailsResponse = unitGetDetailsResponse.CreateResponse(isValidUnit.Message, isValidUnit.Status, unit);
+                    response = response.CreateResponseError(isValidUnit.Message, isValidUnit.Status, moduleName);
+                else
+                {
+                    var unit = await _unitServices.GetDetails(id);
+                    response = response.CreateResponseSuccessOrNoContent(unit, "unitInfoData");
+                }
             }
             catch (Exception ex)
             {
-                unitGetDetailsResponse = unitGetDetailsResponse.CreateResponse(GeneralMessages.errorSomthingWrong, EnumStatus.catchStatus);
+                response = response.CreateResponseError(GeneralMessages.errorSomthingWrong, EnumStatus.catchStatus, moduleName);
                 string message = $"An error occurred in GetDetails: {ex.Message}";
                 _logger.LogError(ex, message);
             }
             finally
             {
                 watch.Stop();
-                unitGetDetailsResponse.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
             }
-            return Ok(unitGetDetailsResponse);
+            return Ok(response);
         }
 
         [HttpPost("AddUnit")]
@@ -104,13 +108,10 @@ namespace Api.Controllers.UnitModule
             {
                 var isValidUnit = _unitValid.ValidUnitAdd(unitDto);
                 if (isValidUnit.Status != EnumStatus.success)
-                {
                     unitAddResponse = unitAddResponse.CreateResponse(isValidUnit.Message, isValidUnit.Status);
-                }
                 else
                 {
                     var unit = await _unitServices.AddAsync(unitDto);
-                    unitAddResponse = unitAddResponse.CreateResponse(isValidUnit.Message, isValidUnit.Status, unit);
                 }
             }
             catch (Exception ex)

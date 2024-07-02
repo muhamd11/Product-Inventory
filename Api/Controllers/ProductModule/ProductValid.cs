@@ -34,9 +34,9 @@ namespace Api.Controllers.ProductModule
             if (!ValidationClass.IsValidId(productId))
                 return BaseValid.createBaseValid(GeneralMessages.errorIdIsRequired, EnumStatus.error);
 
-            var product = _unitOfWork.Products.FirstOrDefault(x => x.Id == productId);
+            var product = _unitOfWork.Products.FirstOrDefault(x => x.productId == productId);
 
-            if (product == null || product.Id != productId)
+            if (product == null || product.productId != productId)
                 return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
 
             return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
@@ -51,7 +51,7 @@ namespace Api.Controllers.ProductModule
                 return BaseValid.createBaseValid(GeneralMessages.errorNameLength, EnumStatus.error);
 
 
-            var color = _unitOfWork.Products.FirstOrDefault(x => x.Name == productDto.Name);
+            var color = _unitOfWork.Products.FirstOrDefault(x => x.productName == productDto.Name);
 
             if (color != null)
                 return BaseValid.createBaseValid(GeneralMessages.wasAddedBefore, EnumStatus.error);
@@ -67,12 +67,12 @@ namespace Api.Controllers.ProductModule
             if (!ValidationClass.IsValidStringLength(productDto.Name, (int)EnumMaxLength.nameMaxLength))
                 return BaseValid.createBaseValid(GeneralMessages.errorNameLength, EnumStatus.error);
 
-            var product = _unitOfWork.Products.FirstOrDefault(x => x.Id == productDto.Id);
+            var product = _unitOfWork.Products.FirstOrDefault(x => x.productId == productDto.Id);
 
             if (product == null)
                 return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
 
-            if (_unitOfWork.Products.Any(x => x.Name == productDto.Name && x.Id != productDto.Id))
+            if (_unitOfWork.Products.Any(x => x.productName == productDto.Name && x.productId != productDto.Id))
                 return BaseValid.createBaseValid(GeneralMessages.wasAddedBefore, EnumStatus.error);
 
             return BaseValid.createBaseValid(GeneralMessages.updateSuccess, EnumStatus.success);
