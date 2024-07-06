@@ -6,9 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.6" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.Text.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.6">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json" Version="8.0.0">
+      <TreatAsUsed>true</TreatAsUsed>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -16,11 +22,6 @@
       <DependentUpon>ColorsMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\ColorsModule\ColorsMessages.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ColorsMessages.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\General\GeneralMessages.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -32,16 +33,37 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UnitsMessages.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Category\CategoryMessages.Designer.cs">
+      <DependentUpon>CategoryMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\ProductProducts\ProductProductsMessages.Designer.cs">
+      <DependentUpon>ProductProductsMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Branches\BranchesMessages.Designer.cs">
+      <DependentUpon>BranchesMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Stores\StoresMessages.Designer.cs">
+      <DependentUpon>StoresMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Products\ProductsMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProductsMessages.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\AdditionsModules\Colors\ColorsMessages.resx">
       <LastGenOutput>ColorsMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\ColorsModule\ColorsMessages.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ColorsMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\General\GeneralMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -50,6 +72,26 @@
     <EmbeddedResource Update="Resources\AdditionsModules\Units\UnitsMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UnitsMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Category\CategoryMessages.resx">
+      <LastGenOutput>CategoryMessages.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ProductProducts\ProductProductsMessages.resx">
+      <LastGenOutput>ProductProductsMessages.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Branches\BranchesMessages.resx">
+      <LastGenOutput>BranchesMessages.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Stores\StoresMessages.resx">
+      <LastGenOutput>StoresMessages.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Products\ProductsMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductsMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

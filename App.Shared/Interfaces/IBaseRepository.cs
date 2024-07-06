@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace App.Core.Interfaces
+namespace App.Shared.Interfaces
 {
     public interface IBaseRepository<T> where T : class
     {
@@ -14,7 +14,8 @@ namespace App.Core.Interfaces
 
         Task<BaseGetDataWithPagnation<TResult>> GetAllAsync<TResult>(Expression<Func<T, TResult>> selection,
                                                                      List<Expression<Func<T, bool>>>? criteria = null,
-                                                                     PaginationRequest? paginationRequest = null);
+                                                                     PaginationRequest? paginationRequest = null,
+                                                                     List<Expression<Func<T, object>>>? includes = null);
 
         T FirstOrDefault(Expression<Func<T, bool>> criteria, string[] includes = null);
 
@@ -46,8 +47,6 @@ namespace App.Core.Interfaces
         Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities);
 
         T Update(T entity);
-
-        Task<T> UpdateAsync(T entity);
 
         void Delete(T entity);
 

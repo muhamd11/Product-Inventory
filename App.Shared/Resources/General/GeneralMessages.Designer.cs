@@ -61,6 +61,15 @@ namespace App.Shared.Resources.General {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action success.
+        /// </summary>
+        public static string actionSuccess {
+            get {
+                return ResourceManager.GetString("actionSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, failed to add the data.
         /// </summary>
         public static string addFailed {
@@ -97,6 +106,15 @@ namespace App.Shared.Resources.General {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry, action failed.
+        /// </summary>
+        public static string errorActionFailed {
+            get {
+                return ResourceManager.GetString("errorActionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, the data was not found..
         /// </summary>
         public static string errorDataNotFound {
@@ -120,6 +138,69 @@ namespace App.Shared.Resources.General {
         public static string errorIdIsRequired {
             get {
                 return ResourceManager.GetString("errorIdIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, Invalid Email .
+        /// </summary>
+        public static string errorInvalidEmail {
+            get {
+                return ResourceManager.GetString("errorInvalidEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, Invalid Facebook Url.
+        /// </summary>
+        public static string errorInvalidFacebookUrl {
+            get {
+                return ResourceManager.GetString("errorInvalidFacebookUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, Invalid Insatgram Url.
+        /// </summary>
+        public static string errorInvalidInstagramUrl {
+            get {
+                return ResourceManager.GetString("errorInvalidInstagramUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, Invalid Linkedin Url.
+        /// </summary>
+        public static string errorInvalidLinkedinUrl {
+            get {
+                return ResourceManager.GetString("errorInvalidLinkedinUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, Invalid Twitter Url.
+        /// </summary>
+        public static string errorInvalidTwitterUrl {
+            get {
+                return ResourceManager.GetString("errorInvalidTwitterUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, Invalid Website Url.
+        /// </summary>
+        public static string errorInvalidWebsiteUrl {
+            get {
+                return ResourceManager.GetString("errorInvalidWebsiteUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, Invalid Youtube Url.
+        /// </summary>
+        public static string errorInvalidYoutubeUrl {
+            get {
+                return ResourceManager.GetString("errorInvalidYoutubeUrl", resourceCulture);
             }
         }
         

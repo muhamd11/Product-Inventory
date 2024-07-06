@@ -5,9 +5,9 @@ using App.Shared.Models.General.LocalModels;
 
 namespace Api.Controllers.AdditionsModules.Colors.Interfaces
 {
-    public interface IColorsValid : ITransientService
+    public interface ICategoriesValid : ITransientService
     {
-        public BaseValid ValidGetDetails(BaseGetDetalisDto inputModel);
+        public BaseValid ValidGetDetails(BaseGetDetailsDto inputModel);
 
         public BaseValid ValidGetAll(BaseSearchDto inputModel);
 
@@ -15,6 +15,6 @@ namespace Api.Controllers.AdditionsModules.Colors.Interfaces
 
         public BaseValid ValidDelete(BaseDeleteDto inputModel);
 
-        public BaseValid ValidUintId(int colorId);
+        public BaseValid ValidColorId(int colorId);
     }
 }

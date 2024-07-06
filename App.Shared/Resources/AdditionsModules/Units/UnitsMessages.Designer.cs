@@ -68,5 +68,14 @@ namespace App.Shared.Resources.AdditionsModules.Units {
                 return ResourceManager.GetString("errorUnitNameIsRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The unit name is already added.
+        /// </summary>
+        public static string errorUnitNameWasAdded {
+            get {
+                return ResourceManager.GetString("errorUnitNameWasAdded", resourceCulture);
+            }
+        }
     }
 }

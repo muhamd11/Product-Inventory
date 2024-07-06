@@ -33,7 +33,7 @@
     Each data row contains a name, and value. The row also contains a 
     type or mimetype. Type corresponds to a .NET class that support 
     text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+    Classes that don't support this are serialized and productd with the 
     mimetype set.
     
     The mimetype is used for serialized objects, and tells the 
@@ -119,5 +119,8 @@
   </resheader>
   <data name="errorUnitNameIsRequired" xml:space="preserve">
     <value>Sorry, Unit Name Is Required</value>
+  </data>
+  <data name="errorUnitNameWasAdded" xml:space="preserve">
+    <value>The unit name is already added</value>
   </data>
 </root>

@@ -61,11 +61,29 @@ namespace App.Shared.Resources.AdditionsModules.Colors {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The color code is already added.
+        /// </summary>
+        public static string errorColorCodeWasAdded {
+            get {
+                return ResourceManager.GetString("errorColorCodeWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, Color Name Is Required.
         /// </summary>
         public static string errorColorNameIsRequired {
             get {
                 return ResourceManager.GetString("errorColorNameIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The color name is already added.
+        /// </summary>
+        public static string errorColorNameWasAdded {
+            get {
+                return ResourceManager.GetString("errorColorNameWasAdded", resourceCulture);
             }
         }
         

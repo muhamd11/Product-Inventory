@@ -9,13 +9,12 @@ namespace App.Shared.Models.General.LocalModels
         public string Message { get; set; }
         public T Data { get; set; }
 
-        public static BaseActionDone<T> GenrateBaseActionDone(int countRowEffectinDB, T data)
+        public static BaseActionDone<T> GenrateBaseActionDone(int countRowEffectInDB, T data)
         {
             return new BaseActionDone<T>()
             {
-                Status = countRowEffectinDB > 0 ? EnumStatus.success : EnumStatus.error,
-                //TODO Action Failed Message And action sucsess
-                Message = countRowEffectinDB > 0 ? GeneralMessages.deleteSuccess : GeneralMessages.deleteFailed,
+                Status = countRowEffectInDB > 0 ? EnumStatus.success : EnumStatus.error,
+                Message = countRowEffectInDB > 0 ? GeneralMessages.actionSuccess : GeneralMessages.errorActionFailed,
                 Data = data,
             };
         }

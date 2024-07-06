@@ -1,5 +1,5 @@
 ﻿using Api.Controllers.AdditionsModules.Colors.Interfaces;
-using App.Core;
+using App.Shared;
 using App.Shared.Models.AdditionsModules.ColorModule;
 using App.Shared.Models.AdditionsModules.ColorModule.DTO;
 using App.Shared.Models.AdditionsModules.ColorModule.ViewModel;
@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace Api.Controllers.AdditionsModules.Colors.Services
 {
-    internal class ColorsService : IColorServices
+    internal class CategoriesService : IColorServices
     {
         #region Members
 
@@ -22,7 +22,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
 
         #region Constructor
 
-        public ColorsService(IUnitOfWork unitOfWork, IMapper mapper)
+        public CategoriesService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
@@ -34,7 +34,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
 
         public async Task<BaseGetDataWithPagnation<ColorInfo>> GetAllAsync(ColorSearchDto inputModel)
         {
-            var select = ColorsAdaptor.SelectExpressionColorInfo();
+            var select = CategoriesAdaptor.SelectExpressionColorInfo();
 
             var criteria = GenrateCriteria(inputModel);
 
@@ -52,7 +52,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
                 criteria.Add(x =>
                 x.colorName.Contains(inputModel.textSearch)
                 || x.colorDescription.Contains(inputModel.textSearch)
-                || x.colorSympol.Contains(inputModel.textSearch));
+                || x.colorHexCode.Contains(inputModel.textSearch));
             }
 
             if (inputModel.elemetId.HasValue)
@@ -61,9 +61,9 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
             return criteria;
         }
 
-        public async Task<ColorInfoDetails> GetDetails(BaseGetDetalisDto inputModel)
+        public async Task<ColorInfoDetails> GetDetails(BaseGetDetailsDto inputModel)
         {
-            var select = ColorsAdaptor.SelectExpressionColorDetails();
+            var select = CategoriesAdaptor.SelectExpressionColorDetails();
 
             Expression<Func<Color, bool>> criteria = (x) => x.colorId == inputModel.elemetId;
 
@@ -76,13 +76,13 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
         {
             var color = _mapper.Map<Color>(inputModel);
             if (isUpdate)
-                await _unitOfWork.Colors.UpdateAsync(color);
+                _unitOfWork.Colors.Update(color);
             else
                 await _unitOfWork.Colors.AddAsync(color);
 
             var isDone = await _unitOfWork.CommitAsync();
 
-            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == color.colorId, ColorsAdaptor.SelectExpressionColorDetails());
+            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == color.colorId, CategoriesAdaptor.SelectExpressionColorDetails());
 
             return BaseActionDone<ColorInfo>.GenrateBaseActionDone(isDone, colorInfo);
         }
@@ -95,7 +95,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
 
             var isDone = await _unitOfWork.CommitAsync();
 
-            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == color.colorId, ColorsAdaptor.SelectExpressionColorInfo());
+            var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == color.colorId, CategoriesAdaptor.SelectExpressionColorInfo());
 
             return BaseActionDone<ColorInfo>.GenrateBaseActionDone(isDone, colorInfo);
         }

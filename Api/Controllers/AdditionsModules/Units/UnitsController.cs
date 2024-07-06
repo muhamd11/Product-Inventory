@@ -42,7 +42,7 @@ namespace Api.Controllers.AdditionsModules.Units
         #region Methods
 
         [HttpGet("GetUnitDetails")]
-        public async Task<IActionResult> GetUnitDetails([FromQuery] BaseGetDetalisDto inputModel)
+        public async Task<IActionResult> GetUnitDetails([FromQuery] BaseGetDetailsDto inputModel)
         {
             BaseGetDetailsResponse<UnitInfoDetails> response = new();
             var watch = Stopwatch.StartNew();
@@ -60,13 +60,12 @@ namespace Api.Controllers.AdditionsModules.Units
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(unitInfoDetails);
-                string message = $"An error occurred in GetDetails: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }
@@ -90,13 +89,12 @@ namespace Api.Controllers.AdditionsModules.Units
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(unitInfoData);
-                string message = $"An error occurred in GetDetails: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }
@@ -121,13 +119,12 @@ namespace Api.Controllers.AdditionsModules.Units
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(unitInfoData);
-                string message = $"An error occurred in AddUnit: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }
@@ -152,13 +149,12 @@ namespace Api.Controllers.AdditionsModules.Units
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(unitInfoData);
-                string message = $"An error occurred in UpdateUnit: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }
@@ -184,13 +180,12 @@ namespace Api.Controllers.AdditionsModules.Units
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(unitInfoData);
-                string message = $"An error occurred in DeleteUnit: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }

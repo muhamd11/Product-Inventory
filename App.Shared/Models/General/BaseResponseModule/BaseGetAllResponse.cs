@@ -9,7 +9,7 @@ public class BaseGetAllResponse<T> : Dictionary<string, object>
 {
     public EnumStatus Status { get; set; }
     public string Message { get; set; }
-    public decimal ExecutionTimeMilliseconds { get; set; }
+    public decimal ExecutionTimeMilliseconds { get; set; } = 0;
     public Pagination Pagination { get; set; }
     public IEnumerable<T> Data { get; set; }
 
@@ -20,7 +20,13 @@ public class BaseGetAllResponse<T> : Dictionary<string, object>
         if (!inputModel.Data.Any())
             response = new BaseGetAllResponse<T> { Message = GeneralMessages.errorDataNotFound, Status = EnumStatus.noContent };
         else //when data found
-            response = new BaseGetAllResponse<T> { Message = GeneralMessages.operationSuccess, Status = EnumStatus.success, Pagination = inputModel.Pagination, Data = inputModel.Data };
+            response = new BaseGetAllResponse<T>
+            {
+                Message = GeneralMessages.operationSuccess,
+                Status = EnumStatus.success,
+                Pagination = inputModel.Pagination,
+                Data = inputModel.Data
+            };
 
         response[nameof(Status)] = response.Status;
         response[nameof(Message)] = response.Message;

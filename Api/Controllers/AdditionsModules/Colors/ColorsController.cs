@@ -17,7 +17,7 @@ namespace Api.Controllers.AdditionsModules.Colors
         //services
         private readonly ILogger<ColorsController> _logger;
 
-        private readonly IColorsValid _colorsValid;
+        private readonly ICategoriesValid _colorsValid;
         private readonly IColorServices _colorsServices;
 
         //parmters
@@ -30,7 +30,7 @@ namespace Api.Controllers.AdditionsModules.Colors
 
         #region Constructor
 
-        public ColorsController(IColorsValid colorsValid, IColorServices colorsServices, ILogger<ColorsController> logger)
+        public ColorsController(ICategoriesValid colorsValid, IColorServices colorsServices, ILogger<ColorsController> logger)
         {
             _logger = logger;
             _colorsValid = colorsValid;
@@ -42,7 +42,7 @@ namespace Api.Controllers.AdditionsModules.Colors
         #region Methods
 
         [HttpGet("GetColorDetails")]
-        public async Task<IActionResult> GetColorDetails([FromQuery] BaseGetDetalisDto inputModel)
+        public async Task<IActionResult> GetColorDetails([FromQuery] BaseGetDetailsDto inputModel)
         {
             BaseGetDetailsResponse<ColorInfoDetails> response = new();
             var watch = Stopwatch.StartNew();
@@ -60,13 +60,12 @@ namespace Api.Controllers.AdditionsModules.Colors
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(colorInfoDetails);
-                string message = $"An error occurred in GetDetails: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }
@@ -90,13 +89,12 @@ namespace Api.Controllers.AdditionsModules.Colors
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(colorInfoData);
-                string message = $"An error occurred in GetDetails: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }
@@ -121,13 +119,12 @@ namespace Api.Controllers.AdditionsModules.Colors
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(colorInfoData);
-                string message = $"An error occurred in AddColor: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }
@@ -152,13 +149,12 @@ namespace Api.Controllers.AdditionsModules.Colors
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(colorInfoData);
-                string message = $"An error occurred in UpdateColor: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }
@@ -184,13 +180,12 @@ namespace Api.Controllers.AdditionsModules.Colors
             catch (Exception ex)
             {
                 response = response.CreateResponseCatch(colorInfoData);
-                string message = $"An error occurred in DeleteColor: {ex.Message}";
-                _logger.LogError(ex, message);
+                _logger.LogError(ex, ex.Message);
             }
             finally
             {
                 watch.Stop();
-                response.ExecutionTimeMilliseconds = watch.ElapsedMilliseconds;
+                response["ExecutionTimeMilliseconds"] = watch.ElapsedMilliseconds;
             }
             return Ok(response);
         }

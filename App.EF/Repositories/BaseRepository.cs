@@ -1,4 +1,5 @@
-﻿using App.Core.Interfaces;
+﻿using App.Shared.Consts;
+using App.Shared.Interfaces;
 using App.Shared.Models.General;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.General.PaginationModule;
@@ -28,7 +29,8 @@ namespace App.EF.Repositories
         public async Task<BaseGetDataWithPagnation<TResult>> GetAllAsync<TResult>(
                                                                      Expression<Func<T, TResult>> selection,
                                                                      List<Expression<Func<T, bool>>>? criteria = null,
-                                                                     PaginationRequest? paginationRequest = null)
+                                                                     PaginationRequest? paginationRequest = null,
+                                                                     List<Expression<Func<T, object>>>? includes = null)
         {
             Pagination pagination = new();
             paginationRequest = paginationRequest ?? new PaginationRequest();
@@ -43,9 +45,15 @@ namespace App.EF.Repositories
                     query = query.Where(item);
             }
 
+            if (includes != null)
+            {
+                foreach (var item in includes)
+                    query = query.Include(item);
+            }
+
             result.totalItems = await query.CountAsync();
 
-            paginationRequest.pageSize = paginationRequest.pageSize <= 0 || paginationRequest.pageSize > 500 ? 500 : paginationRequest.pageSize;
+            paginationRequest.pageSize = paginationRequest.pageSize <= 0 || paginationRequest.pageSize > (int)EnumMaxLength.pageMaxSize ? (int)EnumMaxLength.pageMaxSize : paginationRequest.pageSize;
 
             result.countItemsInPage = paginationRequest.pageSize;
 
@@ -90,15 +98,15 @@ namespace App.EF.Repositories
         }
 
         public async Task<TResult> FirstOrDefaultAsync<TResult>(Expression<Func<T, bool>> criteria,
-            Expression<Func<T, TResult>> projection, string[] includes = null)
+            Expression<Func<T, TResult>> select, string[] includes = null)
         {
             IQueryable<T> query = _context.Set<T>();
 
             if (includes != null)
-                foreach (var incluse in includes)
-                    query = query.Include(incluse);
+                foreach (var include in includes)
+                    query = query.Include(include);
 
-            return await query.Where(criteria).Select(projection).FirstOrDefaultAsync();
+            return await query.Where(criteria).Select(select).FirstOrDefaultAsync();
         }
 
         public async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> criteria, string[] includes = null)
@@ -198,13 +206,7 @@ namespace App.EF.Repositories
 
         public T Update(T entity)
         {
-            _context.Update(entity);
-            return entity;
-        }
-
-        public async Task<T> UpdateAsync(T entity)
-        {
-            _context.Update(entity);
+            _context.Set<T>().Update(entity);
             return entity;
         }
 

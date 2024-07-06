@@ -10,7 +10,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Interfaces
     {
         Task<BaseGetDataWithPagnation<ColorInfo>> GetAllAsync(ColorSearchDto inputModel);
 
-        Task<ColorInfoDetails> GetDetails(BaseGetDetalisDto inputModel);
+        Task<ColorInfoDetails> GetDetails(BaseGetDetailsDto inputModel);
 
         Task<BaseActionDone<ColorInfo>> AddOrUpdate(ColorAddOrUpdateDTO inputModel, bool isUpdate);
 

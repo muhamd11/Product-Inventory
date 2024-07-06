@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace Api.Controllers.AdditionsModules.Colors.Services
 {
-    public static class ColorsAdaptor
+    public static class CategoriesAdaptor
     {
         public static Expression<Func<Color, ColorInfo>> SelectExpressionColorInfo()
         {
@@ -12,7 +12,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
             {
                 colorId = color.colorId,
                 colorName = color.colorName,
-                colorSympol = color.colorSympol
+                colorHexCode = color.colorHexCode
             };
         }
 
@@ -22,7 +22,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
             {
                 colorId = color.colorId,
                 colorName = color.colorName,
-                colorSympol = color.colorSympol,
+                colorHexCode = color.colorHexCode,
                 colorDescription = color.colorDescription
             };
         }
@@ -33,7 +33,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
             {
                 colorId = color.colorId,
                 colorName = color.colorName,
-                colorSympol = color.colorSympol
+                colorHexCode = color.colorHexCode
             };
         }
 
@@ -43,7 +43,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
             {
                 colorId = color.colorId,
                 colorName = color.colorName,
-                colorSympol = color.colorSympol,
+                colorHexCode = color.colorHexCode,
                 colorDescription = color.colorDescription
             };
         }

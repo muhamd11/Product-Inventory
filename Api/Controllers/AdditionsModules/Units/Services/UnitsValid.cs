@@ -1,6 +1,6 @@
 ﻿using Api.Controllers.AdditionsModules.Units.Interfaces;
-using App.Core;
 using App.EF.Consts;
+using App.Shared;
 using App.Shared.Consts;
 using App.Shared.Helper.Validations;
 using App.Shared.Models.AdditionsModules.UnitModule.DTO;
@@ -38,9 +38,9 @@ namespace Api.Controllers.AdditionsModules.Units.Services
 
                 if (inputModel.elemetId.HasValue)
                 {
-                    var isValidUintId = ValidUintId(inputModel.elemetId.Value);
-                    if (isValidUintId.Status != EnumStatus.success)
-                        return isValidUintId;
+                    var isValidUnitId = ValidUnitId(inputModel.elemetId.Value);
+                    if (isValidUnitId.Status != EnumStatus.success)
+                        return isValidUnitId;
                 }
 
                 #endregion elemetId?
@@ -51,13 +51,13 @@ namespace Api.Controllers.AdditionsModules.Units.Services
                 return BaseValid.createBaseValid(GeneralMessages.errorNoData, EnumStatus.error);
         }
 
-        public BaseValid ValidGetDetails(BaseGetDetalisDto inputModel)
+        public BaseValid ValidGetDetails(BaseGetDetailsDto inputModel)
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidUintId(inputModel.elemetId);
-                if (isValidUintId.Status != EnumStatus.success)
-                    return isValidUintId;
+                var isValidUnitId = ValidUnitId(inputModel.elemetId);
+                if (isValidUnitId.Status != EnumStatus.success)
+                    return isValidUnitId;
 
                 return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
             }
@@ -73,9 +73,9 @@ namespace Api.Controllers.AdditionsModules.Units.Services
 
                 if (isUpdate == true)
                 {
-                    var isValidUintId = ValidUintId(inputModel.unitId);
-                    if (isValidUintId.Status != EnumStatus.success)
-                        return isValidUintId;
+                    var isValidUnitId = ValidUnitId(inputModel.unitId);
+                    if (isValidUnitId.Status != EnumStatus.success)
+                        return isValidUnitId;
                 }
 
                 #endregion unitId?
@@ -89,10 +89,9 @@ namespace Api.Controllers.AdditionsModules.Units.Services
                 if (!ValidationClass.IsValidStringLength(inputModel.unitName, nameMaxLength))
                     return BaseValid.createBaseValid(string.Format(GeneralMessages.errorNameLength, nameMaxLength), EnumStatus.error);
 
-                //TODO رسالة توضح ان الاسم اللون مضاف مسبقاً 
                 var unit = _unitOfWork.Units.FirstOrDefault(x => x.unitName == inputModel.unitName);
                 if (unit != null && unit.unitId != inputModel.unitId)
-                    return BaseValid.createBaseValid(GeneralMessages.wasAddedBefore, EnumStatus.error);
+                    return BaseValid.createBaseValid(UnitsMessages.errorUnitNameWasAdded, EnumStatus.error);
 
                 #endregion unitName *
 
@@ -117,7 +116,7 @@ namespace Api.Controllers.AdditionsModules.Units.Services
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidUintId(inputModel.elemetId);
+                var isValidUintId = ValidUnitId(inputModel.elemetId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 
@@ -127,7 +126,7 @@ namespace Api.Controllers.AdditionsModules.Units.Services
                 return BaseValid.createBaseValid(GeneralMessages.errorNoData, EnumStatus.error);
         }
 
-        public BaseValid ValidUintId(int unitId)
+        public BaseValid ValidUnitId(int unitId)
         {
             var unit = _unitOfWork.Units.FirstOrDefault(x => x.unitId == unitId);
             if (unit is not null)

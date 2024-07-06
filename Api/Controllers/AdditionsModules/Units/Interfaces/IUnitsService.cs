@@ -10,7 +10,7 @@ namespace Api.Controllers.AdditionsModules.Units.Interfaces
     {
         Task<BaseGetDataWithPagnation<UnitInfo>> GetAllAsync(UnitSearchDto inputModel);
 
-        Task<UnitInfoDetails> GetDetails(BaseGetDetalisDto inputModel);
+        Task<UnitInfoDetails> GetDetails(BaseGetDetailsDto inputModel);
 
         Task<BaseActionDone<UnitInfo>> AddOrUpdate(UnitAddOrUpdateDTO inputModel, bool isUpdate);
 

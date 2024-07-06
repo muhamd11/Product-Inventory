@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="actionSuccess" xml:space="preserve">
+    <value>Action success</value>
+  </data>
   <data name="addFailed" xml:space="preserve">
     <value>Sorry, failed to add the data</value>
   </data>
@@ -129,6 +132,9 @@
   <data name="deleteSuccess" xml:space="preserve">
     <value>The data has been deleted successfully.</value>
   </data>
+  <data name="errorActionFailed" xml:space="preserve">
+    <value>Sorry, action failed</value>
+  </data>
   <data name="errorDataNotFound" xml:space="preserve">
     <value>Sorry, the data was not found.</value>
   </data>
@@ -137,6 +143,27 @@
   </data>
   <data name="errorIdIsRequired" xml:space="preserve">
     <value>The id is required</value>
+  </data>
+  <data name="errorInvalidEmail" xml:space="preserve">
+    <value>Sorry, Invalid Email </value>
+  </data>
+  <data name="errorInvalidFacebookUrl" xml:space="preserve">
+    <value>Sorry, Invalid Facebook Url</value>
+  </data>
+  <data name="errorInvalidInstagramUrl" xml:space="preserve">
+    <value>Sorry, Invalid Insatgram Url</value>
+  </data>
+  <data name="errorInvalidLinkedinUrl" xml:space="preserve">
+    <value>Sorry, Invalid Linkedin Url</value>
+  </data>
+  <data name="errorInvalidTwitterUrl" xml:space="preserve">
+    <value>Sorry, Invalid Twitter Url</value>
+  </data>
+  <data name="errorInvalidWebsiteUrl" xml:space="preserve">
+    <value>Sorry, Invalid Website Url</value>
+  </data>
+  <data name="errorInvalidYoutubeUrl" xml:space="preserve">
+    <value>Sorry, Invalid Youtube Url</value>
   </data>
   <data name="errorNameIsRequired" xml:space="preserve">
     <value>Sorry,  Name Is Required</value>

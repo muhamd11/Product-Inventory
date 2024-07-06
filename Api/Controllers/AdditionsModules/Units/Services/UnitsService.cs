@@ -1,5 +1,5 @@
 ﻿using Api.Controllers.AdditionsModules.Units.Interfaces;
-using App.Core;
+using App.Shared;
 using App.Shared.Models.AdditionsModules.UnitModule;
 using App.Shared.Models.AdditionsModules.UnitModule.DTO;
 using App.Shared.Models.AdditionsModules.UnitModule.ViewModel;
@@ -45,7 +45,7 @@ namespace Api.Controllers.AdditionsModules.Units.Services
 
         private List<Expression<Func<Unit, bool>>> GenrateCriteria(UnitSearchDto inputModel)
         {
-            List<Expression<Func<Unit, bool>>> criteria = null;
+            List<Expression<Func<Unit, bool>>> criteria = [];
 
             if (inputModel.textSearch is not null)
             {
@@ -61,7 +61,7 @@ namespace Api.Controllers.AdditionsModules.Units.Services
             return criteria;
         }
 
-        public async Task<UnitInfoDetails> GetDetails(BaseGetDetalisDto inputModel)
+        public async Task<UnitInfoDetails> GetDetails(BaseGetDetailsDto inputModel)
         {
             var select = UnitsAdaptor.SelectExpressionUnitDetails();
 
@@ -76,7 +76,7 @@ namespace Api.Controllers.AdditionsModules.Units.Services
         {
             var unit = _mapper.Map<Unit>(inputModel);
             if (isUpdate)
-                await _unitOfWork.Units.UpdateAsync(unit);
+                _unitOfWork.Units.Update(unit);
             else
                 await _unitOfWork.Units.AddAsync(unit);
 

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -11,11 +11,14 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\App.Core\App.Shared.csproj" />
+    <ProjectReference Include="..\App.Shared\App.Shared.csproj">
+      <TreatAsUsed>true</TreatAsUsed>
+    </ProjectReference>
     <ProjectReference Include="..\App.Shared\App.Shared.csproj" />
   </ItemGroup>
 

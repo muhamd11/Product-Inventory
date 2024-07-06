@@ -1,8 +1,13 @@
-﻿using App.Core;
-using App.Core.Interfaces;
-using App.EF.Repositories;
+﻿using App.EF.Repositories;
+using App.Shared;
+using App.Shared.Interfaces;
+using App.Shared.Models.AdditionsModules.CategoryModule;
 using App.Shared.Models.AdditionsModules.ColorModule;
 using App.Shared.Models.AdditionsModules.UnitModule;
+using App.Shared.Models.Branches;
+using App.Shared.Models.Products;
+using App.Shared.Models.ProductStores;
+using App.Shared.Models.Stores;
 using System.Threading.Tasks;
 
 namespace App.EF
@@ -10,6 +15,17 @@ namespace App.EF
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
+
+        #region CoreModules
+
+        public IBaseRepository<Product> Products { get; private set; }
+        public IBaseRepository<Category> Categories { get; private set; }
+
+        public IBaseRepository<ProductStore> ProductStores { get; private set; }
+        public IBaseRepository<Store> Stores { get; private set; }
+        public IBaseRepository<Branch> Branches { get; private set; }
+
+        #endregion CoreModules
 
         #region AdditionsModules
 
@@ -21,6 +37,16 @@ namespace App.EF
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
+
+            #region CoreModules
+
+            Products = new BaseRepository<Product>(_context);
+            Categories = new BaseRepository<Category>(_context);
+            ProductStores = new BaseRepository<ProductStore>(_context);
+            Stores = new BaseRepository<Store>(_context);
+            Branches = new BaseRepository<Branch>(_context);
+
+            #endregion CoreModules
 
             #region AdditionsModules
 

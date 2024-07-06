@@ -1,6 +1,6 @@
 ﻿using Api.Controllers.AdditionsModules.Colors.Interfaces;
-using App.Core;
 using App.EF.Consts;
+using App.Shared;
 using App.Shared.Consts;
 using App.Shared.Helper.Validations;
 using App.Shared.Models.AdditionsModules.ColorModule;
@@ -12,7 +12,7 @@ using App.Shared.Resources.General;
 
 namespace Api.Controllers.AdditionsModules.Colors.Services
 {
-    internal class ColorsValid : IColorsValid
+    internal class CategoriesValid : ICategoriesValid
     {
         #region Members
 
@@ -22,7 +22,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
 
         #region Constructor
 
-        public ColorsValid(IUnitOfWork unitOfWork)
+        public CategoriesValid(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -39,7 +39,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
 
                 if (inputModel.elemetId.HasValue)
                 {
-                    var isValidUintId = ValidUintId(inputModel.elemetId.Value);
+                    var isValidUintId = ValidColorId(inputModel.elemetId.Value);
                     if (isValidUintId.Status != EnumStatus.success)
                         return isValidUintId;
                 }
@@ -52,11 +52,11 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
                 return BaseValid.createBaseValid(GeneralMessages.errorNoData, EnumStatus.error);
         }
 
-        public BaseValid ValidGetDetails(BaseGetDetalisDto inputModel)
+        public BaseValid ValidGetDetails(BaseGetDetailsDto inputModel)
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidUintId(inputModel.elemetId);
+                var isValidUintId = ValidColorId(inputModel.elemetId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 
@@ -70,14 +70,13 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
         {
             if (inputModel is not null)
             {
-
                 Color color;
 
                 #region colorId?
 
-                if (isUpdate == true)
+                if (isUpdate)
                 {
-                    var isValidUintId = ValidUintId(inputModel.colorId);
+                    var isValidUintId = ValidColorId(inputModel.colorId);
                     if (isValidUintId.Status != EnumStatus.success)
                         return isValidUintId;
                 }
@@ -92,10 +91,10 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
                 int nameMaxLength = (int)EnumMaxLength.nameMaxLength;
                 if (!ValidationClass.IsValidStringLength(inputModel.colorName, nameMaxLength))
                     return BaseValid.createBaseValid(string.Format(GeneralMessages.errorNameLength, nameMaxLength), EnumStatus.error);
-                //TODO رسالة توضح ان الاسم اللون مضاف مسبقاً 
+
                 color = _unitOfWork.Colors.FirstOrDefault(x => x.colorName == inputModel.colorName);
                 if (color != null && color.colorId != inputModel.colorId)
-                    return BaseValid.createBaseValid(GeneralMessages.wasAddedBefore, EnumStatus.error);
+                    return BaseValid.createBaseValid(ColorsMessages.errorColorNameWasAdded, EnumStatus.error);
 
                 #endregion colorName *
 
@@ -105,9 +104,10 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
                     return BaseValid.createBaseValid(ColorsMessages.errorHexCodeFormat, EnumStatus.error);
 
                 color = _unitOfWork.Colors.FirstOrDefault(x => x.colorHexCode == inputModel.colorHexCode);
-                //TODO رسالة توضح ان كود اللون مضاف مسبقاً 
+
                 if (color != null && color.colorId != inputModel.colorId)
-                    return BaseValid.createBaseValid(GeneralMessages.wasAddedBefore, EnumStatus.error);
+                    return BaseValid.createBaseValid(ColorsMessages.errorColorCodeWasAdded, EnumStatus.error);
+
                 #endregion colorHexCode *
 
                 #region colorDescription ?
@@ -131,7 +131,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidUintId(inputModel.elemetId);
+                var isValidUintId = ValidColorId(inputModel.elemetId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 
@@ -141,7 +141,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
                 return BaseValid.createBaseValid(GeneralMessages.errorNoData, EnumStatus.error);
         }
 
-        public BaseValid ValidUintId(int colorId)
+        public BaseValid ValidColorId(int colorId)
         {
             var color = _unitOfWork.Colors.FirstOrDefault(x => x.colorId == colorId);
             if (color is not null)

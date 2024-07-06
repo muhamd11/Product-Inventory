@@ -7,7 +7,7 @@ namespace Api.Controllers.AdditionsModules.Units.Interfaces
 {
     public interface IUnitsValid : ITransientService
     {
-        public BaseValid ValidGetDetails(BaseGetDetalisDto inputModel);
+        public BaseValid ValidGetDetails(BaseGetDetailsDto inputModel);
 
         public BaseValid ValidGetAll(BaseSearchDto inputModel);
 
@@ -15,6 +15,6 @@ namespace Api.Controllers.AdditionsModules.Units.Interfaces
 
         public BaseValid ValidDelete(BaseDeleteDto inputModel);
 
-        public BaseValid ValidUintId(int unitId);
+        public BaseValid ValidUnitId(int unitId);
     }
 }

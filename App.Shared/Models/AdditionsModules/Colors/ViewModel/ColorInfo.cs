@@ -4,6 +4,7 @@
     {
         public int colorId { get; set; }
         public string colorName { get; set; }
-        public string colorSympol { get; set; }
+        public string colorDescription { get; set; }
+        public string colorHexCode { get; set; }
     }
 }

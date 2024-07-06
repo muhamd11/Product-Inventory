@@ -4,7 +4,7 @@ namespace App.Shared.Models.AdditionsModules.UnitModule.ViewModel
 {
     public class UnitInfoDetails : UnitInfo
     {
-        [JsonPropertyOrder(3)]
+        [JsonPropertyOrder(4)]
         public string unitDescription { get; set; }
     }
 }
