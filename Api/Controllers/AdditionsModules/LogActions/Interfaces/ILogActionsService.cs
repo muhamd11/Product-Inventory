@@ -13,7 +13,7 @@ namespace Api.Controllers.AdditionsModules.LogActions.Interfaces
 
         Task<LogActionInfoDetails> GetDetails(BaseGetDetailsDto inputModel);
 
-        Task<BaseActionDone<LogActionInfo>> AddOrUpdate(LogActionAddOrUpdateDTO inputModel, bool isUpdate)
+        Task<BaseActionDone<LogActionInfo>> AddOrUpdate(LogActionAddOrUpdateDTO inputModel, bool isUpdate);
 
         Task<BaseActionDone<LogActionInfo>> DeleteAsync(BaseDeleteDto inputModel);
     }

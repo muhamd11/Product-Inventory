@@ -8,6 +8,7 @@ using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.General.PaginationModule;
 using App.Shared.Models.Products;
 using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.Linq.Expressions;
 
@@ -51,9 +52,15 @@ namespace Api.Controllers.AdditionsModules.LogActions.Services
 
             if (inputModel.textSearch is not null)
             {
-                criteria.Add(x =>
-                x.logUser.userName.Contains(inputModel.textSearch));
+                criteria.Add(x => x.oldData.Contains(inputModel.textSearch)
+                || x.newData.Contains(inputModel.textSearch));
             }
+
+            if (!inputModel.modelName.IsNullOrEmpty())
+                criteria.Add(x => x.modelName == inputModel.modelName);
+            
+            if (inputModel.userId.HasValue)
+                criteria.Add(x => x.userId == inputModel.userId);
 
             if (inputModel.elemetId.HasValue)
                 criteria.Add(x => x.logActionId == inputModel.elemetId.Value);

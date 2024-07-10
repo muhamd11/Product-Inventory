@@ -1,9 +1,10 @@
-﻿using App.Shared.Models.ProductStores;
+﻿using App.Shared.Models.Base;
+using App.Shared.Models.ProductStores;
 using System.Collections.Generic;
 
 namespace App.Shared.Models.AdditionsModules.UnitModule
 {
-    public class Unit
+    public class Unit : BaseEntity
     {
         public Unit()
         {

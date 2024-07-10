@@ -4,6 +4,7 @@ using App.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240710102629_sync_logactions_and_add_baseEntity")]
+    partial class sync_logactions_and_add_baseEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,12 +52,6 @@ namespace App.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("colorId"));
 
-                    b.Property<DateTimeOffset?>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("UpdatedDate")
-                        .HasColumnType("datetimeoffset");
-
                     b.Property<string>("colorDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -63,9 +60,6 @@ namespace App.EF.Migrations
 
                     b.Property<string>("colorName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("isDeleted")
-                        .HasColumnType("bit");
 
                     b.HasKey("colorId");
 
@@ -100,6 +94,8 @@ namespace App.EF.Migrations
 
                     b.HasKey("logActionId");
 
+                    b.HasIndex("userId");
+
                     b.ToTable("LogActions");
                 });
 
@@ -110,15 +106,6 @@ namespace App.EF.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("unitId"));
-
-                    b.Property<DateTimeOffset?>("CreatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("UpdatedDate")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<bool?>("isDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("unitDescription")
                         .HasColumnType("nvarchar(max)");
@@ -235,7 +222,7 @@ namespace App.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userId"));
 
-                    b.Property<string>("passwordHash")
+                    b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userName")
@@ -244,6 +231,15 @@ namespace App.EF.Migrations
                     b.HasKey("userId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("App.Shared.Models.AdditionsModules.LogActionsModel.LogAction", b =>
+                {
+                    b.HasOne("App.Shared.Models.Users.User", null)
+                        .WithMany("userLogActions")
+                        .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("App.Shared.Models.Branches.Branch", b =>
@@ -515,6 +511,11 @@ namespace App.EF.Migrations
             modelBuilder.Entity("App.Shared.Models.AdditionsModules.UnitModule.Unit", b =>
                 {
                     b.Navigation("productStoresData");
+                });
+
+            modelBuilder.Entity("App.Shared.Models.Users.User", b =>
+                {
+                    b.Navigation("userLogActions");
                 });
 #pragma warning restore 612, 618
         }

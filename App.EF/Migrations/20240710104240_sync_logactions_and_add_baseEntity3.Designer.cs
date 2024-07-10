@@ -4,6 +4,7 @@ using App.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240710104240_sync_logactions_and_add_baseEntity3")]
+    partial class sync_logactions_and_add_baseEntity3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,9 +67,6 @@ namespace App.EF.Migrations
                     b.Property<string>("colorName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("isDeleted")
-                        .HasColumnType("bit");
-
                     b.HasKey("colorId");
 
                     b.ToTable("Colors");
@@ -116,9 +116,6 @@ namespace App.EF.Migrations
 
                     b.Property<DateTimeOffset?>("UpdatedDate")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<bool?>("isDeleted")
-                        .HasColumnType("bit");
 
                     b.Property<string>("unitDescription")
                         .HasColumnType("nvarchar(max)");

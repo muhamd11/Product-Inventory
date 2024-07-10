@@ -1,16 +1,11 @@
-﻿using Api.Controllers.AdditionsModules.LogActions.Interfaces;
-using Api.Controllers.AdditionsModules.Products.Interfaces;
-using App.EF.Consts;
+﻿using Api.Controllers.AdditionsModules.Products.Interfaces;
 using App.Shared;
-using App.Shared.Models.AdditionsModules.LogActionsModel;
-using App.Shared.Models.AdditionsModules.LogActionsModel.DTO;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.General.PaginationModule;
 using App.Shared.Models.Products;
 using App.Shared.Models.Products.DTO;
 using AutoMapper;
-using Newtonsoft.Json;
 using System.Linq.Expressions;
 
 namespace Api.Controllers.AdditionsModules.Products.Services
@@ -21,17 +16,15 @@ namespace Api.Controllers.AdditionsModules.Products.Services
 
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogActionServices _logActionServices;
 
         #endregion Members
 
         #region Constructor
 
-        public ProductService(IUnitOfWork unitOfWork, IMapper mapper, ILogActionServices logActionServices)
+        public ProductService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _logActionServices = logActionServices;
         }
 
         #endregion Constructor
@@ -89,21 +82,6 @@ namespace Api.Controllers.AdditionsModules.Products.Services
             var isDone = await _unitOfWork.CommitAsync();
 
             var productInfo = await _unitOfWork.Products.FirstOrDefaultAsync(x => x.productId == product.productId, ProductAdaptor.SelectExpressionProductDetails());
-
-            if (isDone > 0)
-            {
-                var userId = 14;
-                var modelName = "Product";
-                var actionType = isUpdate ? "Update" : "Add";
-                var oldProduct = product;
-                var newProduct = _mapper.Map<Product>(productInfo);
-
-                var logAction = await _logActionServices.Add(userId, modelName, actionType, oldProduct, newProduct);
-
-                if (logAction.Status != EnumStatus.success)
-                    return BaseActionDone<ProductInfo>.GenrateBaseActionDone(isDone, productInfo);
-            }
-
 
             return BaseActionDone<ProductInfo>.GenrateBaseActionDone(isDone, productInfo);
         }

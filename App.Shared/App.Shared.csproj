@@ -14,9 +14,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3">
       <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
-    <PackageReference Include="System.Text.Json" Version="8.0.0">
-      <TreatAsUsed>true</TreatAsUsed>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

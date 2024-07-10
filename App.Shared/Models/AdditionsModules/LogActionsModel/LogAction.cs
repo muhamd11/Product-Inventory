@@ -6,17 +6,13 @@ namespace App.Shared.Models.AdditionsModules.LogActionsModel
 
 {
     public class LogAction
-    {
+    { 
         public int logActionId { get; set; }
-
-        [ForeignKey(nameof(logUser))]
-        public int userId { get; set; }
-
-        public User logUser { get; set; }
-        public string ModelName { get; set; }
-        public DateTime ActionDate { get; set; } = DateTime.UtcNow;
+        public int userId { get; set; } // Changed to string to store user identifier
+        public string modelName { get; set; }
+        public DateTimeOffset actionDate { get; set; } = DateTime.UtcNow;
         public string actionType { get; set; }
-        public string oldActionData { get; set; }
-        public string newActionData { get; set; }
+        public string oldData { get; set; }
+        public string newData { get; set; }
     }
 }

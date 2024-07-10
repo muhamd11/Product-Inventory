@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
+using System.Text.Json.Serialization;
 
 namespace App.Shared.Models.Branches
 {
@@ -15,6 +16,7 @@ namespace App.Shared.Models.Branches
     [Owned]
     public class BranchContactSocialMedia
     {
+        [JsonIgnore]public bool jsutForBuildEF { get; set; }
         public string branchWebsite { get; set; }
         public string facebookLink { get; set; }
         public string twitterLink { get; set; }
@@ -26,6 +28,7 @@ namespace App.Shared.Models.Branches
     [Owned]
     public class BranchContactInfo
     {
+        [JsonIgnore] public bool jsutForBuildEF { get; set; }
         public string branchName { get; set; }
         public string branchAddress { get; set; }
         public double branchLatitude { get; set; }

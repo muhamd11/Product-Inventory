@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 
 namespace App.Shared.Models.Stores
@@ -15,6 +16,7 @@ namespace App.Shared.Models.Stores
     [Owned]
     public class StoreContactSocialMedia
     {
+        [JsonIgnore] public bool jsutForBuildEF { get; set; }
         public string storeWebsite { get; set; }
         public string facebookLink { get; set; }
         public string twitterLink { get; set; }
@@ -26,6 +28,7 @@ namespace App.Shared.Models.Stores
     [Owned]
     public class StoreContactInfo
     {
+        [JsonIgnore] public bool jsutForBuildEF { get; set; }
         public string storeName { get; set; }
         public string storeAddress { get; set; }
         public double storeLatitude { get; set; }

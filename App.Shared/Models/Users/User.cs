@@ -1,25 +1,14 @@
-﻿using App.Shared.Models.AdditionsModules.LogActionsModel;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace App.Shared.Models.Users
 {
     public class User
     {
-        public User()
-        {
-            userLogActions = new HashSet<LogAction>();
-        }
-
         public int userId { get; set; }
-        public UserContanctInfo userContanctInfo { get; set; }
         public string userName { get; set; }
-        public string PasswordHash { get; set; }
-
-        [JsonIgnore]
-        public ICollection<LogAction> userLogActions { get; set; }
+        public string passwordHash { get; set; }
+        public UserContanctInfo userContanctInfo { get; set; }
     }
 
     [Owned]

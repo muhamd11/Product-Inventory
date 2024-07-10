@@ -1,9 +1,10 @@
-﻿using App.Shared.Models.ProductStores;
+﻿using App.Shared.Models.Base;
+using App.Shared.Models.ProductStores;
 using System.Collections.Generic;
 
 namespace App.Shared.Models.AdditionsModules.ColorModule
 {
-    public class Color
+    public class Color:BaseEntity
     {
         public Color()
         {
