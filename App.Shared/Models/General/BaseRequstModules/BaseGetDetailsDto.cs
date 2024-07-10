@@ -2,6 +2,6 @@
 {
     public class BaseGetDetailsDto
     {
-        public int elemetId { get; set; }
+        public int elementId { get; set; }
     }
 }

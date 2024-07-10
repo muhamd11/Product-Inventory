@@ -3,6 +3,6 @@
     public class StoreInfo
     {
         public int storeId { get; set; }
-        public string storeName { get; set; }
+        public StoreContactInfo storeContactInfo { get; set; }
     }
 }

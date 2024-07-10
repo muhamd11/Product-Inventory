@@ -3,11 +3,13 @@ using App.Shared;
 using App.Shared.Interfaces;
 using App.Shared.Models.AdditionsModules.CategoryModule;
 using App.Shared.Models.AdditionsModules.ColorModule;
+using App.Shared.Models.AdditionsModules.LogActionsModel;
 using App.Shared.Models.AdditionsModules.UnitModule;
 using App.Shared.Models.Branches;
 using App.Shared.Models.Products;
 using App.Shared.Models.ProductStores;
 using App.Shared.Models.Stores;
+using App.Shared.Models.Users;
 using System.Threading.Tasks;
 
 namespace App.EF
@@ -18,6 +20,7 @@ namespace App.EF
 
         #region CoreModules
 
+        public IBaseRepository<User> Users { get; private set; }
         public IBaseRepository<Product> Products { get; private set; }
         public IBaseRepository<Category> Categories { get; private set; }
 
@@ -31,6 +34,7 @@ namespace App.EF
 
         public IBaseRepository<Color> Colors { get; private set; }
         public IBaseRepository<Unit> Units { get; private set; }
+        public IBaseRepository<LogAction> LogActions { get; private set; }
 
         #endregion AdditionsModules
 
@@ -40,6 +44,7 @@ namespace App.EF
 
             #region CoreModules
 
+            Users = new BaseRepository<User>(_context);
             Products = new BaseRepository<Product>(_context);
             Categories = new BaseRepository<Category>(_context);
             ProductStores = new BaseRepository<ProductStore>(_context);
@@ -52,6 +57,7 @@ namespace App.EF
 
             Colors = new BaseRepository<Color>(_context);
             Units = new BaseRepository<Unit>(_context);
+            LogActions = new BaseRepository<LogAction>(_context);
 
             #endregion AdditionsModules
         }

@@ -70,7 +70,7 @@ namespace Api.Controllers.AdditionsModules.ProductProducts.Services
         {
             var select = ProductStoresAdaptor.SelectExpressionProductStoreDetails();
 
-            Expression<Func<ProductStore, bool>> criteria = (x) => x.productStoreId == inputModel.elemetId;
+            Expression<Func<ProductStore, bool>> criteria = (x) => x.productStoreId == inputModel.elementId;
 
             var productStoreInfo = await _unitOfWork.ProductStores.FirstOrDefaultAsync(criteria, select);
 
@@ -94,7 +94,7 @@ namespace Api.Controllers.AdditionsModules.ProductProducts.Services
 
         public async Task<BaseActionDone<ProductStoreInfo>> DeleteAsync(BaseDeleteDto inputModel)
         {
-            var productStore = await _unitOfWork.ProductStores.FirstOrDefaultAsync(x => x.productStoreId == inputModel.elemetId);
+            var productStore = await _unitOfWork.ProductStores.FirstOrDefaultAsync(x => x.productStoreId == inputModel.elementId);
 
             _unitOfWork.ProductStores.Delete(productStore);
 

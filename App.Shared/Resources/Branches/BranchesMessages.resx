@@ -120,10 +120,16 @@
   <data name="errorBranchAddressIsRequired" xml:space="preserve">
     <value>Sorry, Branch Address Is Required</value>
   </data>
+  <data name="errorBranchAddressWasAdded" xml:space="preserve">
+    <value>The Branch address is already added</value>
+  </data>
+  <data name="errorBranchEmailWasAdded" xml:space="preserve">
+    <value>The Branch email is already added</value>
+  </data>
   <data name="errorBranchNameIsRequired" xml:space="preserve">
     <value>Sorry, Store BranchIs Required</value>
   </data>
   <data name="errorBranchNameWasAdded" xml:space="preserve">
-    <value>The Branchname is already added</value>
+    <value>The Branch name is already added</value>
   </data>
 </root>

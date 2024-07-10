@@ -70,6 +70,24 @@ namespace App.Shared.Resources.Branches {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Branch address is already added.
+        /// </summary>
+        public static string errorBranchAddressWasAdded {
+            get {
+                return ResourceManager.GetString("errorBranchAddressWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Branch email is already added.
+        /// </summary>
+        public static string errorBranchEmailWasAdded {
+            get {
+                return ResourceManager.GetString("errorBranchEmailWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, Store BranchIs Required.
         /// </summary>
         public static string errorBranchNameIsRequired {
@@ -79,7 +97,7 @@ namespace App.Shared.Resources.Branches {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Branchname is already added.
+        ///   Looks up a localized string similar to The Branch name is already added.
         /// </summary>
         public static string errorBranchNameWasAdded {
             get {

@@ -65,7 +65,7 @@ namespace Api.Controllers.AdditionsModules.Units.Services
         {
             var select = UnitsAdaptor.SelectExpressionUnitDetails();
 
-            Expression<Func<Unit, bool>> criteria = (x) => x.unitId == inputModel.elemetId;
+            Expression<Func<Unit, bool>> criteria = (x) => x.unitId == inputModel.elementId;
 
             var unitInfo = await _unitOfWork.Units.FirstOrDefaultAsync(criteria, select);
 
@@ -89,7 +89,7 @@ namespace Api.Controllers.AdditionsModules.Units.Services
 
         public async Task<BaseActionDone<UnitInfo>> DeleteAsync(BaseDeleteDto inputModel)
         {
-            var unit = await _unitOfWork.Units.FirstOrDefaultAsync(x => x.unitId == inputModel.elemetId);
+            var unit = await _unitOfWork.Units.FirstOrDefaultAsync(x => x.unitId == inputModel.elementId);
 
             _unitOfWork.Units.Delete(unit);
 

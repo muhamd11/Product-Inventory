@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="libphonenumber-csharp" Version="8.13.40" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.6" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.6">
       <TreatAsUsed>true</TreatAsUsed>
     </PackageReference>
@@ -48,6 +50,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Resources\User\UsersMessages.Designer.cs">
+      <DependentUpon>UsersMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Update="Resources\Stores\StoresMessages.Designer.cs">
       <DependentUpon>StoresMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -83,6 +90,10 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Branches\BranchesMessages.resx">
       <LastGenOutput>BranchesMessages.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\User\UsersMessages.resx">
+      <LastGenOutput>UsersMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Stores\StoresMessages.resx">

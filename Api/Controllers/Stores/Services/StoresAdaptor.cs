@@ -10,7 +10,7 @@ namespace Api.Controllers.AdditionsModules.Stores.Services
             return store => new StoreInfo
             {
                 storeId = store.storeId,
-                storeName = store.storeName,
+                storeContactInfo = store.storeContactInfo,
             };
         }
 
@@ -19,8 +19,10 @@ namespace Api.Controllers.AdditionsModules.Stores.Services
             return store => new StoreInfoDetails
             {
                 storeId = store.storeId,
-                storeName = store.storeName,
-                storeAddress = store.storeAddress,
+                storeContactInfo = store.storeContactInfo,
+                storeContactSocialMedia = store.storeContactSocialMedia,
+                storeOpenAt = store.storeOpenAt,
+                storeCloseAt = store.storeCloseAt,
             };
         }
 
@@ -29,7 +31,7 @@ namespace Api.Controllers.AdditionsModules.Stores.Services
             return new StoreInfo
             {
                 storeId = store.storeId,
-                storeName = store.storeName,
+                storeContactInfo = store.storeContactInfo,
             };
         }
 
@@ -38,8 +40,10 @@ namespace Api.Controllers.AdditionsModules.Stores.Services
             return new StoreInfoDetails
             {
                 storeId = store.storeId,
-                storeName = store.storeName,
-                storeAddress = store.storeAddress,
+                storeContactInfo = store.storeContactInfo,
+                storeContactSocialMedia = store.storeContactSocialMedia,
+                storeOpenAt = store.storeOpenAt,
+                storeCloseAt = store.storeCloseAt,
             };
         }
     }

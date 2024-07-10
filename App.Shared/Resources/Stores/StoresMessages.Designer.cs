@@ -70,6 +70,24 @@ namespace App.Shared.Resources.Stores {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Store address is already added.
+        /// </summary>
+        public static string errorStoreAddressWasAdded {
+            get {
+                return ResourceManager.GetString("errorStoreAddressWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Store email is already added.
+        /// </summary>
+        public static string errorStoreEmailWasAdded {
+            get {
+                return ResourceManager.GetString("errorStoreEmailWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, Store Name Is Required.
         /// </summary>
         public static string errorStoresNameIsRequired {

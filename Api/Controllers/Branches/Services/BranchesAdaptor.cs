@@ -10,7 +10,7 @@ namespace Api.Controllers.AdditionsModules.Branches.Services
             return branch => new BranchInfo
             {
                 branchId = branch.branchId,
-                branchName = branch.branchName,
+                branchContactInfo = branch.branchContactInfo,
             };
         }
 
@@ -19,8 +19,10 @@ namespace Api.Controllers.AdditionsModules.Branches.Services
             return branch => new BranchInfoDetails
             {
                 branchId = branch.branchId,
-                branchName = branch.branchName,
-                branchAddress = branch.branchAddress,
+                branchContactInfo = branch.branchContactInfo,
+                branchContactSocialMedia = branch.branchContactSocialMedia,
+                branchOpenAt = branch.branchOpenAt,
+                branchCloseAt = branch.branchCloseAt
             };
         }
 
@@ -29,7 +31,7 @@ namespace Api.Controllers.AdditionsModules.Branches.Services
             return new BranchInfo
             {
                 branchId = branch.branchId,
-                branchName = branch.branchName,
+                branchContactInfo = branch.branchContactInfo,
             };
         }
 
@@ -38,8 +40,10 @@ namespace Api.Controllers.AdditionsModules.Branches.Services
             return new BranchInfoDetails
             {
                 branchId = branch.branchId,
-                branchName = branch.branchName,
-                branchAddress = branch.branchAddress,
+                branchContactInfo = branch.branchContactInfo,
+                branchContactSocialMedia = branch.branchContactSocialMedia,
+                branchOpenAt = branch.branchOpenAt,
+                branchCloseAt = branch.branchCloseAt
             };
         }
     }

@@ -65,7 +65,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
         {
             var select = CategoriesAdaptor.SelectExpressionColorDetails();
 
-            Expression<Func<Color, bool>> criteria = (x) => x.colorId == inputModel.elemetId;
+            Expression<Func<Color, bool>> criteria = (x) => x.colorId == inputModel.elementId;
 
             var colorInfo = await _unitOfWork.Colors.FirstOrDefaultAsync(criteria, select);
 
@@ -89,7 +89,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
 
         public async Task<BaseActionDone<ColorInfo>> DeleteAsync(BaseDeleteDto inputModel)
         {
-            var color = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == inputModel.elemetId);
+            var color = await _unitOfWork.Colors.FirstOrDefaultAsync(x => x.colorId == inputModel.elementId);
 
             _unitOfWork.Colors.Delete(color);
 

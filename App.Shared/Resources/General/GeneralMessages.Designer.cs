@@ -178,6 +178,15 @@ namespace App.Shared.Resources.General {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry,  Phone Number Is Invalid.
+        /// </summary>
+        public static string ErrorInvalidPhoneNumber {
+            get {
+                return ResourceManager.GetString("ErrorInvalidPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, Invalid Twitter Url.
         /// </summary>
         public static string errorInvalidTwitterUrl {
@@ -201,6 +210,42 @@ namespace App.Shared.Resources.General {
         public static string errorInvalidYoutubeUrl {
             get {
                 return ResourceManager.GetString("errorInvalidYoutubeUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry,  Country Code Is Required.
+        /// </summary>
+        public static string errorIsRequiredCountryCode {
+            get {
+                return ResourceManager.GetString("errorIsRequiredCountryCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry,  Country Code Name Is Required.
+        /// </summary>
+        public static string errorIsRequiredCountryCodeName {
+            get {
+                return ResourceManager.GetString("errorIsRequiredCountryCodeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry,  Dial Code Is Required.
+        /// </summary>
+        public static string errorIsRequiredDialCode {
+            get {
+                return ResourceManager.GetString("errorIsRequiredDialCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry,  Phone Number Is Required.
+        /// </summary>
+        public static string errorIsRequiredPhoneNumber {
+            get {
+                return ResourceManager.GetString("errorIsRequiredPhoneNumber", resourceCulture);
             }
         }
         

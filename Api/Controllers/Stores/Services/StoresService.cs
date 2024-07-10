@@ -49,8 +49,8 @@ namespace Api.Controllers.AdditionsModules.Stores.Services
             if (inputModel.textSearch is not null)
             {
                 criteria.Add(x =>
-                x.storeName.Contains(inputModel.textSearch)
-                || x.storeAddress.Contains(inputModel.textSearch));
+                x.storeContactInfo.storeName.Contains(inputModel.textSearch)
+                || x.storeContactInfo.storeAddress.Contains(inputModel.textSearch));
             }
 
             if (inputModel.elemetId.HasValue)
@@ -63,7 +63,7 @@ namespace Api.Controllers.AdditionsModules.Stores.Services
         {
             var select = StoreAdaptor.SelectExpressionStoreDetails();
 
-            Expression<Func<Store, bool>> criteria = (x) => x.storeId == inputModel.elemetId;
+            Expression<Func<Store, bool>> criteria = (x) => x.storeId == inputModel.elementId;
 
             var storeInfo = await _unitOfWork.Stores.FirstOrDefaultAsync(criteria, select);
 
@@ -87,7 +87,7 @@ namespace Api.Controllers.AdditionsModules.Stores.Services
 
         public async Task<BaseActionDone<StoreInfo>> DeleteAsync(BaseDeleteDto inputModel)
         {
-            var store = await _unitOfWork.Stores.FirstOrDefaultAsync(x => x.storeId == inputModel.elemetId);
+            var store = await _unitOfWork.Stores.FirstOrDefaultAsync(x => x.storeId == inputModel.elementId);
 
             _unitOfWork.Stores.Delete(store);
 

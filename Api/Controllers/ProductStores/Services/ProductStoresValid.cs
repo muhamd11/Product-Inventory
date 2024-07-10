@@ -61,7 +61,7 @@ namespace Api.Controllers.ProductProducts.Services
         {
             if (inputModel is not null)
             {
-                var isValidProductProductId = ValidProductProductId(inputModel.elemetId);
+                var isValidProductProductId = ValidProductProductId(inputModel.elementId);
                 if (isValidProductProductId.Status != EnumStatus.success)
                     return isValidProductProductId;
 
@@ -120,7 +120,7 @@ namespace Api.Controllers.ProductProducts.Services
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidProductProductId(inputModel.elemetId);
+                var isValidUintId = ValidProductProductId(inputModel.elementId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 

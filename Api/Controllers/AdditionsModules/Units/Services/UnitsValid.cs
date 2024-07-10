@@ -55,7 +55,7 @@ namespace Api.Controllers.AdditionsModules.Units.Services
         {
             if (inputModel is not null)
             {
-                var isValidUnitId = ValidUnitId(inputModel.elemetId);
+                var isValidUnitId = ValidUnitId(inputModel.elementId);
                 if (isValidUnitId.Status != EnumStatus.success)
                     return isValidUnitId;
 
@@ -116,7 +116,7 @@ namespace Api.Controllers.AdditionsModules.Units.Services
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidUnitId(inputModel.elemetId);
+                var isValidUintId = ValidUnitId(inputModel.elementId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 

@@ -156,6 +156,9 @@
   <data name="errorInvalidLinkedinUrl" xml:space="preserve">
     <value>Sorry, Invalid Linkedin Url</value>
   </data>
+  <data name="ErrorInvalidPhoneNumber" xml:space="preserve">
+    <value>Sorry,  Phone Number Is Invalid</value>
+  </data>
   <data name="errorInvalidTwitterUrl" xml:space="preserve">
     <value>Sorry, Invalid Twitter Url</value>
   </data>
@@ -164,6 +167,18 @@
   </data>
   <data name="errorInvalidYoutubeUrl" xml:space="preserve">
     <value>Sorry, Invalid Youtube Url</value>
+  </data>
+  <data name="errorIsRequiredCountryCode" xml:space="preserve">
+    <value>Sorry,  Country Code Is Required</value>
+  </data>
+  <data name="errorIsRequiredCountryCodeName" xml:space="preserve">
+    <value>Sorry,  Country Code Name Is Required</value>
+  </data>
+  <data name="errorIsRequiredDialCode" xml:space="preserve">
+    <value>Sorry,  Dial Code Is Required</value>
+  </data>
+  <data name="errorIsRequiredPhoneNumber" xml:space="preserve">
+    <value>Sorry,  Phone Number Is Required</value>
   </data>
   <data name="errorNameIsRequired" xml:space="preserve">
     <value>Sorry,  Name Is Required</value>

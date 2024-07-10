@@ -56,7 +56,7 @@ namespace Api.Controllers.AdditionsModules.Categories.Services
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidCategoryId(inputModel.elemetId);
+                var isValidUintId = ValidCategoryId(inputModel.elementId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 
@@ -119,7 +119,7 @@ namespace Api.Controllers.AdditionsModules.Categories.Services
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidCategoryId(inputModel.elemetId);
+                var isValidUintId = ValidCategoryId(inputModel.elementId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 

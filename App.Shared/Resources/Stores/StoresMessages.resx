@@ -120,6 +120,12 @@
   <data name="errorStoreAddressIsRequired" xml:space="preserve">
     <value>Sorry, Store Address Is Required</value>
   </data>
+  <data name="errorStoreAddressWasAdded" xml:space="preserve">
+    <value>The Store address is already added</value>
+  </data>
+  <data name="errorStoreEmailWasAdded" xml:space="preserve">
+    <value>The Store email is already added</value>
+  </data>
   <data name="errorStoresNameIsRequired" xml:space="preserve">
     <value>Sorry, Store Name Is Required</value>
   </data>

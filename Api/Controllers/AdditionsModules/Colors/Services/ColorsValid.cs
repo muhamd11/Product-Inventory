@@ -56,7 +56,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidColorId(inputModel.elemetId);
+                var isValidUintId = ValidColorId(inputModel.elementId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 
@@ -131,7 +131,7 @@ namespace Api.Controllers.AdditionsModules.Colors.Services
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidColorId(inputModel.elemetId);
+                var isValidUintId = ValidColorId(inputModel.elementId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 

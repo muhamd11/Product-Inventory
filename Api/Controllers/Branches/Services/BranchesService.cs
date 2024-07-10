@@ -50,8 +50,8 @@ namespace Api.Controllers.AdditionsModules.Branchs.Services
             if (inputModel.textSearch is not null)
             {
                 criteria.Add(x =>
-                x.branchName.Contains(inputModel.textSearch)
-                || x.branchAddress.Contains(inputModel.textSearch));
+                x.branchContactInfo.branchName.Contains(inputModel.textSearch)
+                || x.branchContactInfo.branchAddress.Contains(inputModel.textSearch));
             }
 
             if (inputModel.elemetId.HasValue)
@@ -64,7 +64,7 @@ namespace Api.Controllers.AdditionsModules.Branchs.Services
         {
             var select = BranchesAdaptor.SelectExpressionBranchDetails();
 
-            Expression<Func<Branch, bool>> criteria = (x) => x.branchId == inputModel.elemetId;
+            Expression<Func<Branch, bool>> criteria = (x) => x.branchId == inputModel.elementId;
 
             var branchInfo = await _unitOfWork.Branches.FirstOrDefaultAsync(criteria, select);
 
@@ -88,7 +88,7 @@ namespace Api.Controllers.AdditionsModules.Branchs.Services
 
         public async Task<BaseActionDone<BranchInfo>> DeleteAsync(BaseDeleteDto inputModel)
         {
-            var branch = await _unitOfWork.Branches.FirstOrDefaultAsync(x => x.branchId == inputModel.elemetId);
+            var branch = await _unitOfWork.Branches.FirstOrDefaultAsync(x => x.branchId == inputModel.elementId);
 
             _unitOfWork.Branches.Delete(branch);
 

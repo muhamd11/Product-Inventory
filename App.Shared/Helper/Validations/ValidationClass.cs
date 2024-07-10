@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using PhoneNumbers;
+using System.Text.RegularExpressions;
 
 namespace App.Shared.Helper.Validations
 {
@@ -61,6 +62,26 @@ namespace App.Shared.Helper.Validations
                 return false;
 
             return true;
+        }
+
+        public static bool IsValidPhoneNumber(string countryCode, string dialingCode, string phoneNumber)
+        {
+            var phoneNumberUtil = PhoneNumberUtil.GetInstance();
+            try
+            {
+                var numberProto = phoneNumberUtil.Parse(phoneNumber, countryCode);
+                var expectedDialingCode = "+" + dialingCode;
+                var actualDialingCode = phoneNumberUtil.Format(numberProto, PhoneNumberFormat.INTERNATIONAL).Split(' ')[0];
+
+                if (expectedDialingCode != actualDialingCode)
+                    return false;
+
+                return phoneNumberUtil.IsValidNumber(numberProto);
+            }
+            catch (NumberParseException)
+            {
+                return false;
+            }
         }
     }
 }

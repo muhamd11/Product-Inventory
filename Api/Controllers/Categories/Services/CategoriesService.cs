@@ -64,7 +64,7 @@ namespace Api.Controllers.AdditionsModules.Categories.Services
         {
             var select = CategoriesAdaptor.SelectExpressionCategoryDetails();
 
-            Expression<Func<Category, bool>> criteria = (x) => x.categoryId == inputModel.elemetId;
+            Expression<Func<Category, bool>> criteria = (x) => x.categoryId == inputModel.elementId;
 
             var categoryInfo = await _unitOfWork.Categories.FirstOrDefaultAsync(criteria, select);
 
@@ -88,7 +88,7 @@ namespace Api.Controllers.AdditionsModules.Categories.Services
 
         public async Task<BaseActionDone<CategoryInfo>> DeleteAsync(BaseDeleteDto inputModel)
         {
-            var category = await _unitOfWork.Categories.FirstOrDefaultAsync(x => x.categoryId == inputModel.elemetId);
+            var category = await _unitOfWork.Categories.FirstOrDefaultAsync(x => x.categoryId == inputModel.elementId);
 
             _unitOfWork.Categories.Delete(category);
 

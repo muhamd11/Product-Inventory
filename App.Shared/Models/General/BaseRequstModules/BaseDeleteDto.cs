@@ -2,6 +2,6 @@
 {
     public class BaseDeleteDto
     {
-        public int elemetId { get; set; }
+        public int elementId { get; set; }
     }
 }
