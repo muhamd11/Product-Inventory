@@ -1,5 +1,5 @@
-﻿using App.Shared.Models.Branches;
-using App.Shared.Models.Branches.DTO;
+﻿using App.Shared.Models.PlacesModules.Branches;
+using App.Shared.Models.PlacesModules.Branches.DTO;
 using AutoMapper;
 
 namespace Api.MappingProfiles.Branches

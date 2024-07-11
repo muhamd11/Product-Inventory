@@ -1,15 +1,16 @@
 ﻿using App.EF.Repositories;
 using App.Shared;
 using App.Shared.Interfaces;
-using App.Shared.Models.AdditionsModules.CategoryModule;
-using App.Shared.Models.AdditionsModules.ColorModule;
-using App.Shared.Models.AdditionsModules.LogActionsModel;
-using App.Shared.Models.AdditionsModules.UnitModule;
-using App.Shared.Models.Branches;
+using App.Shared.Models.AdditionsModules.Shared.Colors;
+using App.Shared.Models.AdditionsModules.Shared.Units;
+using App.Shared.Models.PlacesModules.Branches;
+using App.Shared.Models.PlacesModules.Stores;
 using App.Shared.Models.Products;
+using App.Shared.Models.ProductsModules.Categories;
 using App.Shared.Models.ProductStores;
-using App.Shared.Models.Stores;
+using App.Shared.Models.Roles;
 using App.Shared.Models.Users;
+using App.Shared.Models.UsersModule.LogActionsModel;
 using System.Threading.Tasks;
 
 namespace App.EF
@@ -34,6 +35,7 @@ namespace App.EF
 
         public IBaseRepository<Color> Colors { get; private set; }
         public IBaseRepository<Unit> Units { get; private set; }
+        public IBaseRepository<Role> Roles { get; private set; }
         public IBaseRepository<LogAction> LogActions { get; private set; }
 
         #endregion AdditionsModules
@@ -57,6 +59,7 @@ namespace App.EF
 
             Colors = new BaseRepository<Color>(_context);
             Units = new BaseRepository<Unit>(_context);
+            Roles = new BaseRepository<Role>(_context);
             LogActions = new BaseRepository<LogAction>(_context);
 
             #endregion AdditionsModules

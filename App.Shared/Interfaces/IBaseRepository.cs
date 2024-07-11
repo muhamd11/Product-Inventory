@@ -17,10 +17,10 @@ namespace App.Shared.Interfaces
                                                                      PaginationRequest? paginationRequest = null,
                                                                      List<Expression<Func<T, object>>>? includes = null);
 
-        T FirstOrDefault(Expression<Func<T, bool>> criteria, string[] includes = null);
+        T FirstOrDefault(Expression<Func<T, bool>> criteria, List<Expression<Func<T, object>>>? includes = null);
 
         Task<TResult> FirstOrDefaultAsync<TResult>(Expression<Func<T, bool>> criteria,
-            Expression<Func<T, TResult>>? projection = null, string[] includes = null);
+            Expression<Func<T, TResult>> select, List<Expression<Func<T, object>>>? includes = null);
 
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> criteria, string[] includes = null);
 

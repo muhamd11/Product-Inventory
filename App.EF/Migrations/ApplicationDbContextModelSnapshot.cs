@@ -49,7 +49,7 @@ namespace App.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("colorId"));
 
-                    b.Property<DateTimeOffset?>("CreatedDate")
+                    b.Property<DateTimeOffset>("CreatedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset?>("UpdatedDate")
@@ -111,7 +111,7 @@ namespace App.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("unitId"));
 
-                    b.Property<DateTimeOffset?>("CreatedDate")
+                    b.Property<DateTimeOffset>("CreatedDate")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<DateTimeOffset?>("UpdatedDate")
@@ -151,6 +151,52 @@ namespace App.EF.Migrations
                     b.HasKey("branchId");
 
                     b.ToTable("Branches");
+                });
+
+            modelBuilder.Entity("App.Shared.Models.Buyers.Buyer", b =>
+                {
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateOnly>("buyerBirthDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("buyerCountryCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("buyerCountryCodeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("buyerDailCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("buyerEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("buyerFirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("buyerIsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("buyerLastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("buyerPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.HasKey("userId");
+
+                    b.ToTable("Buyer");
                 });
 
             modelBuilder.Entity("App.Shared.Models.ProductStores.ProductStore", b =>
@@ -208,6 +254,34 @@ namespace App.EF.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("App.Shared.Models.Roles.Role", b =>
+                {
+                    b.Property<int>("roleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("roleId"));
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool?>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("roleDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("roleName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("roleId");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("App.Shared.Models.Stores.Store", b =>
                 {
                     b.Property<int>("storeId")
@@ -235,13 +309,27 @@ namespace App.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userId"));
 
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool?>("isDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("passwordHash")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("roleId")
+                        .HasColumnType("int");
 
                     b.Property<string>("userName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("userId");
+
+                    b.HasIndex("roleId");
 
                     b.ToTable("Users");
                 });
@@ -331,6 +419,17 @@ namespace App.EF.Migrations
                     b.Navigation("branchContactInfo");
 
                     b.Navigation("branchContactSocialMedia");
+                });
+
+            modelBuilder.Entity("App.Shared.Models.Buyers.Buyer", b =>
+                {
+                    b.HasOne("App.Shared.Models.Users.User", "user")
+                        .WithOne("userBuyerData")
+                        .HasForeignKey("App.Shared.Models.Buyers.Buyer", "userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("App.Shared.Models.ProductStores.ProductStore", b =>
@@ -456,50 +555,11 @@ namespace App.EF.Migrations
 
             modelBuilder.Entity("App.Shared.Models.Users.User", b =>
                 {
-                    b.OwnsOne("App.Shared.Models.Users.UserContanctInfo", "userContanctInfo", b1 =>
-                        {
-                            b1.Property<int>("userId")
-                                .HasColumnType("int");
+                    b.HasOne("App.Shared.Models.Roles.Role", "roleData")
+                        .WithMany("usersData")
+                        .HasForeignKey("roleId");
 
-                            b1.Property<DateOnly>("userBirthDate")
-                                .HasColumnType("date");
-
-                            b1.Property<string>("userCountryCode")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("userCountryCodeName")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<DateTime>("userCreationDate")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<string>("userDailCode")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("userEmail")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("userFirstName")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<bool>("userIsActive")
-                                .HasColumnType("bit");
-
-                            b1.Property<string>("userLastName")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("userPhoneNumber")
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("userId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("userId");
-                        });
-
-                    b.Navigation("userContanctInfo");
+                    b.Navigation("roleData");
                 });
 
             modelBuilder.Entity("App.Shared.Models.AdditionsModules.CategoryModule.Category", b =>
@@ -515,6 +575,16 @@ namespace App.EF.Migrations
             modelBuilder.Entity("App.Shared.Models.AdditionsModules.UnitModule.Unit", b =>
                 {
                     b.Navigation("productStoresData");
+                });
+
+            modelBuilder.Entity("App.Shared.Models.Roles.Role", b =>
+                {
+                    b.Navigation("usersData");
+                });
+
+            modelBuilder.Entity("App.Shared.Models.Users.User", b =>
+                {
+                    b.Navigation("userBuyerData");
                 });
 #pragma warning restore 612, 618
         }

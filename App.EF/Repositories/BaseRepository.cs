@@ -86,7 +86,7 @@ namespace App.EF.Repositories
             };
         }
 
-        public T FirstOrDefault(Expression<Func<T, bool>> criteria, string[] includes = null)
+        public T FirstOrDefault(Expression<Func<T, bool>> criteria, List<Expression<Func<T, object>>>? includes = null)
         {
             IQueryable<T> query = _context.Set<T>();
 
@@ -98,7 +98,7 @@ namespace App.EF.Repositories
         }
 
         public async Task<TResult> FirstOrDefaultAsync<TResult>(Expression<Func<T, bool>> criteria,
-            Expression<Func<T, TResult>> select, string[] includes = null)
+            Expression<Func<T, TResult>> select, List<Expression<Func<T, object>>>? includes = null)
         {
             IQueryable<T> query = _context.Set<T>();
 

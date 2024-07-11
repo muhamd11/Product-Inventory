@@ -1,5 +1,5 @@
-﻿using App.Shared.Models.Stores;
-using App.Shared.Models.Stores.DTO;
+﻿using App.Shared.Models.PlacesModules.Stores;
+using App.Shared.Models.PlacesModules.Stores.DTO;
 using AutoMapper;
 
 namespace Api.MappingProfiles.Stores

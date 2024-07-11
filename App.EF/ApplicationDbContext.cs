@@ -1,22 +1,22 @@
-﻿using App.Shared.Models.AdditionsModules.CategoryModule;
-using App.Shared.Models.AdditionsModules.ColorModule;
-using App.Shared.Models.AdditionsModules.LogActionsModel;
-using App.Shared.Models.AdditionsModules.UnitModule;
-using App.Shared.Models.Branches;
+﻿using App.Shared.Helper.Json;
+using App.Shared.Models.AdditionsModules.Shared.Colors;
+using App.Shared.Models.AdditionsModules.Shared.Units;
+using App.Shared.Models.PlacesModules.Branches;
+using App.Shared.Models.PlacesModules.Stores;
 using App.Shared.Models.Products;
+using App.Shared.Models.ProductsModules.Categories;
 using App.Shared.Models.ProductStores;
-using App.Shared.Models.Stores;
+using App.Shared.Models.Roles;
+using App.Shared.Models.SystemBase.BaseClass;
 using App.Shared.Models.Users;
+using App.Shared.Models.UsersModule.LogActionsModel;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Threading;
-using System;
-using App.Shared.Models.AdditionsModules.LogActionsModel.ViewModel;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json;
-using App.Shared.Models.Base;
-using App.Shared.Helper.Json;
-using App.Shared.Helper.Validations;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace App.EF
 {
@@ -39,44 +39,37 @@ namespace App.EF
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-                    LogChanges();
+            LogChanges();
             return await base.SaveChangesAsync(cancellationToken);
         }
 
         private void LogChanges()
         {
-            var entries = ChangeTracker.Entries().Where(e => e.Entity is BaseEntity && (e.State == EntityState.Added || e.State == EntityState.Modified));
-
+            var entries = ChangeTracker.Entries().Where(e => e.Entity is BaseEntity && (e.State == EntityState.Added || e.State == EntityState.Modified
+                                                                                                                     || e.State == EntityState.Deleted));
 
             foreach (var entityEntry in entries)
             {
-                if (entityEntry.State == EntityState.Added) 
+                if (entityEntry.State == EntityState.Added)
                     ((BaseEntity)entityEntry.Entity).CreatedDate = DateTime.UtcNow;
                 else if (entityEntry.State == EntityState.Modified)
-                {
                     ((BaseEntity)entityEntry.Entity).UpdatedDate = DateTime.UtcNow;
-                    ((BaseEntity)entityEntry.Entity).CreatedDate = ((BaseEntity)entityEntry.Entity).CreatedDate;
-                    ((BaseEntity)entityEntry.Entity).isDeleted = ((BaseEntity)entityEntry.Entity).isDeleted;
-                }
                 else if (entityEntry.State == EntityState.Deleted)
                 {
                     ((BaseEntity)entityEntry.Entity).isDeleted = true;
                     ((BaseEntity)entityEntry.Entity).UpdatedDate = DateTime.UtcNow;
-                    ((BaseEntity)entityEntry.Entity).CreatedDate = ((BaseEntity)entityEntry.Entity).CreatedDate;
                 }
             }
 
             var logEntries = ChangeTracker.Entries()
-                   .Where(e => e.Entity is BaseEntity && (e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted))
-                   .Select(e => CreateLogEntry(e))
-                   .ToList(); // Collect log entries in a separate list
+                                          .Select(CreateLogEntry)
+                                          .ToList(); // Collect log entries in a separate list
 
             // Add the log entries to the LogActions DbSet after enumeration is complete
             LogActions.AddRange(logEntries);
         }
 
-
-        private LogAction CreateLogEntry(Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry entry)
+        private LogAction CreateLogEntry(EntityEntry entry)
         {
             var logEntry = new LogAction
             {
@@ -88,8 +81,9 @@ namespace App.EF
 
             if (entry.State == EntityState.Modified)
             {
+                var databaseValues = entry.GetDatabaseValues();
                 logEntry.oldData = JsonConvert.SerializeObject(
-                    entry.GetDatabaseValues().Properties.ToDictionary(p => p.Name, p => entry.OriginalValues[p]),
+                    databaseValues.Properties.ToDictionary(p => p.Name, p => databaseValues[p]),
                     JsonSettings.IgnoreSelfReferencesAndSpecificProperties);
 
                 logEntry.newData = JsonConvert.SerializeObject(
@@ -127,6 +121,7 @@ namespace App.EF
 
         public DbSet<Color> Colors { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DbSet<LogAction> LogActions { get; set; }
 
         #endregion AdditionsModules
