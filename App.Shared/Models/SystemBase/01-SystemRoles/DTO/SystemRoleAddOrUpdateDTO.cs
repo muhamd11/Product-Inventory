@@ -1,6 +1,6 @@
 ﻿namespace App.Shared.Models.SystemBase.Roles.DTO
 {
-    public class RoleAddOrUpdateDTO
+    public class SystemRoleAddOrUpdateDTO
     {
         public int systemRoleId { get; set; }
         public string systemRoleName { get; set; }

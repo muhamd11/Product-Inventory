@@ -1,5 +1,6 @@
 using App.EF;
 using App.Shared;
+using App.Shared.Interfaces.General.Scrutor;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -10,7 +10,7 @@ namespace Api.MappingProfiles.Authorizations
     {
         public SystemBaseProfile()
         {
-            CreateMap<SystemRole, RoleAddOrUpdateDTO>().ReverseMap();
+            CreateMap<SystemRole, SystemRoleAddOrUpdateDTO>().ReverseMap();
             CreateMap<LogAction, LogActionAddOrUpdateDTO>().ReverseMap();
         }
     }

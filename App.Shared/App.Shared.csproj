@@ -22,8 +22,8 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Resources\UsersModules\Authorizations\Roles\RolesMessages.Designer.cs">
-      <DependentUpon>RolesMessages.resx</DependentUpon>
+    <Compile Update="Resources\SystemBase\SystemRoles\SystemRolesMessages.Designer.cs">
+      <DependentUpon>SystemRolesMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
@@ -74,8 +74,8 @@
       <LastGenOutput>ColorsMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\UsersModules\Authorizations\Roles\RolesMessages.resx">
-      <LastGenOutput>RolesMessages.Designer.cs</LastGenOutput>
+    <EmbeddedResource Update="Resources\SystemBase\SystemRoles\SystemRolesMessages.resx">
+      <LastGenOutput>SystemRolesMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\General\GeneralMessages.resx">
@@ -113,7 +113,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Interfaces\UsersModule\Authorizations\" />
     <Folder Include="Models\UsersModule\02-Authorizations\" />
+    <Folder Include="Resources\UsersModules\Authorizations\" />
   </ItemGroup>
 
 </Project>

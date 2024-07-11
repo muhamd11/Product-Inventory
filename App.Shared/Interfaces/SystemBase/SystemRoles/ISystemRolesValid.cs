@@ -3,18 +3,18 @@ using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.SystemBase.Roles.DTO;
 
-namespace Api.Controllers.Authorizations.Roles.Interfaces
+namespace App.Shared.Interfaces.SystemBase.SystemRoles
 {
-    public interface IRoleValid : ITransientService
+    public interface ISystemRolesValid : ITransientService
     {
         public BaseValid ValidGetDetails(BaseGetDetailsDto inputModel);
 
         public BaseValid ValidGetAll(BaseSearchDto inputModel);
 
-        public BaseValid ValidAddOrUpdate(RoleAddOrUpdateDTO inputModel, bool isUpdate);
+        public BaseValid ValidAddOrUpdate(SystemRoleAddOrUpdateDTO inputModel, bool isUpdate);
 
         public BaseValid ValidDelete(BaseDeleteDto inputModel);
 
-        public BaseValid ValidRoleId(int systemRoleId);
+        public BaseValid ValidSystemRoleId(int systemRoleId);
     }
 }

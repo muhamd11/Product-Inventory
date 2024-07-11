@@ -2,7 +2,7 @@
 
 namespace App.Shared.Models.SystemBase.Roles.DTO
 {
-    public class RoleSearchDto : BaseSearchDto
+    public class SystemRoleSearchDto : BaseSearchDto
     {
     }
 }

@@ -33,7 +33,7 @@ namespace Api.Controllers.UsersModule.Users
 
         public async Task<BaseGetDataWithPagnation<UserInfo>> GetAllAsync(UserSearchDto inputModel)
         {
-            var select = UserAdaptor.SelectExpressionUserInfo();
+            var select = UsersAdaptor.SelectExpressionUserInfo();
 
             var criteria = GenrateCriteria(inputModel);
 
@@ -64,7 +64,7 @@ namespace Api.Controllers.UsersModule.Users
 
         public async Task<UserInfoDetails> GetDetails(BaseGetDetailsDto inputModel)
         {
-            var select = UserAdaptor.SelectExpressionUserDetails();
+            var select = UsersAdaptor.SelectExpressionUserDetails();
 
             Expression<Func<User, bool>> criteria = (x) => x.userId == inputModel.elementId;
 
@@ -91,7 +91,7 @@ namespace Api.Controllers.UsersModule.Users
 
             var isDone = await _unitOfWork.CommitAsync();
 
-            var userInfo = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.userId == user.userId, UserAdaptor.SelectExpressionUserDetails());
+            var userInfo = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.userId == user.userId, UsersAdaptor.SelectExpressionUserDetails());
 
             return BaseActionDone<UserInfo>.GenrateBaseActionDone(isDone, userInfo);
         }
@@ -104,7 +104,7 @@ namespace Api.Controllers.UsersModule.Users
 
             var isDone = await _unitOfWork.CommitAsync();
 
-            var userInfo = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.userId == user.userId, UserAdaptor.SelectExpressionUserInfo());
+            var userInfo = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.userId == user.userId, UsersAdaptor.SelectExpressionUserInfo());
 
             return BaseActionDone<UserInfo>.GenrateBaseActionDone(isDone, userInfo);
         }

@@ -1,17 +1,17 @@
-﻿using Api.Controllers.Authorizations.Roles.Interfaces;
-using App.Shared;
+﻿using App.Shared;
 using App.Shared.Consts.GeneralModels;
 using App.Shared.Helper.Validations;
+using App.Shared.Interfaces.SystemBase.SystemRoles;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.SystemBase.Roles;
 using App.Shared.Models.SystemBase.Roles.DTO;
 using App.Shared.Resources.General;
-using App.Shared.Resources.UsersModules.Authorizations.Roles;
+using App.Shared.Resources.SystemBase.SystemRoles;
 
-namespace Api.Controllers.Authorizations.Roles.Services
+namespace Api.Controllers.SystemBase.SystemRoles
 {
-    internal class RoleValid : IRoleValid
+    internal class SystemRoleValid : ISystemRolesValid
     {
         #region Members
 
@@ -21,7 +21,7 @@ namespace Api.Controllers.Authorizations.Roles.Services
 
         #region Constructor
 
-        public RoleValid(IUnitOfWork unitOfWork)
+        public SystemRoleValid(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -38,9 +38,9 @@ namespace Api.Controllers.Authorizations.Roles.Services
 
                 if (inputModel.elemetId.HasValue)
                 {
-                    var isValidRoleId = ValidRoleId(inputModel.elemetId.Value);
-                    if (isValidRoleId.Status != EnumStatus.success)
-                        return isValidRoleId;
+                    var isValidSystemRoleId = ValidSystemRoleId(inputModel.elemetId.Value);
+                    if (isValidSystemRoleId.Status != EnumStatus.success)
+                        return isValidSystemRoleId;
                 }
 
                 #endregion elemetId?
@@ -55,9 +55,9 @@ namespace Api.Controllers.Authorizations.Roles.Services
         {
             if (inputModel is not null)
             {
-                var isValidRoleId = ValidRoleId(inputModel.elementId);
-                if (isValidRoleId.Status != EnumStatus.success)
-                    return isValidRoleId;
+                var isValidSystemRoleId = ValidSystemRoleId(inputModel.elementId);
+                if (isValidSystemRoleId.Status != EnumStatus.success)
+                    return isValidSystemRoleId;
 
                 return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
             }
@@ -65,7 +65,7 @@ namespace Api.Controllers.Authorizations.Roles.Services
                 return BaseValid.createBaseValid(GeneralMessages.errorNoData, EnumStatus.error);
         }
 
-        public BaseValid ValidAddOrUpdate(RoleAddOrUpdateDTO inputModel, bool isUpdate)
+        public BaseValid ValidAddOrUpdate(SystemRoleAddOrUpdateDTO inputModel, bool isUpdate)
         {
             if (inputModel is not null)
             {
@@ -73,9 +73,9 @@ namespace Api.Controllers.Authorizations.Roles.Services
 
                 if (isUpdate == true)
                 {
-                    var isValidRoleId = ValidRoleId(inputModel.systemRoleId);
-                    if (isValidRoleId.Status != EnumStatus.success)
-                        return isValidRoleId;
+                    var isValidSystemRoleId = ValidSystemRoleId(inputModel.systemRoleId);
+                    if (isValidSystemRoleId.Status != EnumStatus.success)
+                        return isValidSystemRoleId;
                 }
 
                 #endregion systemRoleId?
@@ -83,7 +83,7 @@ namespace Api.Controllers.Authorizations.Roles.Services
                 #region systemRoleName *
 
                 if (!ValidationClass.IsValidString(inputModel.systemRoleName))
-                    return BaseValid.createBaseValid(RolesMessages.errorRoleNameIsRequired, EnumStatus.error);
+                    return BaseValid.createBaseValid(SystemRolesMessages.errorSystemRoleNameIsRequired, EnumStatus.error);
 
                 int nameMaxLength = (int)EnumMaxLength.nameMaxLength;
                 if (!ValidationClass.IsValidStringLength(inputModel.systemRoleName, nameMaxLength))
@@ -91,14 +91,14 @@ namespace Api.Controllers.Authorizations.Roles.Services
 
                 #endregion systemRoleName *
 
-                #region ValidateRole
+                #region ValidateSystemRole
 
-                var isValidRole = IsValidRole(inputModel);
+                var isValidSystemRole = IsValidSystemRole(inputModel);
 
-                if (isValidRole.Status != EnumStatus.success)
-                    return isValidRole;
+                if (isValidSystemRole.Status != EnumStatus.success)
+                    return isValidSystemRole;
 
-                #endregion ValidateRole
+                #endregion ValidateSystemRole
 
                 return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
             }
@@ -110,7 +110,7 @@ namespace Api.Controllers.Authorizations.Roles.Services
         {
             if (inputModel is not null)
             {
-                var isValidUintId = ValidRoleId(inputModel.elementId);
+                var isValidUintId = ValidSystemRoleId(inputModel.elementId);
                 if (isValidUintId.Status != EnumStatus.success)
                     return isValidUintId;
 
@@ -120,22 +120,22 @@ namespace Api.Controllers.Authorizations.Roles.Services
                 return BaseValid.createBaseValid(GeneralMessages.errorNoData, EnumStatus.error);
         }
 
-        public BaseValid ValidRoleId(int systemRoleId)
+        public BaseValid ValidSystemRoleId(int systemRoleId)
         {
-            var role = _unitOfWork.Roles.FirstOrDefault(x => x.systemRoleId == systemRoleId);
-            if (role is not null)
+            var systemRole = _unitOfWork.SystemRoles.FirstOrDefault(x => x.systemRoleId == systemRoleId);
+            if (systemRole is not null)
                 return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
             else
                 return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
         }
 
-        public BaseValid IsValidRole(RoleAddOrUpdateDTO inputModel)
+        public BaseValid IsValidSystemRole(SystemRoleAddOrUpdateDTO inputModel)
         {
-            SystemRole existingRole;
+            SystemRole existingSystemRole;
 
-            existingRole = _unitOfWork.Roles.FirstOrDefault(x => x.systemRoleName == inputModel.systemRoleName);
-            if (existingRole is not null && existingRole.systemRoleId != inputModel.systemRoleId)
-                return BaseValid.createBaseValid(RolesMessages.errorRoleNameWasAdded, EnumStatus.error);
+            existingSystemRole = _unitOfWork.SystemRoles.FirstOrDefault(x => x.systemRoleName == inputModel.systemRoleName);
+            if (existingSystemRole is not null && existingSystemRole.systemRoleId != inputModel.systemRoleId)
+                return BaseValid.createBaseValid(SystemRolesMessages.errorSystemRoleNameWasAdded, EnumStatus.error);
 
             return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
         }

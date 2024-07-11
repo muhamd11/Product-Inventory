@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace App.Shared.Resources.UsersModules.Authorizations.Roles {
+namespace App.Shared.Resources.SystemBase.SystemRoles {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace App.Shared.Resources.UsersModules.Authorizations.Roles {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class RolesMessages {
+    public class SystemRolesMessages {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RolesMessages() {
+        internal SystemRolesMessages() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace App.Shared.Resources.UsersModules.Authorizations.Roles {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("App.Shared.Resources.UsersModules.Authorizations.Roles.RolesMessages", typeof(RolesMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("App.Shared.Resources.SystemBase.SystemRoles.SystemRolesMessages", typeof(SystemRolesMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,18 +63,18 @@ namespace App.Shared.Resources.UsersModules.Authorizations.Roles {
         /// <summary>
         ///   Looks up a localized string similar to Sorry, role name is required.
         /// </summary>
-        public static string errorRoleNameIsRequired {
+        public static string errorSystemRoleNameIsRequired {
             get {
-                return ResourceManager.GetString("errorRoleNameIsRequired", resourceCulture);
+                return ResourceManager.GetString("errorSystemRoleNameIsRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Sorry, role name was added before.
         /// </summary>
-        public static string errorRoleNameWasAdded {
+        public static string errorSystemRoleNameWasAdded {
             get {
-                return ResourceManager.GetString("errorRoleNameWasAdded", resourceCulture);
+                return ResourceManager.GetString("errorSystemRoleNameWasAdded", resourceCulture);
             }
         }
     }
