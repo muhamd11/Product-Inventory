@@ -112,4 +112,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\UsersModule\02-Authorizations\" />
+  </ItemGroup>
+
 </Project>

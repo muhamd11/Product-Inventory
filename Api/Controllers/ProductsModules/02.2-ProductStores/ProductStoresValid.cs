@@ -1,8 +1,8 @@
 ﻿using Api.Controllers.AdditionsModules.Shared.Units.Interfaces;
 using Api.Controllers.ProductsModules.Products.Interfaces;
 using Api.Controllers.ProductsModules.ProductStores.Interfaces;
-using App.EF.Consts;
 using App.Shared;
+using App.Shared.Consts.GeneralModels;
 using App.Shared.Interfaces.AdditionsModules.Colors;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;

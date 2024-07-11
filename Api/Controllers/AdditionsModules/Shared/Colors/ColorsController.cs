@@ -1,4 +1,4 @@
-﻿using App.EF.Consts;
+﻿using App.Shared.Consts.GeneralModels;
 using App.Shared.Interfaces.AdditionsModules.Colors;
 using App.Shared.Models.AdditionsModules.Shared.Colors.DTO;
 using App.Shared.Models.AdditionsModules.Shared.Colors.ViewModel;

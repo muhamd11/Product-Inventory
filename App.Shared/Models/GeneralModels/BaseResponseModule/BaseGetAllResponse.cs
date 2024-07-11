@@ -1,4 +1,4 @@
-﻿using App.EF.Consts;
+﻿using App.Shared.Consts.GeneralModels;
 using App.Shared.Models.General;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Resources.General;

@@ -1,4 +1,4 @@
-﻿using App.EF.Consts;
+﻿using App.Shared.Consts.GeneralModels;
 
 namespace App.Shared.Models.General.LocalModels
 {

@@ -1,6 +1,5 @@
-﻿using App.EF.Consts;
-using App.Shared;
-using App.Shared.Consts;
+﻿using App.Shared;
+using App.Shared.Consts.GeneralModels;
 using App.Shared.Helper.Validations;
 using App.Shared.Interfaces.AdditionsModules.Colors;
 using App.Shared.Models.AdditionsModules.Shared.Colors;

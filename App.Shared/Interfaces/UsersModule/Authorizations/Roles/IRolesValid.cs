@@ -1,7 +1,7 @@
 ﻿using App.Shared.Interfaces.General.Scrutor;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
-using App.Shared.Models.Roles;
+using App.Shared.Models.SystemBase.Roles.DTO;
 
 namespace Api.Controllers.Authorizations.Roles.Interfaces
 {
@@ -15,6 +15,6 @@ namespace Api.Controllers.Authorizations.Roles.Interfaces
 
         public BaseValid ValidDelete(BaseDeleteDto inputModel);
 
-        public BaseValid ValidRoleId(int roleId);
+        public BaseValid ValidRoleId(int systemRoleId);
     }
 }

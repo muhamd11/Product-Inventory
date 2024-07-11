@@ -1,7 +1,6 @@
 ﻿using Api.Controllers.PlacesModules.Branches.Interfaces;
-using App.EF.Consts;
 using App.Shared;
-using App.Shared.Consts;
+using App.Shared.Consts.GeneralModels;
 using App.Shared.Helper.Validations;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;

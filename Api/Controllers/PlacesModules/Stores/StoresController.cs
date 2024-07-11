@@ -1,5 +1,5 @@
 ﻿using Api.Controllers.PlacesModules.Stores.Interfaces;
-using App.EF.Consts;
+using App.Shared.Consts.GeneralModels;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.PlacesModules.Stores.DTO;
 using App.Shared.Models.PlacesModules.Stores.ViewModel;

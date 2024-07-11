@@ -1,5 +1,5 @@
 ﻿using Api.Controllers.AdditionsModules.Shared.Units.Interfaces;
-using App.EF.Consts;
+using App.Shared.Consts.GeneralModels;
 using App.Shared.Models.AdditionsModules.Shared.Units.DTO;
 using App.Shared.Models.AdditionsModules.Shared.Units.ViewModel;
 using App.Shared.Models.General.BaseRequstModules;

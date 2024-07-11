@@ -1,7 +1,8 @@
 ﻿using App.Shared.Interfaces.General.Scrutor;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
-using App.Shared.Models.Roles;
+using App.Shared.Models.SystemBase.Roles.DTO;
+using App.Shared.Models.SystemBase.Roles.ViewModel;
 using System.Threading.Tasks;
 
 namespace Api.Controllers.Authorizations.Roles.Interfaces

@@ -6,8 +6,8 @@ using App.Shared.Models.PlacesModules.Stores;
 using App.Shared.Models.Products;
 using App.Shared.Models.ProductsModules.Categories;
 using App.Shared.Models.ProductStores;
-using App.Shared.Models.Roles;
 using App.Shared.Models.SystemBase.BaseClass;
+using App.Shared.Models.SystemBase.Roles;
 using App.Shared.Models.Users;
 using App.Shared.Models.UsersModule.LogActionsModel;
 using Microsoft.EntityFrameworkCore;
@@ -26,10 +26,14 @@ namespace App.EF
         {
         }
 
+        #region override Configrations
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
+
+        #region override SaveChanges
 
         public override int SaveChanges()
         {
@@ -106,24 +110,47 @@ namespace App.EF
             return logEntry;
         }
 
-        #region CoreModules
+        #endregion override SaveChanges
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<ProductStore> ProductStores { get; set; }
-        public DbSet<Store> Stores { get; set; }
-        public DbSet<Branch> Branches { get; set; }
+        #endregion override Configrations
 
-        #endregion CoreModules
+        #region DB Tables
 
         #region AdditionsModules
 
         public DbSet<Color> Colors { get; set; }
         public DbSet<Unit> Units { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<LogAction> LogActions { get; set; }
 
         #endregion AdditionsModules
+
+        #region PlacesModules
+
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<Branch> Branches { get; set; }
+
+        #endregion PlacesModules
+
+        #region ProductsModules
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductStore> ProductStores { get; set; }
+
+        #endregion ProductsModules
+
+        #region SystemBase
+
+        public DbSet<SystemRole> SystemRoles { get; set; }
+        public DbSet<LogAction> LogActions { get; set; }
+
+        #endregion SystemBase
+
+        #region UsersModule
+
+        public DbSet<User> Users { get; set; }
+
+        #endregion UsersModule
+
+        #endregion DB Tables
     }
 }

@@ -1,4 +1,4 @@
-﻿using App.Shared.Consts;
+﻿using App.Shared.Consts.GeneralModels;
 using App.Shared.Interfaces.General;
 using App.Shared.Models.General;
 using App.Shared.Models.General.LocalModels;
@@ -86,25 +86,29 @@ namespace App.EF.Repositories
             };
         }
 
-        public T FirstOrDefault(Expression<Func<T, bool>> criteria, string[] includes = null)
+        public T FirstOrDefault(Expression<Func<T, bool>> criteria, List<Expression<Func<T, object>>>? includes = null)
         {
             IQueryable<T> query = _context.Set<T>();
 
             if (includes != null)
-                foreach (var incluse in includes)
-                    query = query.Include(incluse);
+            {
+                foreach (var item in includes)
+                    query = query.Include(item);
+            }
 
             return query.FirstOrDefault(criteria);
         }
 
         public async Task<TResult> FirstOrDefaultAsync<TResult>(Expression<Func<T, bool>> criteria,
-            Expression<Func<T, TResult>> select, string[] includes = null)
+            Expression<Func<T, TResult>> select, List<Expression<Func<T, object>>>? includes = null)
         {
             IQueryable<T> query = _context.Set<T>();
 
             if (includes != null)
-                foreach (var include in includes)
-                    query = query.Include(include);
+            {
+                foreach (var item in includes)
+                    query = query.Include(item);
+            }
 
             return await query.Where(criteria).Select(select).FirstOrDefaultAsync();
         }

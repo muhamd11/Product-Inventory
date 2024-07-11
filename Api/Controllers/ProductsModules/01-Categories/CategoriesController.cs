@@ -1,5 +1,5 @@
 ﻿using Api.Controllers.ProductsModules.Categories.Interfaces;
-using App.EF.Consts;
+using App.Shared.Consts.GeneralModels;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.ProductsModules.Categories.DTO;
 using App.Shared.Models.ProductsModules.Categories.ViewModel;

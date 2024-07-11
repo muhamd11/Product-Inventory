@@ -1,5 +1,5 @@
 ﻿using Api.Controllers.SystemBase.LogActions.Interfaces;
-using App.EF.Consts;
+using App.Shared.Consts.GeneralModels;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.UsersModule.LogActionsModel.DTO;
 using App.Shared.Models.UsersModule.LogActionsModel.ViewModel;
