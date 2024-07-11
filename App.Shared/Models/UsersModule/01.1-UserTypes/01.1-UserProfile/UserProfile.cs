@@ -1,9 +1,4 @@
-﻿using App.Shared.Models.SystemBase.BaseClass;
-using App.Shared.Models.Users;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+﻿using System;
 
 namespace App.Shared.Models.Buyers
 {

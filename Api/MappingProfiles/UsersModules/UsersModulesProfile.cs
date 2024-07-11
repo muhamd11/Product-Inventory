@@ -1,5 +1,4 @@
-﻿using App.Shared.Models.Buyers;
-using App.Shared.Models.Users;
+﻿using App.Shared.Models.Users;
 using AutoMapper;
 
 namespace Api.MappingProfiles.Users
@@ -9,6 +8,6 @@ namespace Api.MappingProfiles.Users
         public UsersModulesProfile()
         {
             CreateMap<User, UserAddOrUpdateDTO>().ReverseMap();
-         }
+        }
     }
 }

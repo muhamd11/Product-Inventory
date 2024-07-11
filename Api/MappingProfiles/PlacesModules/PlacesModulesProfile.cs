@@ -1,8 +1,8 @@
-﻿using App.Shared.Models.PlacesModules.Branches.DTO;
-using App.Shared.Models.PlacesModules.Branches;
-using AutoMapper;
+﻿using App.Shared.Models.PlacesModules.Branches;
+using App.Shared.Models.PlacesModules.Branches.DTO;
 using App.Shared.Models.PlacesModules.Stores;
 using App.Shared.Models.PlacesModules.Stores.DTO;
+using AutoMapper;
 
 namespace Api.MappingProfiles.ProductsModules
 {

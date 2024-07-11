@@ -1,6 +1,4 @@
 ﻿using App.Shared.Consts.Users;
-using App.Shared.Models.Buyers;
-using App.Shared.Models.SystemBase.Roles.ViewModel;
 
 namespace App.Shared.Models.Users
 {

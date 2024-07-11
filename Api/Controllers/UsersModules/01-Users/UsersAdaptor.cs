@@ -1,5 +1,4 @@
 ﻿using Api.Controllers.Authorizations.Roles.Services;
-using App.Shared.Models.Buyers;
 using App.Shared.Models.Users;
 using System.Linq.Expressions;
 
