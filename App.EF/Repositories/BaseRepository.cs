@@ -3,6 +3,7 @@ using App.Shared.Interfaces.General;
 using App.Shared.Models.General;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.General.PaginationModule;
+using App.Shared.Models.SystemBase.Roles;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -192,15 +193,53 @@ namespace App.EF.Repositories
 
         public async Task<T> AddAsync(T entity)
         {
+            // Get the entity type from the context
+            var entityType = _context.Model.FindEntityType(typeof(T));
+
+            // Get the primary key property
+            var primaryKey = entityType.FindPrimaryKey().Properties.FirstOrDefault();
+
+            if (primaryKey != null)
+            {
+                // Set the primary key value to 0
+                var propertyInfo = typeof(T).GetProperty(primaryKey.Name);
+                if (propertyInfo != null && propertyInfo.CanWrite)
+                {
+                    propertyInfo.SetValue(entity, 0);
+                }
+            }
+
             await _context.Set<T>().AddAsync(entity);
             return entity;
         }
 
         public IEnumerable<T> AddRange(IEnumerable<T> entities)
         {
+            // Get the entity type from the context
+            var entityType = _context.Model.FindEntityType(typeof(T));
+
+            // Get the primary key property
+            var primaryKey = entityType.FindPrimaryKey().Properties.FirstOrDefault();
+
+            if (primaryKey != null)
+            {
+                // Loop through each entity in the collection
+                foreach (var entity in entities)
+                {
+                    // Set the primary key value to 0
+                    var propertyInfo = typeof(T).GetProperty(primaryKey.Name);
+                    if (propertyInfo != null && propertyInfo.CanWrite)
+                    {
+                        propertyInfo.SetValue(entity, 0);
+                    }
+                }
+            }
+
+            // Add the entities to the context
             _context.Set<T>().AddRange(entities);
             return entities;
         }
+
 
         public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
         {

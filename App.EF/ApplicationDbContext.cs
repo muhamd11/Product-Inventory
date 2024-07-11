@@ -55,13 +55,13 @@ namespace App.EF
             foreach (var entityEntry in entries)
             {
                 if (entityEntry.State == EntityState.Added)
-                    ((BaseEntity)entityEntry.Entity).CreatedDate = DateTime.UtcNow;
+                    ((BaseEntity)entityEntry.Entity).createdDate = DateTime.UtcNow;
                 else if (entityEntry.State == EntityState.Modified)
-                    ((BaseEntity)entityEntry.Entity).UpdatedDate = DateTime.UtcNow;
+                    ((BaseEntity)entityEntry.Entity).updatedDate = DateTime.UtcNow;
                 else if (entityEntry.State == EntityState.Deleted)
                 {
                     ((BaseEntity)entityEntry.Entity).isDeleted = true;
-                    ((BaseEntity)entityEntry.Entity).UpdatedDate = DateTime.UtcNow;
+                    ((BaseEntity)entityEntry.Entity).updatedDate = DateTime.UtcNow;
                 }
             }
 

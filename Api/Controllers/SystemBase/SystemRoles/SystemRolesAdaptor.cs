@@ -1,4 +1,5 @@
-﻿using App.Shared.Models.SystemBase.Roles;
+﻿using Api.Controllers.SystemBase.BaseEntitys;
+using App.Shared.Models.SystemBase.Roles;
 using App.Shared.Models.SystemBase.Roles.ViewModel;
 using System.Linq.Expressions;
 
@@ -12,6 +13,7 @@ namespace Api.Controllers.SystemBase.SystemRoles
             {
                 systemRoleId = systemRole.systemRoleId,
                 systemRoleName = systemRole.systemRoleName,
+                baseEntityInfo= BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole),
             };
         }
 
@@ -21,6 +23,7 @@ namespace Api.Controllers.SystemBase.SystemRoles
             {
                 systemRoleId = systemRole.systemRoleId,
                 systemRoleName = systemRole.systemRoleName,
+                baseEntityInfo = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole),
             };
         }
 
@@ -33,15 +36,20 @@ namespace Api.Controllers.SystemBase.SystemRoles
             {
                 systemRoleId = systemRole.systemRoleId,
                 systemRoleName = systemRole.systemRoleName,
+                baseEntityInfo = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole),
             };
         }
 
         public static SystemRoleInfoDetails SelectExpressionSystemRoleDetails(SystemRole systemRole)
         {
+            if (systemRole == null)
+                return null;
+
             return new SystemRoleInfoDetails
             {
                 systemRoleId = systemRole.systemRoleId,
                 systemRoleName = systemRole.systemRoleName,
+                baseEntityInfo = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole),
             };
         }
     }

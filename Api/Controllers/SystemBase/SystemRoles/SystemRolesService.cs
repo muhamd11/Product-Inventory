@@ -46,12 +46,16 @@ namespace Api.Controllers.SystemBase.SystemRoles
         private List<Expression<Func<SystemRole, bool>>> GenrateCriteria(SystemRoleSearchDto inputModel)
         {
             List<Expression<Func<SystemRole, bool>>> criteria = [];
-            // TODO: Complete Search Function For SystemRole
+
             if (inputModel.textSearch is not null)
             {
                 criteria.Add(x =>
-                x.systemRoleName.Contains(inputModel.textSearch));
+                x.systemRoleName.Contains(inputModel.textSearch)
+                || x.systemRoleDescription.Contains(inputModel.textSearch));
             }
+
+            if (inputModel.systemRoleUserType.HasValue)
+                criteria.Add(x => x.systemRoleUserType == inputModel.systemRoleUserType.Value);
 
             if (inputModel.elemetId.HasValue)
                 criteria.Add(x => x.systemRoleId == inputModel.elemetId.Value);
@@ -77,6 +81,7 @@ namespace Api.Controllers.SystemBase.SystemRoles
         public async Task<BaseActionDone<SystemRoleInfo>> AddOrUpdate(SystemRoleAddOrUpdateDTO inputModel, bool isUpdate)
         {
             var systemRole = _mapper.Map<SystemRole>(inputModel);
+
             if (isUpdate)
                 _unitOfWork.SystemRoles.Update(systemRole);
             else
