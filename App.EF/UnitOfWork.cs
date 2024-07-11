@@ -1,4 +1,5 @@
-﻿using App.EF.Repositories;
+﻿using Api.Controllers.SystemBase._01._2_SystemRoleFincations;
+using App.EF.Repositories;
 using App.Shared;
 using App.Shared.Interfaces.General;
 using App.Shared.Models.AdditionsModules.Shared.Colors;
@@ -44,6 +45,7 @@ namespace App.EF
         #region SystemBase
 
         public IBaseRepository<SystemRole> SystemRoles { get; private set; }
+        public IBaseRepository<SystemRoleFincation> SystemRoleFincations { get; private set; }
         public IBaseRepository<LogAction> LogActions { get; private set; }
 
         #endregion SystemBase
@@ -83,6 +85,7 @@ namespace App.EF
             #region SystemBase
 
             SystemRoles = new BaseRepository<SystemRole>(_context);
+            SystemRoleFincations = new BaseRepository<SystemRoleFincation>(_context);
             LogActions = new BaseRepository<LogAction>(_context);
 
             #endregion SystemBase

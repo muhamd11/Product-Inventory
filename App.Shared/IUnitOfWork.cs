@@ -1,4 +1,5 @@
-﻿using App.Shared.Interfaces.General;
+﻿using Api.Controllers.SystemBase._01._2_SystemRoleFincations;
+using App.Shared.Interfaces.General;
 using App.Shared.Models.AdditionsModules.Shared.Colors;
 using App.Shared.Models.AdditionsModules.Shared.Units;
 using App.Shared.Models.PlacesModules.Branches;
@@ -42,6 +43,7 @@ namespace App.Shared
         #region SystemBase
 
         IBaseRepository<SystemRole> SystemRoles { get; }
+        IBaseRepository<SystemRoleFincation> SystemRoleFincations { get; }
         IBaseRepository<LogAction> LogActions { get; }
 
         #endregion SystemBase

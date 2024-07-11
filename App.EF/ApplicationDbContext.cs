@@ -1,4 +1,5 @@
-﻿using App.Shared.Helper.Json;
+﻿using Api.Controllers.SystemBase._01._2_SystemRoleFincations;
+using App.Shared.Helper.Json;
 using App.Shared.Models.AdditionsModules.Shared.Colors;
 using App.Shared.Models.AdditionsModules.Shared.Units;
 using App.Shared.Models.PlacesModules.Branches;
@@ -141,6 +142,7 @@ namespace App.EF
         #region SystemBase
 
         public DbSet<SystemRole> SystemRoles { get; set; }
+        public DbSet<SystemRoleFincation> SystemRoleFincations { get; set; }
         public DbSet<LogAction> LogActions { get; set; }
 
         #endregion SystemBase
