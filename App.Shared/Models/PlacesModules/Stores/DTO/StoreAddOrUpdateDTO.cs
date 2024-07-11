@@ -1,5 +1,4 @@
 ﻿using System;
-using App.Shared.Models.PlacesModules.Stores;
 
 namespace App.Shared.Models.PlacesModules.Stores.DTO
 {

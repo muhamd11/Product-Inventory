@@ -6,21 +6,21 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace App.Shared.Interfaces
+namespace App.Shared.Interfaces.General
 {
     public interface IBaseRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
 
         Task<BaseGetDataWithPagnation<TResult>> GetAllAsync<TResult>(Expression<Func<T, TResult>> selection,
-                                                                     List<Expression<Func<T, bool>>>? criteria = null,
-                                                                     PaginationRequest? paginationRequest = null,
-                                                                     List<Expression<Func<T, object>>>? includes = null);
+                                                                     List<Expression<Func<T, bool>>> criteria = null,
+                                                                     PaginationRequest paginationRequest = null,
+                                                                     List<Expression<Func<T, object>>> includes = null);
 
-        T FirstOrDefault(Expression<Func<T, bool>> criteria, List<Expression<Func<T, object>>>? includes = null);
+        T FirstOrDefault(Expression<Func<T, bool>> criteria, List<Expression<Func<T, object>>> includes = null);
 
         Task<TResult> FirstOrDefaultAsync<TResult>(Expression<Func<T, bool>> criteria,
-            Expression<Func<T, TResult>> select, List<Expression<Func<T, object>>>? includes = null);
+            Expression<Func<T, TResult>> select, List<Expression<Func<T, object>>> includes = null);
 
         Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> criteria, string[] includes = null);
 

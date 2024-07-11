@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.Json.Serialization;
-using App.Shared.Models.PlacesModules.Stores;
 
 namespace App.Shared.Models.PlacesModules.Stores.ViewModel
 {

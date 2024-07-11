@@ -1,4 +1,4 @@
-﻿namespace App.Shared.Interfaces.Scrutor
+﻿namespace App.Shared.Interfaces.General.Scrutor
 {
     public interface IScopedService
     {

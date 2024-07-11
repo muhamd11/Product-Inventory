@@ -1,7 +1,5 @@
-﻿using App.Shared.Models.Roles;
-using App.Shared.Models.SystemBase.BaseClass;
+﻿using App.Shared.Models.SystemBase.BaseClass;
 using App.Shared.Models.Users;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,7 +9,7 @@ namespace App.Shared.Models.Buyers
 {
     public class Buyer : BaseEntity
     {
-        [JsonIgnore, Key,ForeignKey(nameof(User))]
+        [JsonIgnore, Key, ForeignKey(nameof(User))]
         public int userId { get; set; }
         [JsonIgnore]
         public User user { get; set; }

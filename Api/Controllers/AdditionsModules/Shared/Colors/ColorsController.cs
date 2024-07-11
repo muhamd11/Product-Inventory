@@ -16,11 +16,13 @@ namespace Api.Controllers.AdditionsModules.Shared.Colors
 
         //services
         private readonly ILogger<ColorsController> _logger;
+
         private readonly IColorsValid _colorsValid;
         private readonly IColorServices _colorsServices;
 
         //parmters
         private readonly string colorInfoData = "colorInfoData";
+
         private readonly string colorsInfoData = "colorsInfoData";
         private readonly string colorInfoDetails = "colorInfoDetails";
 

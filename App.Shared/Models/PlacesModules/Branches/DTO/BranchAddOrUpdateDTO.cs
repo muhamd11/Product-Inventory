@@ -1,5 +1,4 @@
 ﻿using System;
-using App.Shared.Models.PlacesModules.Branches;
 
 namespace App.Shared.Models.PlacesModules.Branches.DTO
 {

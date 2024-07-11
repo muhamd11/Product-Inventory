@@ -1,4 +1,4 @@
-﻿using App.Shared.Interfaces.Scrutor;
+﻿using App.Shared.Interfaces.General.Scrutor;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.Roles;

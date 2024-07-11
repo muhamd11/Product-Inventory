@@ -1,6 +1,4 @@
-﻿using App.Shared.Models.Roles;
-
-namespace App.Shared.Models.Buyers
+﻿namespace App.Shared.Models.Buyers
 {
     public class BuyerInfo
     {

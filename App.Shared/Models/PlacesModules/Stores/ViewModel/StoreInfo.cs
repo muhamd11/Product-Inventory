@@ -1,6 +1,4 @@
-﻿using App.Shared.Models.PlacesModules.Stores;
-
-namespace App.Shared.Models.PlacesModules.Stores.ViewModel
+﻿namespace App.Shared.Models.PlacesModules.Stores.ViewModel
 {
     public class StoreInfo
     {
