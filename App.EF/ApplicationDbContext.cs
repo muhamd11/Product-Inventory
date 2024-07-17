@@ -158,7 +158,7 @@ namespace App.EF
 
         #region UsersModule
 
-        public DbSet<BaseUser> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         #region UserWishlists
 

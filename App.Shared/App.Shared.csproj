@@ -64,6 +64,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Update="Resources\UsersModules\UserTypes\UserClients\UserClientsMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserClientsMessages.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\UsersModules\User\UsersMessages.Designer.cs">
       <DependentUpon>UsersMessages.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -79,7 +84,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ProductsMessages.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\UsersModules\UserTypes\UserProfilesMessages.Designer.cs">
+    <Compile Update="Resources\UsersModules\UserTypes\UserProfiles\UserProfilesMessages.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>UserProfilesMessages.resx</DependentUpon>
@@ -115,6 +120,10 @@
       <LastGenOutput>BranchesMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UsersModules\UserTypes\UserClients\UserClientsMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserClientsMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\UsersModules\User\UsersMessages.resx">
       <LastGenOutput>UsersMessages.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -127,7 +136,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProductsMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\UsersModules\UserTypes\UserProfilesMessages.resx">
+    <EmbeddedResource Update="Resources\UsersModules\UserTypes\UserProfiles\UserProfilesMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UserProfilesMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>

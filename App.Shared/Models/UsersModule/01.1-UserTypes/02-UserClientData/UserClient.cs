@@ -8,7 +8,8 @@ namespace App.Shared.Models.Buyers
 {
     public class UserClient
     {
-        public int userClientId { get; set; }
+        [Key,JsonIgnore]
+        public int userId { get; set; }
         public string userShippingAddress { get; set; }
         [JsonIgnore,ForeignKey(nameof(userProductWishList))]
         public int? userProductWishListId { get; set; }

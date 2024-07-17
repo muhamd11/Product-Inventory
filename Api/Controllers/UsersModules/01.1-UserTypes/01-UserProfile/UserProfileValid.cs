@@ -42,27 +42,18 @@ namespace Api.Controllers.UsersModules._01._1_UserTypes._01_UserProfile
                 if (!ValidationClass.IsValidPhoneNumber(inputModel.userPhoneCC_4, inputModel.userPhoneDialCode_4, inputModel.userPhone_4))
                     return BaseValid.createBaseValid(string.Format(GeneralMessages.ErrorInvalidPhoneNumbers, "4"), EnumStatus.error);
 
-            if(inputModel.userContactEmail is not null)
+            if (inputModel.userContactEmail is not null)
                 if (!ValidationClass.IsValidEmail(inputModel.userContactEmail))
                     return BaseValid.createBaseValid(GeneralMessages.errorInvalidEmail, EnumStatus.error);
 
             return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
         }
-
-        public BaseValid IsValidUserProfileId(int userProfileId)
-        {
-            var user = _unitOfWork.Users.FirstOrDefault(x => x.userProfile.userProfileId == userProfileId);
-            if (user is not null)
-                return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
-            else
-                return BaseValid.createBaseValid(UserProfilesMessages.errorUserProfileIdWasNotFound, EnumStatus.error);
-        }
-
         private bool IsValidPhoneNumberSet(string countryCode, string dialCode, string phoneNumber)
         {
-            return ValidationClass.IsValidString(countryCode)
-                || ValidationClass.IsValidString(dialCode)
-                || ValidationClass.IsValidString(phoneNumber);
+            if (!string.IsNullOrEmpty(countryCode) && !string.IsNullOrEmpty(dialCode) && !string.IsNullOrEmpty(phoneNumber))
+                return true;
+
+            return false;
         }
 
         #endregion Methods

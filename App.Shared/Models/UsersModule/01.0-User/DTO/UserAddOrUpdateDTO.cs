@@ -20,5 +20,6 @@ namespace App.Shared.Models.Users
         public int systemRoleId { get; set; }
 
         public UserProfile userProfile { get; set; } = new();
+        public UserClient userClient { get; set; } = new();
     }
 }

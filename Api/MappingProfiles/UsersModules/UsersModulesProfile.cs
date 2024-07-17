@@ -1,4 +1,5 @@
-﻿using App.Shared.Models.Users;
+﻿using App.Shared.Models.Buyers;
+using App.Shared.Models.Users;
 using AutoMapper;
 
 namespace Api.MappingProfiles.Users

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace App.Shared.Models.Users
 {
-    public class BaseUserInfo : BaseEntityInfo
+    public class UserInfo : BaseEntityInfo
     {
         [JsonPropertyOrder(-5)]
         public int userId { get; set; }

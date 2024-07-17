@@ -1,10 +1,8 @@
 ﻿using Api.Controllers.UsersModules.Users.Interfaces;
 using App.Shared.Consts.GeneralModels;
-using App.Shared.Interfaces.UsersModule.UserTypes.UserClient;
+using App.Shared.Interfaces.UsersModule.Users;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.Users;
-using App.Shared.Models.UsersModule._01._1_UserTypes._01._2_UserClientData.DTO;
-using App.Shared.Models.UsersModule._01._1_UserTypes._02_UserClientData.DTO;
 using App.Shared.Models.UsersModule._01._1_UserTypes._02_UserClientData.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -13,15 +11,15 @@ namespace Api.Controllers.UsersModules.Users
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserClientsController : ControllerBase
+    public class UsersController : ControllerBase
     {
         #region Members
 
         //services
-        private readonly ILogger<UserClientsController> _logger;
+        private readonly ILogger<UsersController> _logger;
 
-        private readonly IUserClientValid _usersValid;
-        private readonly IUserClientServices _usersServices;
+        private readonly IUsersValid _usersValid;
+        private readonly IUsersServices _usersServices;
 
         //paramters
         private readonly string userInfoData = "userInfoData";
@@ -33,7 +31,7 @@ namespace Api.Controllers.UsersModules.Users
 
         #region Constructor
 
-        public UserClientsController(IUserClientValid usersValid, IUserClientServices usersServices, ILogger<UserClientsController> logger)
+        public UsersController(IUsersValid usersValid, IUsersServices usersServices, ILogger<UsersController> logger)
         {
             _logger = logger;
             _usersValid = usersValid;
@@ -44,10 +42,10 @@ namespace Api.Controllers.UsersModules.Users
 
         #region Methods
 
-        [HttpGet("GetUserClientDetails")]
+        [HttpGet("GetUserDetails")]
         public async Task<IActionResult> GetUserDetails([FromQuery] BaseGetDetailsDto inputModel)
         {
-            BaseGetDetailsResponse<BaseUserInfoDetails> response = new();
+            BaseGetDetailsResponse<UserInfoDetails> response = new();
             var watch = Stopwatch.StartNew();
             try
             {
@@ -74,9 +72,9 @@ namespace Api.Controllers.UsersModules.Users
         }
 
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll([FromQuery] UserClientSearchDTO inputModel)
+        public async Task<IActionResult> GetAll([FromQuery] UserSearchDto inputModel)
         {
-            BaseGetAllResponse<UserClientInfo> response = new();
+            BaseGetAllResponse<UserInfo> response = new();
             var watch = Stopwatch.StartNew();
             try
             {
@@ -102,11 +100,11 @@ namespace Api.Controllers.UsersModules.Users
             return Ok(response);
         }
 
-        [HttpPost("AddUserClient")]
-        public async Task<IActionResult> AddUser([FromBody] UserClientAddOrUpdateDTO inputModel)
+        [HttpPost("AddUser")]
+        public async Task<IActionResult> AddUser([FromBody] UserAddOrUpdateDTO inputModel)
         {
             string userInfoData = "userInfoData";
-            BaseActionResponse<UserClientInfo> response = new();
+            BaseActionResponse<UserInfo> response = new();
             var watch = Stopwatch.StartNew();
             try
             {
@@ -132,11 +130,11 @@ namespace Api.Controllers.UsersModules.Users
             return Ok(response);
         }
 
-        [HttpPost("UpdateUserClient")]
-        public async Task<IActionResult> UpdateUser([FromBody] UserClientAddOrUpdateDTO inputModel)
+        [HttpPost("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserAddOrUpdateDTO inputModel)
         {
             string userInfoData = "userInfoData";
-            BaseActionResponse<UserClientInfo> response = new();
+            BaseActionResponse<UserInfo> response = new();
             var watch = Stopwatch.StartNew();
             try
             {
@@ -165,7 +163,7 @@ namespace Api.Controllers.UsersModules.Users
         [HttpPost("DeleteUserClient")]
         public async Task<IActionResult> DeleteUser([FromQuery] BaseDeleteDto inputModel)
         {
-            BaseActionResponse<UserClientInfo> response = new();
+            BaseActionResponse<UserInfo> response = new();
             var watch = Stopwatch.StartNew();
             try
             {

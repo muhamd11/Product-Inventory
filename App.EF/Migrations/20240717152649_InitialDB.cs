@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace App.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -180,44 +180,6 @@ namespace App.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserClient",
-                columns: table => new
-                {
-                    userClientId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    createdDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    updatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserClient", x => x.userClientId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserProfile",
-                columns: table => new
-                {
-                    userProfileId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    userPhone_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userPhoneCC_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userPhoneCCName_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userPhone_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userPhoneCC_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userPhoneCCName_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userPhone_4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userPhoneCC_4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userPhoneCCName_4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    buyerBirthDate = table.Column<DateOnly>(type: "date", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserProfile", x => x.userProfileId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -246,14 +208,13 @@ namespace App.EF.Migrations
                     userName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneDialCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userPhoneCC = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userPhoneCCName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userLoginName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userType = table.Column<int>(type: "int", nullable: false),
                     systemRoleId = table.Column<int>(type: "int", nullable: false),
-                    userProfileId = table.Column<int>(type: "int", nullable: true),
-                    userBuyerDatauserClientId = table.Column<int>(type: "int", nullable: true),
                     isDeleted = table.Column<bool>(type: "bit", nullable: true),
                     createdDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     updatedDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true)
@@ -267,16 +228,6 @@ namespace App.EF.Migrations
                         principalTable: "SystemRoles",
                         principalColumn: "systemRoleId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Users_UserClient_userBuyerDatauserClientId",
-                        column: x => x.userBuyerDatauserClientId,
-                        principalTable: "UserClient",
-                        principalColumn: "userClientId");
-                    table.ForeignKey(
-                        name: "FK_Users_UserProfile_userProfileId",
-                        column: x => x.userProfileId,
-                        principalTable: "UserProfile",
-                        principalColumn: "userProfileId");
                 });
 
             migrationBuilder.CreateTable(
@@ -313,6 +264,86 @@ namespace App.EF.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserProfile",
+                columns: table => new
+                {
+                    userId = table.Column<int>(type: "int", nullable: false),
+                    userPhone_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneDialCode_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneCC_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneCCName_2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhone_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneDialCode_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneCC_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneCCName_3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhone_4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneDialCode_4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneCC_4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userPhoneCCName_4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userBirthDate = table.Column<DateOnly>(type: "date", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProfile", x => x.userId);
+                    table.ForeignKey(
+                        name: "FK_UserProfile_Users_userId",
+                        column: x => x.userId,
+                        principalTable: "Users",
+                        principalColumn: "userId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserWishlists",
+                columns: table => new
+                {
+                    wishlistId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    productQuantity = table.Column<int>(type: "int", nullable: false),
+                    userId = table.Column<int>(type: "int", nullable: true),
+                    prodcutId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserWishlists", x => x.wishlistId);
+                    table.ForeignKey(
+                        name: "FK_UserWishlists_Products_prodcutId",
+                        column: x => x.prodcutId,
+                        principalTable: "Products",
+                        principalColumn: "productId");
+                    table.ForeignKey(
+                        name: "FK_UserWishlists_Users_userId",
+                        column: x => x.userId,
+                        principalTable: "Users",
+                        principalColumn: "userId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserClient",
+                columns: table => new
+                {
+                    userId = table.Column<int>(type: "int", nullable: false),
+                    userShippingAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    userProductWishListId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserClient", x => x.userId);
+                    table.ForeignKey(
+                        name: "FK_UserClient_UserWishlists_userProductWishListId",
+                        column: x => x.userProductWishListId,
+                        principalTable: "UserWishlists",
+                        principalColumn: "wishlistId");
+                    table.ForeignKey(
+                        name: "FK_UserClient_Users_userId",
+                        column: x => x.userId,
+                        principalTable: "Users",
+                        principalColumn: "userId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Products_categoryId",
                 table: "Products",
@@ -334,19 +365,24 @@ namespace App.EF.Migrations
                 column: "unitId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserClient_userProductWishListId",
+                table: "UserClient",
+                column: "userProductWishListId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_systemRoleId",
                 table: "Users",
                 column: "systemRoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_userBuyerDatauserClientId",
-                table: "Users",
-                column: "userBuyerDatauserClientId");
+                name: "IX_UserWishlists_prodcutId",
+                table: "UserWishlists",
+                column: "prodcutId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_userProfileId",
-                table: "Users",
-                column: "userProfileId");
+                name: "IX_UserWishlists_userId",
+                table: "UserWishlists",
+                column: "userId");
         }
 
         /// <inheritdoc />
@@ -368,28 +404,31 @@ namespace App.EF.Migrations
                 name: "SystemRoleFincations");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Colors");
-
-            migrationBuilder.DropTable(
-                name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Units");
-
-            migrationBuilder.DropTable(
-                name: "SystemRoles");
-
-            migrationBuilder.DropTable(
                 name: "UserClient");
 
             migrationBuilder.DropTable(
                 name: "UserProfile");
 
             migrationBuilder.DropTable(
+                name: "Colors");
+
+            migrationBuilder.DropTable(
+                name: "Units");
+
+            migrationBuilder.DropTable(
+                name: "UserWishlists");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "SystemRoles");
         }
     }
 }

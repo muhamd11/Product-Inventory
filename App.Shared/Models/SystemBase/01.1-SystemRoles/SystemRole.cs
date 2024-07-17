@@ -9,7 +9,7 @@ namespace App.Shared.Models.SystemBase.Roles
     {
         public SystemRole()
         {
-            usersData = new HashSet<BaseUser>();
+            usersData = new HashSet<User>();
         }
 
         public int systemRoleId { get; set; }
@@ -17,6 +17,6 @@ namespace App.Shared.Models.SystemBase.Roles
         public string systemRoleDescription { get; set; }
         public EnumUserType systemRoleUserType { get; set; }
         public bool systemRoleCanUseDefault { get; set; }
-        public ICollection<BaseUser> usersData { get; set; }
+        public ICollection<User> usersData { get; set; }
     }
 }

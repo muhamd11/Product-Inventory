@@ -9,7 +9,6 @@ using App.Shared.Models.SystemBase._01._2_SystemRoleFincations.ViewModel;
 using App.Shared.Models.SystemBase.Roles;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace Api.Controllers.SystemBase.SystemRoleFincations
 {
@@ -111,18 +110,14 @@ namespace Api.Controllers.SystemBase.SystemRoleFincations
                 z.isHavePrivlage = inputSystemRoleFincations.FirstOrDefault(x => x.funcationId == z.funcationId, new SystemRoleFincation()).isHavePrivlage;
             });
 
-
-
             return trueSystemRoleFincation;
         }
-        
+
         private List<SystemRoleFunctionInfo> GetSystemRoleFunctionsGroupedByModuleId(List<SystemRoleFincation> systemRoleFincations)
         {
             var trueSystemRoleFincationsGroupedByModuleId = systemRoleFincations.GroupBy(x => x.moduleId);
 
-
             List<SystemRoleFunctionInfo> systemRoleFincationsInfo = new();
-
 
             foreach (var item in trueSystemRoleFincationsGroupedByModuleId)
             {
@@ -137,8 +132,6 @@ namespace Api.Controllers.SystemBase.SystemRoleFincations
 
             return systemRoleFincationsInfo;
         }
-
-
 
         #endregion Methods
     }

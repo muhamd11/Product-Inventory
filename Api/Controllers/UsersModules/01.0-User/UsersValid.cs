@@ -13,23 +13,23 @@ using App.Shared.Resources.UsersModules.User;
 
 namespace Api.Controllers.UsersModule.Users
 {
-    internal class UserValid : IUsersValid
+    internal class UsersValid : IUsersValid
     {
         #region Members
 
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISystemRolesValid _systemRolesValid;
         private readonly IUserProfileValid _userProfileValid;
-        private readonly IUserClientValid _userClientValid;
+        private readonly IUserClientsValid _userClientValid;
 
         #endregion Members
 
         #region Constructor
 
-        public UserValid(IUnitOfWork unitOfWork,
+        public UsersValid(IUnitOfWork unitOfWork,
                          ISystemRolesValid systemRolesValid,
                          IUserProfileValid userProfileValid,
-                         IUserClientValid userClientValid)
+                         IUserClientsValid userClientValid)
         {
             _unitOfWork = unitOfWork;
             _systemRolesValid = systemRolesValid;
@@ -82,30 +82,25 @@ namespace Api.Controllers.UsersModule.Users
             {
                 #region userId?
 
-                if (isUpdate == true)
+                if (isUpdate)
                 {
                     var isValidUserId = IsValidUserId(inputModel.userId);
                     if (isValidUserId.Status != EnumStatus.success)
                         return isValidUserId;
-
-                    var isVaalidUserProfileId = _userProfileValid.IsValidUserProfileId(inputModel.userProfile.userProfileId);
-                    if (isVaalidUserProfileId.Status != EnumStatus.success)
-                        return isVaalidUserProfileId;
                 }
 
                 #endregion userId?
 
                 #region userName &&  userLoginName && userEmail
 
-                //TODO messae send login data
-                if (string.IsNullOrEmpty(inputModel.userName) == false && string.IsNullOrEmpty(inputModel.userEmail) == false && string.IsNullOrEmpty(inputModel.userPhone) == false)
-                    return BaseValid.createBaseValidError(GeneralMessages.errorNameLength);
+                if (string.IsNullOrEmpty(inputModel.userName) && string.IsNullOrEmpty(inputModel.userEmail) && string.IsNullOrEmpty(inputModel.userPhone))
+                    return BaseValid.createBaseValidError(GeneralMessages.errorSendLoginData);
 
                 #endregion userName &&  userLoginName && userEmail
 
                 #region userName ?
 
-                if (string.IsNullOrEmpty(inputModel.userName) == false)
+                if (!string.IsNullOrEmpty(inputModel.userName))
                 {
                     int nameMaxLength = (int)EnumMaxLength.nameMaxLength;
                     if (!ValidationClass.IsValidStringLength(inputModel.userName, nameMaxLength))
@@ -116,7 +111,7 @@ namespace Api.Controllers.UsersModule.Users
 
                 #region userLoginName ?
 
-                if (string.IsNullOrEmpty(inputModel.userLoginName) == false)
+                if (!string.IsNullOrEmpty(inputModel.userLoginName))
                 {
                     if (!ValidationClass.IsValidString(inputModel.userLoginName))
                         return BaseValid.createBaseValid(UsersMessages.errorUserLoginNameIsRequired, EnumStatus.error);
@@ -126,7 +121,7 @@ namespace Api.Controllers.UsersModule.Users
 
                 #region userEmail ?
 
-                if (string.IsNullOrEmpty(inputModel.userLoginName) == false)
+                if (!string.IsNullOrEmpty(inputModel.userEmail))
                 {
                     if (!ValidationClass.IsValidEmail(inputModel.userEmail))
                         return BaseValid.createBaseValid(GeneralMessages.errorInvalidEmail, EnumStatus.error);
@@ -157,36 +152,38 @@ namespace Api.Controllers.UsersModule.Users
                 if (isValidSystemRoleId.Status != EnumStatus.success)
                     return isValidSystemRoleId;
 
-                #endregion ValidSystemRoleId
+                #endregion ValidSystemRoleId *
 
                 #region validUserWasAddedBefore
 
-               var existingUser = _unitOfWork.Users.FirstOrDefault(x => x.userName == inputModel.userName
-                || x.userEmail == inputModel.userEmail
-                || x.userPhone == inputModel.userPhone
-                || x.userLoginName == inputModel.userLoginName);
+                var existingUser = _unitOfWork.Users.FirstOrDefault(x => x.userName == inputModel.userName
+                 || x.userEmail == inputModel.userEmail
+                 || x.userPhone == inputModel.userPhone
+                 || x.userLoginName == inputModel.userLoginName);
 
-                if (existingUser is not null && existingUser.userId != inputModel.userId)
+                if (existingUser is not null && existingUser.userId != inputModel.userId && existingUser.userLoginName == inputModel.userLoginName)
                     return BaseValid.createBaseValid(UsersMessages.errorUsernameWasAdded, EnumStatus.error);
 
-                if (existingUser is not null && existingUser.userId != inputModel.userId)
+                if (existingUser is not null && existingUser.userId != inputModel.userId && existingUser.userEmail == inputModel.userEmail)
                     return BaseValid.createBaseValid(UsersMessages.errorUserEmailWasAdded, EnumStatus.error);
 
-                if (existingUser is not null && existingUser.userId != inputModel.userId)
+                if (existingUser is not null && existingUser.userId != inputModel.userId && existingUser.userPhone == inputModel.userPhone)
                     return BaseValid.createBaseValid(UsersMessages.errorUserPhoneNumberWasAdded, EnumStatus.error);
 
-                if (existingUser is not null && existingUser.userId != inputModel.userId)
+                if (existingUser is not null && existingUser.userId != inputModel.userId && existingUser.userLoginName == inputModel.userLoginName)
                     return BaseValid.createBaseValid(UsersMessages.errorUserLoginNameWasAdded, EnumStatus.error);
 
                 #endregion validUserWasAddedBefore
 
                 #region validUserProfile
+
                 if (inputModel.userProfile != null)
                 {
                     var isValidUserProfile = _userProfileValid.IsValidUserProfile(inputModel.userProfile);
                     if (isValidUserProfile.Status != EnumStatus.success)
                         return isValidUserProfile;
                 }
+
                 #endregion validUserProfile
 
                 return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
@@ -199,9 +196,9 @@ namespace Api.Controllers.UsersModule.Users
         {
             if (inputModel is not null)
             {
-                var isValidUintId = IsValidUserId(inputModel.elementId);
-                if (isValidUintId.Status != EnumStatus.success)
-                    return isValidUintId;
+                var isValidUserId = IsValidUserId(inputModel.elementId);
+                if (isValidUserId.Status != EnumStatus.success)
+                    return isValidUserId;
 
                 return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
             }
@@ -218,8 +215,6 @@ namespace Api.Controllers.UsersModule.Users
                 return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
         }
 
-
         #endregion Methods
-
     }
 }

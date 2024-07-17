@@ -286,6 +286,15 @@ namespace App.Shared.Resources.General {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please, send login data .
+        /// </summary>
+        public static string errorSendLoginData {
+            get {
+                return ResourceManager.GetString("errorSendLoginData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, an error occurred, please contact the administration.
         /// </summary>
         public static string errorSomthingWrong {

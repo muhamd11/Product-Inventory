@@ -50,7 +50,7 @@ namespace App.Shared
 
         #region UsersModule
 
-        IBaseRepository<BaseUser> Users { get; }
+        IBaseRepository<User> Users { get; }
 
         #endregion UsersModule
 

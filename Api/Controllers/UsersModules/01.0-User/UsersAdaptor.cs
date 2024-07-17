@@ -1,16 +1,15 @@
 ﻿using Api.Controllers.SystemBase.BaseEntitys;
 using Api.Controllers.SystemBase.SystemRoles;
 using App.Shared.Models.Users;
-using App.Shared.Models.UsersModule._01._1_UserTypes._02_UserClientData.ViewModel;
 using System.Linq.Expressions;
 
 namespace Api.Controllers.UsersModule.Users
 {
-    public static class UserProfilesAdaptor
+    public static class UsersAdaptor
     {
-        public static Expression<Func<User, UserClientInfo>> SelectExpressionUserClientInfo()
+        public static Expression<Func<User, UserInfo>> SelectExpressionUserClientInfo()
         {
-            return user => new UserClientInfo
+            return user => new UserInfo
             {
                 userId = user.userId,
                 userName = user.userName,
@@ -24,9 +23,9 @@ namespace Api.Controllers.UsersModule.Users
             };
         }
 
-        public static Expression<Func<User, UserClientInfoDetails>> SelectExpressionUserClientDetails()
+        public static Expression<Func<User, UserInfoDetails>> SelectExpressionUserClientDetails()
         {
-            return user => new UserClientInfoDetails
+            return user => new UserInfoDetails
             {
                 userId = user.userId,
                 userName = user.userName,
@@ -39,17 +38,16 @@ namespace Api.Controllers.UsersModule.Users
                 systemRoleId = user.systemRoleId,
                 roleData = SystemRolesAdaptor.SelectExpressionSystemRoleInfo(user.roleData),
                 userProfile = user.userProfile,
-                userClientId = user.userClientData.userClientId,
-                userShippingAddress = user.userClientData.userShippingAddress,
+                userClientInfo = UserClientsAdaptor.SelectExpressionUserClientInfo(user.userClientData),
             };
         }
 
-        public static UserClientInfo SelectExpressionUserClientInfo(User user)
+        public static UserInfo SelectExpressionUserClientInfo(User user)
         {
             if (user == null)
                 return null;
 
-            return new UserClientInfo
+            return new UserInfo
             {
                 userId = user.userId,
                 userName = user.userName,
@@ -62,11 +60,11 @@ namespace Api.Controllers.UsersModule.Users
             };
         }
 
-        public static UserClientInfoDetails SelectExpressionUserClientDetails(User user)
+        public static UserInfoDetails SelectExpressionUserClientDetails(User user)
         {
             if (user == null)
                 return null;
-            return new UserClientInfoDetails
+            return new UserInfoDetails
             {
                 userId = user.userId,
                 userName = user.userName,
@@ -79,8 +77,7 @@ namespace Api.Controllers.UsersModule.Users
                 systemRoleId = user.systemRoleId,
                 roleData = SystemRolesAdaptor.SelectExpressionSystemRoleInfo(user.roleData),
                 userProfile = user.userProfile,
-                userClientId = user.userClientData.userClientId,
-                userShippingAddress = user.userClientData.userShippingAddress,
+                userClientInfo = UserClientsAdaptor.SelectExpressionUserClientInfo(user.userClientData),
             };
         }
     }

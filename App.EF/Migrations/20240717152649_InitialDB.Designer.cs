@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240713101635_AddFields2")]
-    partial class AddFields2
+    [Migration("20240717152649_InitialDB")]
+    partial class InitialDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -117,24 +117,26 @@ namespace App.EF.Migrations
 
             modelBuilder.Entity("App.Shared.Models.Buyers.UserClient", b =>
                 {
-                    b.Property<int>("userClientId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("userId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userClientId"));
+                    b.Property<int?>("userProductWishListId")
+                        .HasColumnType("int");
 
-                    b.HasKey("userClientId");
+                    b.Property<string>("userShippingAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("userId");
+
+                    b.HasIndex("userProductWishListId");
 
                     b.ToTable("UserClient");
                 });
 
             modelBuilder.Entity("App.Shared.Models.Buyers.UserProfile", b =>
                 {
-                    b.Property<int>("userProfileId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("userId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userProfileId"));
 
                     b.Property<DateOnly>("userBirthDate")
                         .HasColumnType("date");
@@ -178,7 +180,7 @@ namespace App.EF.Migrations
                     b.Property<string>("userPhone_4")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("userProfileId");
+                    b.HasKey("userId");
 
                     b.ToTable("UserProfile");
                 });
@@ -295,6 +297,32 @@ namespace App.EF.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("App.Shared.Models.ProductsModules._02._3_ProductWishlist.Wishlist", b =>
+                {
+                    b.Property<int>("wishlistId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("wishlistId"));
+
+                    b.Property<int?>("prodcutId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("userId")
+                        .HasColumnType("int");
+
+                    b.HasKey("wishlistId");
+
+                    b.HasIndex("prodcutId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("UserWishlists");
+                });
+
             modelBuilder.Entity("App.Shared.Models.SystemBase.Roles.SystemRole", b =>
                 {
                     b.Property<int>("systemRoleId")
@@ -349,9 +377,6 @@ namespace App.EF.Migrations
                     b.Property<DateTimeOffset?>("updatedDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int?>("userClientDatauserClientId")
-                        .HasColumnType("int");
-
                     b.Property<string>("userEmail")
                         .HasColumnType("nvarchar(max)");
 
@@ -376,19 +401,12 @@ namespace App.EF.Migrations
                     b.Property<string>("userPhoneDialCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("userProfileId")
-                        .HasColumnType("int");
-
                     b.Property<int>("userType")
                         .HasColumnType("int");
 
                     b.HasKey("userId");
 
                     b.HasIndex("systemRoleId");
-
-                    b.HasIndex("userClientDatauserClientId");
-
-                    b.HasIndex("userProfileId");
 
                     b.ToTable("Users");
                 });
@@ -422,6 +440,30 @@ namespace App.EF.Migrations
                     b.HasKey("logActionId");
 
                     b.ToTable("LogActions");
+                });
+
+            modelBuilder.Entity("App.Shared.Models.Buyers.UserClient", b =>
+                {
+                    b.HasOne("App.Shared.Models.Users.User", null)
+                        .WithOne("userClientData")
+                        .HasForeignKey("App.Shared.Models.Buyers.UserClient", "userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("App.Shared.Models.ProductsModules._02._3_ProductWishlist.Wishlist", "userProductWishList")
+                        .WithMany()
+                        .HasForeignKey("userProductWishListId");
+
+                    b.Navigation("userProductWishList");
+                });
+
+            modelBuilder.Entity("App.Shared.Models.Buyers.UserProfile", b =>
+                {
+                    b.HasOne("App.Shared.Models.Users.User", null)
+                        .WithOne("userProfile")
+                        .HasForeignKey("App.Shared.Models.Buyers.UserProfile", "userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("App.Shared.Models.PlacesModules.Branches.Branch", b =>
@@ -632,6 +674,21 @@ namespace App.EF.Migrations
                         .HasForeignKey("categoryId");
                 });
 
+            modelBuilder.Entity("App.Shared.Models.ProductsModules._02._3_ProductWishlist.Wishlist", b =>
+                {
+                    b.HasOne("App.Shared.Models.Products.Product", "productData")
+                        .WithMany("wishlistData")
+                        .HasForeignKey("prodcutId");
+
+                    b.HasOne("App.Shared.Models.Users.User", "userData")
+                        .WithMany()
+                        .HasForeignKey("userId");
+
+                    b.Navigation("productData");
+
+                    b.Navigation("userData");
+                });
+
             modelBuilder.Entity("App.Shared.Models.Users.User", b =>
                 {
                     b.HasOne("App.Shared.Models.SystemBase.Roles.SystemRole", "roleData")
@@ -640,19 +697,7 @@ namespace App.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("App.Shared.Models.Buyers.UserClient", "userClientData")
-                        .WithMany()
-                        .HasForeignKey("userClientDatauserClientId");
-
-                    b.HasOne("App.Shared.Models.Buyers.UserProfile", "userProfile")
-                        .WithMany()
-                        .HasForeignKey("userProfileId");
-
                     b.Navigation("roleData");
-
-                    b.Navigation("userClientData");
-
-                    b.Navigation("userProfile");
                 });
 
             modelBuilder.Entity("App.Shared.Models.AdditionsModules.Shared.Colors.Color", b =>
@@ -665,6 +710,11 @@ namespace App.EF.Migrations
                     b.Navigation("productStoresData");
                 });
 
+            modelBuilder.Entity("App.Shared.Models.Products.Product", b =>
+                {
+                    b.Navigation("wishlistData");
+                });
+
             modelBuilder.Entity("App.Shared.Models.ProductsModules.Categories.Category", b =>
                 {
                     b.Navigation("productsData");
@@ -673,6 +723,13 @@ namespace App.EF.Migrations
             modelBuilder.Entity("App.Shared.Models.SystemBase.Roles.SystemRole", b =>
                 {
                     b.Navigation("usersData");
+                });
+
+            modelBuilder.Entity("App.Shared.Models.Users.User", b =>
+                {
+                    b.Navigation("userClientData");
+
+                    b.Navigation("userProfile");
                 });
 #pragma warning restore 612, 618
         }

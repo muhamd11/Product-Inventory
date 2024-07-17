@@ -7,7 +7,5 @@ namespace App.Shared.Interfaces.UsersModule.UserTypes.UserProfiles
     public interface IUserProfileValid : ITransientService
     {
         BaseValid IsValidUserProfile(UserProfile inputModel);
-
-        BaseValid IsValidUserProfileId(int userProfileId);
     }
 }
