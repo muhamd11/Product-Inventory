@@ -53,7 +53,7 @@ namespace App.EF
 
         #region UsersModule
 
-        public IBaseRepository<BaseUser> Users { get; private set; }
+        public IBaseRepository<User> Users { get; private set; }
 
         #region UserWishlists
 
@@ -99,7 +99,7 @@ namespace App.EF
 
             #region UsersModule
 
-            Users = new BaseRepository<BaseUser>(_context);
+            Users = new BaseRepository<User>(_context);
 
             #region UserWishlists
 

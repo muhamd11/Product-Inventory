@@ -2,7 +2,7 @@
 
 namespace App.Shared.Models.Users
 {
-    public class BaseUserSearchDto : BaseSearchDto
+    public class UserSearchDto : BaseSearchDto
     {
     }
 }

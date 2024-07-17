@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Api.Controllers.UsersModule.Users
 {
-    public static class UserClientsAdaptor
+    public static class UserProfilesAdaptor
     {
         public static Expression<Func<User, UserClientInfo>> SelectExpressionUserClientInfo()
         {

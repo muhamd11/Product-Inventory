@@ -15,13 +15,13 @@ namespace Api.Controllers.UsersModule.Users
         #region Members
 
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IBaseUserValid _baseUserValid;
+        private readonly IUsersValid _baseUserValid;
 
         #endregion Members
 
         #region Constructor
 
-        public UserClientValid(IUnitOfWork unitOfWork, IBaseUserValid baseUserValid)
+        public UserClientValid(IUnitOfWork unitOfWork, IUsersValid baseUserValid)
         {
             _unitOfWork = unitOfWork;
             _baseUserValid = baseUserValid;

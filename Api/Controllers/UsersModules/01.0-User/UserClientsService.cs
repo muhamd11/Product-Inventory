@@ -42,7 +42,7 @@ namespace Api.Controllers.UsersModule.Users
 
             var criteria = GenrateCriteria(inputModel);
 
-            List<Expression<Func<BaseUser, object>>> includes = [];
+            List<Expression<Func<User, object>>> includes = [];
 
             includes.Add(x => x.roleData);
             includes.Add(x => x.userClientData.userProductWishList);
@@ -52,9 +52,9 @@ namespace Api.Controllers.UsersModule.Users
             return await _unitOfWork.Users.GetAllAsync(select, criteria, paginationRequest, includes);
         }
 
-        private List<Expression<Func<BaseUser, bool>>> GenrateCriteria(UserClientSearchDTO inputModel)
+        private List<Expression<Func<User, bool>>> GenrateCriteria(UserClientSearchDTO inputModel)
         {
-            List<Expression<Func<BaseUser, bool>>> criteria = [];
+            List<Expression<Func<User, bool>>> criteria = [];
             // TODO: Complete Search Function For User
             if (inputModel.textSearch is not null)
             {
@@ -74,9 +74,9 @@ namespace Api.Controllers.UsersModule.Users
         {
             var select = UserClientsAdaptor.SelectExpressionUserClientDetails();
 
-            Expression<Func<BaseUser, bool>> criteria = (x) => x.userId == inputModel.elementId && x.userType == EnumUserType.Client;
+            Expression<Func<User, bool>> criteria = (x) => x.userId == inputModel.elementId && x.userType == EnumUserType.Client;
 
-            List<Expression<Func<BaseUser, object>>> includes = [];
+            List<Expression<Func<User, object>>> includes = [];
 
             includes.Add(x => x.roleData);
             includes.Add(x => x.userClientData.userProductWishList);
@@ -88,7 +88,7 @@ namespace Api.Controllers.UsersModule.Users
 
         public async Task<BaseActionDone<UserClientInfo>> AddOrUpdate(UserClientAddOrUpdateDTO inputModel, bool isUpdate)
         {
-            var user = _mapper.Map<BaseUser>(inputModel);
+            var user = _mapper.Map<User>(inputModel);
             var userClientData = _mapper.Map<UserClient>(inputModel.userClientData);
             if (isUpdate)
                 _unitOfWork.Users.Update(user);

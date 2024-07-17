@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Shared.Models.Users
 {
-    public class BaseUser : BaseEntity
+    public class User : BaseEntity
     {
         [Key]
         public int userId { get; set; }

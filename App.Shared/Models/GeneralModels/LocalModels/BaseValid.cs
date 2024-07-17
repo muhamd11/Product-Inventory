@@ -15,5 +15,13 @@ namespace App.Shared.Models.General.LocalModels
                 Message = message
             };
         }
+        public static BaseValid createBaseValidError(string message)
+        {
+            return new BaseValid
+            {
+                Status = EnumStatus.error,
+                Message = message
+            };
+        }
     }
 }

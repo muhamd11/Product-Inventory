@@ -3,7 +3,7 @@ using App.Shared.Models.Buyers;
 
 namespace App.Shared.Models.Users
 {
-    public class BaseUserAddOrUpdateDTO
+    public class UserAddOrUpdateDTO
     {
         public int userId { get; set; }
         public string userName { get; set; }
