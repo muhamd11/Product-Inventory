@@ -3,7 +3,6 @@ using App.Shared.Interfaces.General;
 using App.Shared.Models.General;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.General.PaginationModule;
-using App.Shared.Models.SystemBase.Roles;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -239,7 +238,6 @@ namespace App.EF.Repositories
             _context.Set<T>().AddRange(entities);
             return entities;
         }
-
 
         public async Task<IEnumerable<T>> AddRangeAsync(IEnumerable<T> entities)
         {

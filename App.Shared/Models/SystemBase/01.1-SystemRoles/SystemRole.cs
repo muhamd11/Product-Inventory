@@ -2,8 +2,6 @@
 using App.Shared.Models.SystemBase.BaseClass;
 using App.Shared.Models.Users;
 using System.Collections.Generic;
-using System.Data;
-using System.Runtime.Intrinsics.X86;
 
 namespace App.Shared.Models.SystemBase.Roles
 {
@@ -11,7 +9,7 @@ namespace App.Shared.Models.SystemBase.Roles
     {
         public SystemRole()
         {
-            usersData = new HashSet<User>();
+            usersData = new HashSet<BaseUser>();
         }
 
         public int systemRoleId { get; set; }
@@ -19,6 +17,6 @@ namespace App.Shared.Models.SystemBase.Roles
         public string systemRoleDescription { get; set; }
         public EnumUserType systemRoleUserType { get; set; }
         public bool systemRoleCanUseDefault { get; set; }
-        public ICollection<User> usersData { get; set; }
+        public ICollection<BaseUser> usersData { get; set; }
     }
 }

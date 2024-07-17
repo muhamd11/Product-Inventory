@@ -6,6 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Interfaces\UsersModule\Authorizations\**" />
+    <Compile Remove="Models\UsersModule\02-Authorizations\**" />
+    <Compile Remove="Resources\UsersModules\Authorizations\**" />
+    <EmbeddedResource Remove="Interfaces\UsersModule\Authorizations\**" />
+    <EmbeddedResource Remove="Models\UsersModule\02-Authorizations\**" />
+    <EmbeddedResource Remove="Resources\UsersModules\Authorizations\**" />
+    <None Remove="Interfaces\UsersModule\Authorizations\**" />
+    <None Remove="Models\UsersModule\02-Authorizations\**" />
+    <None Remove="Resources\UsersModules\Authorizations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="libphonenumber-csharp" Version="8.13.40" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="8.0.6" />
     <PackageReference Include="Microsoft.Extensions.Localization" Version="8.0.6">
@@ -67,6 +79,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ProductsMessages.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\UsersModules\UserTypes\UserProfilesMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserProfilesMessages.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -110,12 +127,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProductsMessages.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Interfaces\UsersModule\Authorizations\" />
-    <Folder Include="Models\UsersModule\02-Authorizations\" />
-    <Folder Include="Resources\UsersModules\Authorizations\" />
+    <EmbeddedResource Update="Resources\UsersModules\UserTypes\UserProfilesMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserProfilesMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -123,8 +123,17 @@
   <data name="errorPhoneNumberIsRequired" xml:space="preserve">
     <value>The phone number is required addded before</value>
   </data>
+  <data name="errorUserContactEmailWasAdded" xml:space="preserve">
+    <value>The user contact email is already added</value>
+  </data>
   <data name="errorUserEmailWasAdded" xml:space="preserve">
     <value>The user email is already added</value>
+  </data>
+  <data name="errorUserLoginNameIsRequired" xml:space="preserve">
+    <value>Sorry, user login name is required</value>
+  </data>
+  <data name="errorUserLoginNameWasAdded" xml:space="preserve">
+    <value>The user login name is already added</value>
   </data>
   <data name="errorUsernameIsRequired" xml:space="preserve">
     <value>Sorry, username is required</value>
@@ -134,5 +143,8 @@
   </data>
   <data name="errorUserPhoneNumberWasAdded" xml:space="preserve">
     <value>The phone number was addded before</value>
+  </data>
+  <data name="errorUserTypeInvalid" xml:space="preserve">
+    <value>Sorry, user type is invalid</value>
   </data>
 </root>

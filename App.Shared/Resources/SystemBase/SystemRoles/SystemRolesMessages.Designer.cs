@@ -77,5 +77,14 @@ namespace App.Shared.Resources.SystemBase.SystemRoles {
                 return ResourceManager.GetString("errorSystemRoleNameWasAdded", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, role was not found.
+        /// </summary>
+        public static string errorSystemRoleWasNotFound {
+            get {
+                return ResourceManager.GetString("errorSystemRoleWasNotFound", resourceCulture);
+            }
+        }
     }
 }

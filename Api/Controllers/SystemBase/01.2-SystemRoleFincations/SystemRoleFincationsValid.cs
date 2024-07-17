@@ -52,8 +52,8 @@ namespace Api.Controllers.SystemBase.SystemRoleFincations
             }
             else
                 return BaseValid.createBaseValid(GeneralMessages.errorNoData, EnumStatus.error);
-
         }
+
         #endregion Methods
     }
 }

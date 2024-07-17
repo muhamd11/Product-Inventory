@@ -5,7 +5,6 @@ using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
 using System.Threading.Tasks;
 
-
 namespace App.Shared.Interfaces.AdditionsModules.Colors
 {
     public interface IColorServices : ITransientService

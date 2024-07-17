@@ -22,6 +22,7 @@ namespace Api.Controllers.SystemBase.SystemRoles
 
         //paramters
         private readonly string systemRoleInfoData = "systemRoleInfoData";
+
         private readonly string systemRolesInfoData = "systemRolesInfoData";
         private readonly string systemRoleInfoDetails = "systemRoleInfoDetails";
 

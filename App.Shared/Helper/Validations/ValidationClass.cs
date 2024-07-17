@@ -1,4 +1,5 @@
 ﻿using PhoneNumbers;
+using System;
 using System.Text.RegularExpressions;
 
 namespace App.Shared.Helper.Validations
@@ -82,6 +83,11 @@ namespace App.Shared.Helper.Validations
             {
                 return false;
             }
+        }
+
+        public static bool IsEnumValue<TEnum>(TEnum value) where TEnum : Enum
+        {
+            return Enum.IsDefined(typeof(TEnum), value);
         }
     }
 }

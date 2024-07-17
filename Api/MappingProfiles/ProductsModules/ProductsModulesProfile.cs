@@ -15,7 +15,6 @@ namespace Api.MappingProfiles.ProductsModules
             CreateMap<Category, CategoryAddOrUpdateDTO>().ReverseMap();
             CreateMap<Product, ProductAddOrUpdateDTO>().ReverseMap();
             CreateMap<ProductStore, ProductStoreAddOrUpdateDTO>().ReverseMap();
-
         }
     }
 }

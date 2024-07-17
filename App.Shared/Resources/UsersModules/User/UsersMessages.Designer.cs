@@ -79,11 +79,38 @@ namespace App.Shared.Resources.UsersModules.User {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The user contact email is already added.
+        /// </summary>
+        public static string errorUserContactEmailWasAdded {
+            get {
+                return ResourceManager.GetString("errorUserContactEmailWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The user email is already added.
         /// </summary>
         public static string errorUserEmailWasAdded {
             get {
                 return ResourceManager.GetString("errorUserEmailWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, user login name is required.
+        /// </summary>
+        public static string errorUserLoginNameIsRequired {
+            get {
+                return ResourceManager.GetString("errorUserLoginNameIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user login name is already added.
+        /// </summary>
+        public static string errorUserLoginNameWasAdded {
+            get {
+                return ResourceManager.GetString("errorUserLoginNameWasAdded", resourceCulture);
             }
         }
         
@@ -111,6 +138,15 @@ namespace App.Shared.Resources.UsersModules.User {
         public static string errorUserPhoneNumberWasAdded {
             get {
                 return ResourceManager.GetString("errorUserPhoneNumberWasAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, user type is invalid.
+        /// </summary>
+        public static string errorUserTypeInvalid {
+            get {
+                return ResourceManager.GetString("errorUserTypeInvalid", resourceCulture);
             }
         }
     }

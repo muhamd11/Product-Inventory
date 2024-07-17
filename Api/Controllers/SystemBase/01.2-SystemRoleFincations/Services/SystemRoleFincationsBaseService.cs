@@ -42,6 +42,5 @@ namespace Api.Controllers.SystemBase._01._2_SystemRoleFincations
                 isHavePrivlage = false
             };
         }
-
     }
 }

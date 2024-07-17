@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="Controllers\UsersModules\02-Authorizations\**" />
     <Compile Remove="obj\**" />
     <Content Remove="bin\**" />
+    <Content Remove="Controllers\UsersModules\02-Authorizations\**" />
     <Content Remove="obj\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="Controllers\UsersModules\02-Authorizations\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="bin\**" />
+    <None Remove="Controllers\UsersModules\02-Authorizations\**" />
     <None Remove="obj\**" />
   </ItemGroup>
 
@@ -47,7 +51,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\UsersModules\02-Authorizations\" />
+    <Folder Include="Controllers\OnlineStoreModules\" />
+    <Folder Include="Controllers\ProductsModules\02.3-ProductWishlist\" />
   </ItemGroup>
 
 </Project>

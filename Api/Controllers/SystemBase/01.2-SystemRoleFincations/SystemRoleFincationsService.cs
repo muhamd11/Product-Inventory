@@ -1,17 +1,15 @@
 ﻿using Api.Controllers.SystemBase._01._2_SystemRoleFincations;
-using Api.Controllers.SystemBase._01._2_SystemRoleFincations.Services;
 using Api.Controllers.SystemBase.LogActions.Interfaces;
 using App.Shared;
 using App.Shared.Consts.Users;
 using App.Shared.Interfaces.SystemBase._01._2_SystemRoleFincations;
-using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.SystemBase._01._2_SystemRoleFincations.DTO;
+using App.Shared.Models.SystemBase._01._2_SystemRoleFincations.ViewModel;
 using App.Shared.Models.SystemBase.Roles;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace Api.Controllers.SystemBase.SystemRoleFincations
 {
@@ -40,7 +38,8 @@ namespace Api.Controllers.SystemBase.SystemRoleFincations
         #endregion Constructor
 
         #region Methods
-        public async Task<List<SystemRoleFincation>> GetDetails(int systemRoleId)
+
+        public async Task<List<SystemRoleFunctionInfo>> GetDetails(int systemRoleId)
         {
             // Fetch the system role based on the given ID
             var systemRole = await _unitOfWork.SystemRoles.FirstOrDefaultAsync(x => x.systemRoleId == systemRoleId);
@@ -52,7 +51,9 @@ namespace Api.Controllers.SystemBase.SystemRoleFincations
                 .ToListAsync() ?? new List<SystemRoleFincation>();
 
             // Get the detailed system role functions
-            return GetSystemRoleFincations(systemRole, systemRoleFincationsInDB);
+            var systemRoleFunctions = GetSystemRoleFincations(systemRole, systemRoleFincationsInDB);
+
+            return GetSystemRoleFunctionsGroupedByModuleId(systemRoleFunctions);
         }
 
         public async Task<BaseActionDone<List<SystemRoleFincation>>> UpdatePrivilege(SystemRoleFincationDto inputModel)
@@ -103,7 +104,6 @@ namespace Api.Controllers.SystemBase.SystemRoleFincations
             else if (systemRole.systemRoleUserType == EnumUserType.Client)
                 trueSystemRoleFincation = _systemRoleFincationsClientService.GetSystemRoleFincations();
 
-
             // Migrate input functions and trueSystemRoleFincation, updating privileges
             trueSystemRoleFincation.ForEach(z =>
             {
@@ -111,8 +111,34 @@ namespace Api.Controllers.SystemBase.SystemRoleFincations
                 z.isHavePrivlage = inputSystemRoleFincations.FirstOrDefault(x => x.funcationId == z.funcationId, new SystemRoleFincation()).isHavePrivlage;
             });
 
+
+
             return trueSystemRoleFincation;
         }
+        
+        private List<SystemRoleFunctionInfo> GetSystemRoleFunctionsGroupedByModuleId(List<SystemRoleFincation> systemRoleFincations)
+        {
+            var trueSystemRoleFincationsGroupedByModuleId = systemRoleFincations.GroupBy(x => x.moduleId);
+
+
+            List<SystemRoleFunctionInfo> systemRoleFincationsInfo = new();
+
+
+            foreach (var item in trueSystemRoleFincationsGroupedByModuleId)
+            {
+                systemRoleFincationsInfo.Add(
+                    new SystemRoleFunctionInfo
+                    {
+                        systemRoleFunctionModule = item.Key,
+                        systemRoleFunctions = item.ToList()
+                    }
+                    );
+            }
+
+            return systemRoleFincationsInfo;
+        }
+
+
 
         #endregion Methods
     }

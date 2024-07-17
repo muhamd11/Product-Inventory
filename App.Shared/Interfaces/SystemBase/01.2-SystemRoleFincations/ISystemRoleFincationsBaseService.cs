@@ -8,6 +8,7 @@ namespace App.Shared.Interfaces.SystemBase._01._2_SystemRoleFincations
     public interface ISystemRoleFincationsBaseService : ISingletonService
     {
         public List<SystemRoleFincation> GetFuncationBasic(string moduleId);
+
         //Base Funcations
         public SystemRoleFincation GetFuncationView(string moduleId);
 
@@ -20,6 +21,5 @@ namespace App.Shared.Interfaces.SystemBase._01._2_SystemRoleFincations
         public SystemRoleFincation GetFuncationFinaleDelete(string moduleId);
 
         public SystemRoleFincation GetFuncationCustomize(string moduleId, EnumFuncationsType customize);
-
     }
 }

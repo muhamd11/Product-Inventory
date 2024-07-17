@@ -159,6 +159,9 @@
   <data name="ErrorInvalidPhoneNumber" xml:space="preserve">
     <value>Sorry,  Phone Number Is Invalid</value>
   </data>
+  <data name="ErrorInvalidPhoneNumbers" xml:space="preserve">
+    <value>Sorry,  Phone Number {0} Is Invalid</value>
+  </data>
   <data name="errorInvalidTwitterUrl" xml:space="preserve">
     <value>Sorry, Invalid Twitter Url</value>
   </data>

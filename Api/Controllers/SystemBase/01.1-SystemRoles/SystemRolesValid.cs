@@ -126,7 +126,7 @@ namespace Api.Controllers.SystemBase.SystemRoles
             if (systemRole is not null)
                 return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
             else
-                return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
+                return BaseValid.createBaseValid(SystemRolesMessages.errorSystemRoleWasNotFound, EnumStatus.error);
         }
 
         public BaseValid IsValidSystemRole(SystemRoleAddOrUpdateDTO inputModel)

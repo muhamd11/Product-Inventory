@@ -187,6 +187,15 @@ namespace App.Shared.Resources.General {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry,  Phone Number {0} Is Invalid.
+        /// </summary>
+        public static string ErrorInvalidPhoneNumbers {
+            get {
+                return ResourceManager.GetString("ErrorInvalidPhoneNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry, Invalid Twitter Url.
         /// </summary>
         public static string errorInvalidTwitterUrl {

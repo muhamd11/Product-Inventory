@@ -5,6 +5,7 @@ using App.Shared.Models.AdditionsModules.Shared.Units;
 using App.Shared.Models.PlacesModules.Branches;
 using App.Shared.Models.PlacesModules.Stores;
 using App.Shared.Models.Products;
+using App.Shared.Models.ProductsModules._02._3_ProductWishlist;
 using App.Shared.Models.ProductsModules.Categories;
 using App.Shared.Models.ProductStores;
 using App.Shared.Models.SystemBase.BaseClass;
@@ -27,7 +28,7 @@ namespace App.EF
         {
         }
 
-        #region override Configrations
+        #region override Configurations
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,14 +56,22 @@ namespace App.EF
 
             foreach (var entityEntry in entries)
             {
+                var entity = (BaseEntity)entityEntry.Entity;
+
                 if (entityEntry.State == EntityState.Added)
-                    ((BaseEntity)entityEntry.Entity).createdDate = DateTime.UtcNow;
-                else if (entityEntry.State == EntityState.Modified)
-                    ((BaseEntity)entityEntry.Entity).updatedDate = DateTime.UtcNow;
-                else if (entityEntry.State == EntityState.Deleted)
                 {
-                    ((BaseEntity)entityEntry.Entity).isDeleted = true;
-                    ((BaseEntity)entityEntry.Entity).updatedDate = DateTime.UtcNow;
+                    entity.createdDate = DateTimeOffset.Now;
+                }
+
+                if (entityEntry.State == EntityState.Modified)
+                {
+                    entity.updatedDate = DateTimeOffset.Now;
+                }
+
+                if (entityEntry.State == EntityState.Deleted)
+                {
+                    entity.isDeleted = true;
+                    entity.updatedDate = DateTimeOffset.Now;
                 }
             }
 
@@ -113,7 +122,7 @@ namespace App.EF
 
         #endregion override SaveChanges
 
-        #endregion override Configrations
+        #endregion override Configurations
 
         #region DB Tables
 
@@ -149,7 +158,13 @@ namespace App.EF
 
         #region UsersModule
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<BaseUser> Users { get; set; }
+
+        #region UserWishlists
+
+        public DbSet<Wishlist> UserWishlists { get; set; }
+
+        #endregion UserWishlists
 
         #endregion UsersModule
 

@@ -13,7 +13,9 @@ namespace Api.Controllers.SystemBase.SystemRoles
             {
                 systemRoleId = systemRole.systemRoleId,
                 systemRoleName = systemRole.systemRoleName,
-                baseEntityInfo= BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole),
+                isDeleted = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).isDeleted,
+                updatedDateTime = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).updatedDateTime,
+                createdDateTime = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).createdDateTime
             };
         }
 
@@ -23,7 +25,9 @@ namespace Api.Controllers.SystemBase.SystemRoles
             {
                 systemRoleId = systemRole.systemRoleId,
                 systemRoleName = systemRole.systemRoleName,
-                baseEntityInfo = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole),
+                isDeleted = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).isDeleted,
+                updatedDateTime = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).updatedDateTime,
+                createdDateTime = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).createdDateTime
             };
         }
 
@@ -36,7 +40,9 @@ namespace Api.Controllers.SystemBase.SystemRoles
             {
                 systemRoleId = systemRole.systemRoleId,
                 systemRoleName = systemRole.systemRoleName,
-                baseEntityInfo = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole),
+                isDeleted = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).isDeleted,
+                updatedDateTime = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).updatedDateTime,
+                createdDateTime = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).createdDateTime
             };
         }
 
@@ -49,7 +55,9 @@ namespace Api.Controllers.SystemBase.SystemRoles
             {
                 systemRoleId = systemRole.systemRoleId,
                 systemRoleName = systemRole.systemRoleName,
-                baseEntityInfo = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole),
+                isDeleted = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).isDeleted,
+                updatedDateTime = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).updatedDateTime,
+                createdDateTime = BaseEntitiesAdaptor.SelectExpressionBaseEntityInfo(systemRole).createdDateTime
             };
         }
     }

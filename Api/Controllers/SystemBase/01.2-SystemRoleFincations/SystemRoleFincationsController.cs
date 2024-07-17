@@ -2,6 +2,7 @@
 using Api.Controllers.SystemBase.LogActions.Interfaces;
 using App.Shared.Consts.GeneralModels;
 using App.Shared.Models.SystemBase._01._2_SystemRoleFincations.DTO;
+using App.Shared.Models.SystemBase._01._2_SystemRoleFincations.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -43,7 +44,7 @@ namespace Api.Controllers.SystemBase.SystemRoleFincations
         [HttpGet("GetSystemRoleFincationDetails")]
         public async Task<IActionResult> GetSystemRoleFincationDetails([FromQuery] int systemRoleId)
         {
-            BaseGetDetailsResponse<List<SystemRoleFincation>> response = new();
+            BaseGetDetailsResponse<List<SystemRoleFunctionInfo>> response = new();
             var watch = Stopwatch.StartNew();
             try
             {

@@ -7,6 +7,7 @@ using App.Shared.Models.AdditionsModules.Shared.Units;
 using App.Shared.Models.PlacesModules.Branches;
 using App.Shared.Models.PlacesModules.Stores;
 using App.Shared.Models.Products;
+using App.Shared.Models.ProductsModules._02._3_ProductWishlist;
 using App.Shared.Models.ProductsModules.Categories;
 using App.Shared.Models.ProductStores;
 using App.Shared.Models.SystemBase.Roles;
@@ -52,7 +53,13 @@ namespace App.EF
 
         #region UsersModule
 
-        public IBaseRepository<User> Users { get; private set; }
+        public IBaseRepository<BaseUser> Users { get; private set; }
+
+        #region UserWishlists
+
+        public IBaseRepository<Wishlist> UserWishlists { get; private set; }
+
+        #endregion UserWishlists
 
         #endregion UsersModule
 
@@ -92,7 +99,13 @@ namespace App.EF
 
             #region UsersModule
 
-            Users = new BaseRepository<User>(_context);
+            Users = new BaseRepository<BaseUser>(_context);
+
+            #region UserWishlists
+
+            UserWishlists = new BaseRepository<Wishlist>(_context);
+
+            #endregion UserWishlists
 
             #endregion UsersModule
         }

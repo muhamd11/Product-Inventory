@@ -1,6 +1,4 @@
 ﻿using App.Shared.Models.SystemBase.BaseClass;
-using App.Shared.Models.SystemBase.Roles.ViewModel;
-using App.Shared.Models.SystemBase.Roles;
 using System.Linq.Expressions;
 
 namespace Api.Controllers.SystemBase.BaseEntitys
@@ -32,7 +30,5 @@ namespace Api.Controllers.SystemBase.BaseEntitys
 
         private static string GetDateTimeLocal(DateTimeOffset dateTimeOffset) =>
              dateTimeOffset.ToLocalTime().DateTime.ToString("yyyy/MM/dd hh:mm:ss");
-
-
     }
 }

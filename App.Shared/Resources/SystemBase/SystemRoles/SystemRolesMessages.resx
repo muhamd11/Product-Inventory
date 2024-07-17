@@ -123,4 +123,7 @@
   <data name="errorSystemRoleNameWasAdded" xml:space="preserve">
     <value>Sorry, role name was added before</value>
   </data>
+  <data name="errorSystemRoleWasNotFound" xml:space="preserve">
+    <value>Sorry, role was not found</value>
+  </data>
 </root>
