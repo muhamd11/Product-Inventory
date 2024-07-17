@@ -1,4 +1,5 @@
-﻿using App.Shared.Models.Users;
+﻿using App.Shared.Consts.SystemBase;
+using App.Shared.Models.Users;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,10 +7,12 @@ using System.Text.Json.Serialization;
 
 namespace App.Shared.Models.Buyers
 {
+    [Table($"{nameof(UserProfile)}s", Schema = nameof(EnumDatabaseSchema.Users))]
     public class UserProfile
     {
-        [Key, JsonIgnore]
-        public int userId { get; set; }
+        [JsonIgnore, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int userProfileId { get; set; }
+
         //phone-4
         public string userPhone_2 { get; set; }
 
@@ -33,5 +36,8 @@ namespace App.Shared.Models.Buyers
 
         public string userContactEmail { get; set; }
         public DateOnly userBirthDate { get; set; }
+        //relations
+        [JsonIgnore, ForeignKey(nameof(User))]
+        public int userId { get; set; }
     }
 }

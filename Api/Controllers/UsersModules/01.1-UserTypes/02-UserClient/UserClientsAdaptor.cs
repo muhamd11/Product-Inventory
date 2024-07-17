@@ -10,7 +10,6 @@ namespace Api.Controllers.UsersModule.Users
         {
             return user => new UserClientInfo
             {
-                userShippingAddress = user.userShippingAddress,
                 //TODO: Add Whislist Adaptor
             };
         }
@@ -22,7 +21,6 @@ namespace Api.Controllers.UsersModule.Users
 
             return new UserClientInfo
             {
-                userShippingAddress = user.userShippingAddress,
                 //TODO: Add Whislist Adaptor
             };
         }

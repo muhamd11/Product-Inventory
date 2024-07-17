@@ -1,9 +1,12 @@
-﻿using App.Shared.Models.ProductStores;
+﻿using App.Shared.Consts.SystemBase;
+using App.Shared.Models.ProductStores;
 using App.Shared.Models.SystemBase.BaseClass;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Shared.Models.AdditionsModules.Shared.Units
 {
+    [Table($"{nameof(Unit)}s", Schema = nameof(EnumDatabaseSchema.Shared))]
     public class Unit : BaseEntity
     {
         public Unit()

@@ -1,9 +1,13 @@
-﻿using App.Shared.Models.ProductStores;
+﻿using App.Shared.Consts.SystemBase;
+using App.Shared.Models.ProductsModules._02._3_ProductWishlist;
+using App.Shared.Models.ProductStores;
 using App.Shared.Models.SystemBase.BaseClass;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Shared.Models.AdditionsModules.Shared.Colors
 {
+    [Table($"{nameof(Color)}s", Schema = nameof(EnumDatabaseSchema.Shared))]
     public class Color : BaseEntity
     {
         public Color()

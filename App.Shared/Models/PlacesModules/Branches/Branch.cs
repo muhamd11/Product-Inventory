@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using App.Shared.Consts.SystemBase;
+using App.Shared.Models.PlacesModules.Stores;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace App.Shared.Models.PlacesModules.Branches
 {
+    [Table($"{nameof(Branch)}s", Schema = nameof(EnumDatabaseSchema.Places))]
     public class Branch
     {
         public int branchId { get; set; }

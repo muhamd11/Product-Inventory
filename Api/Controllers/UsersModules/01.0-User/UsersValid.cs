@@ -177,9 +177,9 @@ namespace Api.Controllers.UsersModule.Users
 
                 #region validUserProfile
 
-                if (inputModel.userProfile != null)
+                if (inputModel.userProfileData != null)
                 {
-                    var isValidUserProfile = _userProfileValid.IsValidUserProfile(inputModel.userProfile);
+                    var isValidUserProfile = _userProfileValid.IsValidUserProfile(inputModel.userProfileData);
                     if (isValidUserProfile.Status != EnumStatus.success)
                         return isValidUserProfile;
                 }

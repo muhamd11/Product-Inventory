@@ -1,12 +1,12 @@
 ﻿using App.Shared;
 using App.Shared.Consts.Users;
 using App.Shared.Interfaces.UsersModule.Users;
-using App.Shared.Models.Buyers;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.General.PaginationModule;
 using App.Shared.Models.Users;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Api.Controllers.UsersModule.Users
@@ -41,7 +41,6 @@ namespace Api.Controllers.UsersModule.Users
             List<Expression<Func<User, object>>> includes = [];
 
             includes.Add(x => x.roleData);
-            includes.Add(x => x.userClientData.userProductWishList);
 
             PaginationRequest paginationRequest = inputModel;
 
@@ -83,20 +82,56 @@ namespace Api.Controllers.UsersModule.Users
         public async Task<BaseActionDone<UserInfo>> AddOrUpdate(UserAddOrUpdateDTO inputModel, bool isUpdate)
         {
             var user = _mapper.Map<User>(inputModel);
-            var userClientData = _mapper.Map<UserClient>(inputModel.userClient);
+
             if (isUpdate)
                 _unitOfWork.Users.Update(user);
             else
-            {
-                user.userClientData = userClientData;
-                await _unitOfWork.Users.AddAsync(user);
-            }
+                user = await _unitOfWork.Users.AddAsync(user);
 
             var isDone = await _unitOfWork.CommitAsync();
+
+            if (isDone > 0)
+                SyncProfiles(user.userId, inputModel);
 
             var userInfo = await _unitOfWork.Users.FirstOrDefaultAsync(x => x.userId == user.userId, UsersAdaptor.SelectExpressionUserClientInfo());
 
             return BaseActionDone<UserInfo>.GenrateBaseActionDone(isDone, userInfo);
+        }
+
+        private void SyncProfiles(int userId, UserAddOrUpdateDTO inputModel)
+        {
+            //delete
+            _unitOfWork.UserProfiles.AsQueryable().Where(x => x.userId == userId).ExecuteDelete();
+            _unitOfWork.UserClients.AsQueryable().Where(x => x.userId == userId).ExecuteDelete();
+            _unitOfWork.UserEmployees.AsQueryable().Where(x => x.userId == userId).ExecuteDelete();
+            _unitOfWork.CommitAsync();
+            //add
+
+            //userProfile scope
+            {
+                //null save
+                inputModel.userProfileData = inputModel.userProfileData ?? new();
+                inputModel.userProfileData.userId = userId;
+                _unitOfWork.UserProfiles.AddAsync(inputModel.userProfileData);
+                _unitOfWork.CommitAsync();
+            }
+
+            if (inputModel.userType == EnumUserType.Client)
+            {
+                //null save
+                inputModel.userClientData = inputModel.userClientData ?? new();
+                inputModel.userClientData.userId = userId;
+                _unitOfWork.UserClients.AddAsync(inputModel.userClientData);
+                _unitOfWork.CommitAsync();
+            }
+            else if (inputModel.userType == EnumUserType.Employe)
+            {
+                //null save
+                inputModel.userEmployeeData = inputModel.userEmployeeData ?? new();
+                inputModel.userEmployeeData.userId = userId;
+                _unitOfWork.UserEmployees.AddAsync(inputModel.userEmployeeData);
+                _unitOfWork.CommitAsync();
+            }
         }
 
         public async Task<BaseActionDone<UserInfo>> DeleteAsync(BaseDeleteDto inputModel)

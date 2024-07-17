@@ -1,5 +1,6 @@
 ﻿using App.Shared.Consts.Users;
 using App.Shared.Models.Buyers;
+using App.Shared.Models.UsersModule._01._1_UserTypes.UserEmployee;
 
 namespace App.Shared.Models.Users
 {
@@ -19,7 +20,8 @@ namespace App.Shared.Models.Users
         //relations
         public int systemRoleId { get; set; }
 
-        public UserProfile userProfile { get; set; } = new();
-        public UserClient userClient { get; set; } = new();
+        public UserProfile userProfileData { get; set; } = new();
+        public UserClient userClientData { get; set; } = new();
+        public UserEmployee userEmployeeData { get; set; } = new();
     }
 }

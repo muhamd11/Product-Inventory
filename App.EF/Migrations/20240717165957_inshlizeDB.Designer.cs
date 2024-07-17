@@ -4,6 +4,7 @@ using App.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240717165957_inshlizeDB")]
+    partial class inshlizeDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -385,10 +388,10 @@ namespace App.EF.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("userEmail")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userLoginName")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userName")
                         .HasColumnType("nvarchar(max)");
@@ -397,7 +400,7 @@ namespace App.EF.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userPhone")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userPhoneCC")
                         .HasColumnType("nvarchar(max)");
@@ -414,20 +417,6 @@ namespace App.EF.Migrations
                     b.HasKey("userId");
 
                     b.HasIndex("systemRoleId");
-
-                    b.HasIndex("userEmail")
-                        .IsUnique()
-                        .HasFilter("[userEmail] IS NOT NULL");
-
-                    b.HasIndex("userLoginName")
-                        .IsUnique()
-                        .HasFilter("[userLoginName] IS NOT NULL");
-
-                    b.HasIndex("userPhone")
-                        .IsUnique()
-                        .HasFilter("[userPhone] IS NOT NULL");
-
-                    b.HasIndex("userType");
 
                     b.ToTable("Users", "Users");
                 });
@@ -475,9 +464,6 @@ namespace App.EF.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("userEmployeetId");
-
-                    b.HasIndex("userId")
-                        .IsUnique();
 
                     b.ToTable("UserEmployees", "Users");
                 });
@@ -734,15 +720,6 @@ namespace App.EF.Migrations
                     b.Navigation("roleData");
                 });
 
-            modelBuilder.Entity("App.Shared.Models.UsersModule._01._1_UserTypes.UserEmployee.UserEmployee", b =>
-                {
-                    b.HasOne("App.Shared.Models.Users.User", null)
-                        .WithOne("userEmployeeData")
-                        .HasForeignKey("App.Shared.Models.UsersModule._01._1_UserTypes.UserEmployee.UserEmployee", "userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("App.Shared.Models.AdditionsModules.Shared.Colors.Color", b =>
                 {
                     b.Navigation("productStoreData");
@@ -771,8 +748,6 @@ namespace App.EF.Migrations
             modelBuilder.Entity("App.Shared.Models.Users.User", b =>
                 {
                     b.Navigation("userClientData");
-
-                    b.Navigation("userEmployeeData");
 
                     b.Navigation("userProfile");
                 });

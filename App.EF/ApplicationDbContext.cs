@@ -2,6 +2,7 @@
 using App.Shared.Helper.Json;
 using App.Shared.Models.AdditionsModules.Shared.Colors;
 using App.Shared.Models.AdditionsModules.Shared.Units;
+using App.Shared.Models.Buyers;
 using App.Shared.Models.PlacesModules.Branches;
 using App.Shared.Models.PlacesModules.Stores;
 using App.Shared.Models.Products;
@@ -11,6 +12,7 @@ using App.Shared.Models.ProductStores;
 using App.Shared.Models.SystemBase.BaseClass;
 using App.Shared.Models.SystemBase.Roles;
 using App.Shared.Models.Users;
+using App.Shared.Models.UsersModule._01._1_UserTypes.UserEmployee;
 using App.Shared.Models.UsersModule.LogActionsModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -159,6 +161,9 @@ namespace App.EF
         #region UsersModule
 
         public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserClient> UserClients { get; set; }
+        public DbSet<UserEmployee> UserEmployees { get; set; }
 
         #region UserWishlists
 

@@ -4,6 +4,7 @@ using App.Shared;
 using App.Shared.Interfaces.General;
 using App.Shared.Models.AdditionsModules.Shared.Colors;
 using App.Shared.Models.AdditionsModules.Shared.Units;
+using App.Shared.Models.Buyers;
 using App.Shared.Models.PlacesModules.Branches;
 using App.Shared.Models.PlacesModules.Stores;
 using App.Shared.Models.Products;
@@ -12,6 +13,7 @@ using App.Shared.Models.ProductsModules.Categories;
 using App.Shared.Models.ProductStores;
 using App.Shared.Models.SystemBase.Roles;
 using App.Shared.Models.Users;
+using App.Shared.Models.UsersModule._01._1_UserTypes.UserEmployee;
 using App.Shared.Models.UsersModule.LogActionsModel;
 using System.Threading.Tasks;
 
@@ -27,6 +29,12 @@ namespace App.EF
         public IBaseRepository<Unit> Units { get; private set; }
 
         #endregion AdditionsModules
+
+        #region OnlineStoreModules
+
+        public IBaseRepository<Wishlist> UserWishlists { get; private set; }
+
+        #endregion OnlineStoreModules
 
         #region PlacesModules
 
@@ -54,12 +62,9 @@ namespace App.EF
         #region UsersModule
 
         public IBaseRepository<User> Users { get; private set; }
-
-        #region UserWishlists
-
-        public IBaseRepository<Wishlist> UserWishlists { get; private set; }
-
-        #endregion UserWishlists
+        public IBaseRepository<UserProfile> UserProfiles { get; private set; }
+        public IBaseRepository<UserClient> UserClients { get; private set; }
+        public IBaseRepository<UserEmployee> UserEmployees { get; private set; }
 
         #endregion UsersModule
 
@@ -73,6 +78,12 @@ namespace App.EF
             Units = new BaseRepository<Unit>(_context);
 
             #endregion AdditionsModules
+
+            #region OnlineStoreModules
+
+            UserWishlists = new BaseRepository<Wishlist>(_context);
+
+            #endregion OnlineStoreModules
 
             #region PlacesModules
 
@@ -100,12 +111,9 @@ namespace App.EF
             #region UsersModule
 
             Users = new BaseRepository<User>(_context);
-
-            #region UserWishlists
-
-            UserWishlists = new BaseRepository<Wishlist>(_context);
-
-            #endregion UserWishlists
+            UserProfiles = new BaseRepository<UserProfile>(_context);
+            UserClients = new BaseRepository<UserClient>(_context);
+            UserEmployees = new BaseRepository<UserEmployee>(_context);
 
             #endregion UsersModule
         }

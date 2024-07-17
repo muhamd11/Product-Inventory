@@ -1,10 +1,14 @@
-﻿using App.Shared.Models.Products;
+﻿using App.Shared.Consts.SystemBase;
+using App.Shared.Models.PlacesModules.Branches;
+using App.Shared.Models.Products;
 using App.Shared.Models.Users;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Shared.Models.ProductsModules._02._3_ProductWishlist
 {
+    [Table($"{nameof(Wishlist)}s", Schema = nameof(EnumDatabaseSchema.OnlineStores))]
+
     public class Wishlist
     {
         public int wishlistId { get; set; }

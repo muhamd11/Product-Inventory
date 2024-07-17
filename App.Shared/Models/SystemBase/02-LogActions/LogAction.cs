@@ -1,8 +1,12 @@
-﻿using System;
+﻿using App.Shared.Consts.SystemBase;
+using App.Shared.Models.UsersModule._01._1_UserTypes.UserEmployee;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Shared.Models.UsersModule.LogActionsModel
 
 {
+    [Table($"{nameof(LogAction)}s", Schema = nameof(EnumDatabaseSchema.SystemBase))]
     public class LogAction
     {
         public int logActionId { get; set; }
