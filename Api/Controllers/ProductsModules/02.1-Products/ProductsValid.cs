@@ -134,6 +134,20 @@ namespace Api.Controllers.ProductsModules.Products.Services
                 return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
         }
 
+        public BaseValid ValidProductIds(IEnumerable<int> productIds)
+        {
+            var productsIdsInDB = _unitOfWork.Products.AsQueryable()
+                .Where(x => productIds.Contains(x.productId))
+                .Select(x => x.productId).ToList();
+
+            var fakProductIds = productsIdsInDB.Except(productIds);
+            
+            if (!fakProductIds.Any())
+                return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
+            else
+                return BaseValid.createBaseValid(GeneralMessages.errorDataNotFound, EnumStatus.error);
+        }
+
         #endregion Methods
     }
 }

@@ -4,6 +4,7 @@ using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.OnlineStoreModules._02._0_Wishlist.DTO;
 using App.Shared.Models.ProductsModules._02._3._0_ProductWishlist.DTO;
 using App.Shared.Models.ProductsModules._02._3._0_ProductWishlist.ViewModel;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace App.Shared.Interfaces.OnlineStoreModules.Wishlists
@@ -12,6 +13,6 @@ namespace App.Shared.Interfaces.OnlineStoreModules.Wishlists
     {
         Task<BaseGetDataWithPagnation<WishlistInfo>> GetAllAsync(WishlistSearchDto inputModel);
         Task<WishlistInfo> GetDetails(BaseGetDetailsDto inputModel);
-        Task<BaseActionDone<WishlistInfo>> Update(WishlistUpdateDto inputModel);
+        Task<BaseActionDone<IEnumerable<WishlistInfo>>> Update(WishlistUpdateDto inputModel);
     }
 }

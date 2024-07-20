@@ -10,7 +10,7 @@ namespace App.Shared.Interfaces.General
 {
     public interface IBaseRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
+        IEnumerable<T> GetAll(); 
 
         Task<BaseGetDataWithPagnation<TResult>> GetAllAsync<TResult>(Expression<Func<T, TResult>> selection,
                                                                      List<Expression<Func<T, bool>>> criteria = null,

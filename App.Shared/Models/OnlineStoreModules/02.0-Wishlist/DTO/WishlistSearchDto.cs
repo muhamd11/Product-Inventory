@@ -9,5 +9,8 @@ namespace App.Shared.Models.OnlineStoreModules._02._0_Wishlist.DTO
 {
     public class WishlistSearchDto : BaseSearchDto
     {
+        public int? userId { get; set; }
+        public bool? userDataInclude { get; set; }
+        public bool? productDataInclude { get; set; }
     }
 }

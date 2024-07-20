@@ -4,6 +4,7 @@
     {
         nameMaxLength = 100,
         descriptionMaxLength = 500,
-        pageMaxSize = 16
+        pageMaxSize = 16,
+        maxNumberInDB = 100_000_000,
     }
 }

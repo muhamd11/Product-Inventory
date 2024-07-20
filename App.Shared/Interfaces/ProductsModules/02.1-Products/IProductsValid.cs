@@ -2,6 +2,8 @@
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.Products.DTO;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Api.Controllers.ProductsModules.Products.Interfaces
 {
@@ -16,5 +18,6 @@ namespace Api.Controllers.ProductsModules.Products.Interfaces
         public BaseValid ValidDelete(BaseDeleteDto inputModel);
 
         public BaseValid ValidProductId(int productId);
+        public BaseValid ValidProductIds(IEnumerable<int> productId);
     }
 }

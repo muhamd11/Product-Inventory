@@ -104,7 +104,7 @@ namespace Api.Controllers.OnlineStoreModules.Wishlists
         public async Task<IActionResult> UpdateWishlist([FromBody] WishlistUpdateDto inputModel)
         {
             string WishlistInfoData = "WishlistInfoData";
-            BaseActionResponse<WishlistInfo> response = new();
+            BaseActionResponse<IEnumerable<WishlistInfo>> response = new();
             var watch = Stopwatch.StartNew();
             try
             {

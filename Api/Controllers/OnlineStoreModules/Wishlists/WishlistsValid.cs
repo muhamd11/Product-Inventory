@@ -67,21 +67,34 @@ namespace Api.Controllers.OnlineStoreModules.Wishlists
 
         public BaseValid ValidUpdate(WishlistUpdateDto inputModel)
         {
-            if (inputModel.withListUpdateItems is not null && inputModel.withListUpdateItems.Count > 0)
+            if (inputModel.withListUpdateItems is not null)
             {
-                #region wishlistUserId?
+                #region userId?
+
                 var isValidWishlistUserId = ValidWishlistUserId(inputModel.userId);
                 if (isValidWishlistUserId.Status != EnumStatus.success)
                     return isValidWishlistUserId;
 
-                #endregion wishlistUserId?
+                #endregion userId?
 
-                foreach (var item in inputModel.withListUpdateItems)
+                #region prodcutIds ?
+                if (inputModel.withListUpdateItems.Count > 0)
                 {
-                    var isValidProductId = _productValid.ValidProductId(item.prodcutId);
+                    var prodcutIds = inputModel.withListUpdateItems.Select(x => x.prodcutId);
+                    var isValidProductId = _productValid.ValidProductIds(prodcutIds);
                     if (isValidProductId.Status != EnumStatus.success)
                         return isValidProductId;
                 }
+                #endregion
+
+                #region productQuantity?
+                if (inputModel.withListUpdateItems.Count > 0)
+                {
+                    //TODO Change Messages
+                    if (inputModel.withListUpdateItems.Any(x => x.productQuantity < 0 || x.productQuantity > (int)EnumMaxLength.maxNumberInDB))
+                        return BaseValid.createBaseValidError($"الرجاء ان تكون الكميات بين الصفر و اقل من {(int)EnumMaxLength.maxNumberInDB}");
+                }
+                #endregion
 
                 return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
             }
@@ -99,6 +112,5 @@ namespace Api.Controllers.OnlineStoreModules.Wishlists
         }
 
         #endregion Methods
-
     }
 }

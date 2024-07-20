@@ -10,6 +10,7 @@ using App.Shared.Models.ProductsModules._02._3_ProductWishlist;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace Api.Controllers.OnlineStoreModules.Wishlists
 {
@@ -34,17 +35,13 @@ namespace Api.Controllers.OnlineStoreModules.Wishlists
 
         #region Methods
 
+        private readonly Expression<Func<Wishlist, WishlistInfo>> select = WishlistsAdaptor.SelectExpressionWishlistInfo();
 
         public async Task<BaseGetDataWithPagnation<WishlistInfo>> GetAllAsync(WishlistSearchDto inputModel)
         {
-            var select = WishlistsAdaptor.SelectExpressionWishlistInfo();
-
             var criteria = GenrateCriteria(inputModel);
 
-            List<Expression<Func<Wishlist, object>>> includes = [];
-
-            includes.Add(x => x.productData);
-            includes.Add(x => x.userData);
+            var includes = GetIncludes(inputModel);
 
             PaginationRequest paginationRequest = inputModel;
 
@@ -57,65 +54,82 @@ namespace Api.Controllers.OnlineStoreModules.Wishlists
 
             if (inputModel.textSearch is not null)
             {
-                criteria.Add(x =>
-                x.productData.productName.Contains(inputModel.textSearch));
+                criteria.Add(x => x.productData.productName.Contains(inputModel.textSearch));
             }
 
-            if (inputModel.elemetId.HasValue)
+            if (inputModel.userId.HasValue)
                 criteria.Add(x => x.userId == inputModel.elemetId.Value);
 
             return criteria;
         }
 
+        private List<Expression<Func<Wishlist, object>>> GetIncludes(WishlistSearchDto inputModel)
+        {
+            List<Expression<Func<Wishlist, object>>> includes = [];
+
+            if (inputModel.userDataInclude == true)
+                includes.Add(x => x.userData);
+
+            if (inputModel.productDataInclude == true)
+                includes.Add(x => x.productData);
+
+            return includes;
+        }
+
+        private List<Expression<Func<Wishlist, object>>> GetAllIncludes()
+        {
+            return GetIncludes(new()
+            {
+                userDataInclude = true,
+                productDataInclude = true,
+            });
+        }
 
         public async Task<WishlistInfo> GetDetails(BaseGetDetailsDto inputModel)
         {
-            var select = WishlistsAdaptor.SelectExpressionWishlistInfo();
-
             Expression<Func<Wishlist, bool>> criteria = (x) => x.userId == inputModel.elementId;
 
-            List<Expression<Func<Wishlist, object>>> includes = [];
-
-            includes.Add(x => x.userData);
-            includes.Add(x => x.productData);
+            var includes = GetAllIncludes();
 
             var userInfo = await _unitOfWork.UserWishlists.FirstOrDefaultAsync(criteria, select, includes);
 
             return userInfo;
         }
 
-        public async Task<BaseActionDone<WishlistInfo>> Update(WishlistUpdateDto inputModel)
+        public async Task<BaseActionDone<IEnumerable<WishlistInfo>>> Update(WishlistUpdateDto inputModel)
         {
-            var wishlist = new Wishlist();
-            
-            var productCount = await _unitOfWork.UserWishlists.AsQueryable().Where(x => x.userId == inputModel.userId).CountAsync();
 
-            await _unitOfWork.UserWishlists.AsQueryable().Where(x => x.userId == inputModel.userId).ExecuteDeleteAsync();
+            await _unitOfWork.UserWishlists.AsQueryable()
+                .Where(x => x.userId == inputModel.userId)
+                .ExecuteDeleteAsync();
 
             var isDone = await _unitOfWork.CommitAsync();
 
-            foreach (var item in inputModel.withListUpdateItems)
-            {
-                wishlist.userId = inputModel.userId;
-                wishlist.productQuantity = item.productQuantity;
-                wishlist.prodcutId = item.prodcutId;
-                await _unitOfWork.UserWishlists.AddAsync(wishlist);
-                isDone = await _unitOfWork.CommitAsync();
-            }
+            List<Wishlist> wishlistsOfUser = MapDtoToWishList(inputModel);
 
+            await _unitOfWork.UserWishlists.AddRangeAsync(wishlistsOfUser);
 
-            List<Expression<Func<Wishlist, object>>> includes = [];
+            isDone = await _unitOfWork.CommitAsync();
 
-            includes.Add(x => x.productData);
-            includes.Add(x => x.userData);
+            var updatedWishlist = GetAllAsync(new() { userId = inputModel.userId }).Result.Data;
 
-            var updatedWishlist = await _unitOfWork.UserWishlists.FirstOrDefaultAsync(x => x.userId == inputModel.userId, z => WishlistsAdaptor.SelectExpressionWishlistInfo(z,productCount), includes);
-
-            return BaseActionDone<WishlistInfo>.GenrateBaseActionDone(isDone, updatedWishlist);
+            return BaseActionDone<IEnumerable<WishlistInfo>>.GenrateBaseActionDone(isDone, updatedWishlist);
         }
 
-
-
+        private List<Wishlist> MapDtoToWishList(WishlistUpdateDto inputModel)
+        {
+            var wishlist = new List<Wishlist>();
+            foreach (var item in inputModel.withListUpdateItems)
+            {
+                wishlist.Add(new()
+                {
+                    userId = inputModel.userId,
+                    prodcutId = item.prodcutId,
+                    productQuantity = item.productQuantity,
+                });
+            }
+            return wishlist;
+        }
         #endregion Methods
     }
 }
