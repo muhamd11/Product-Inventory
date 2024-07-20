@@ -3,7 +3,6 @@ using App.Shared.Consts.GeneralModels;
 using App.Shared.Interfaces.UsersModule.Users;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.Users;
-using App.Shared.Models.UsersModule._01._1_UserTypes._02_UserClientData.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

@@ -1,5 +1,4 @@
 ﻿using App.Shared.Consts.SystemBase;
-using App.Shared.Models.PlacesModules.Stores;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;

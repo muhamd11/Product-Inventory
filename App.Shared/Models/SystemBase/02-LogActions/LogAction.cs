@@ -1,5 +1,4 @@
 ﻿using App.Shared.Consts.SystemBase;
-using App.Shared.Models.UsersModule._01._1_UserTypes.UserEmployee;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 

@@ -1,5 +1,4 @@
 ﻿using App.Shared.Consts.SystemBase;
-using App.Shared.Models.ProductsModules._02._3_ProductWishlist;
 using App.Shared.Models.ProductStores;
 using App.Shared.Models.SystemBase.BaseClass;
 using System.Collections.Generic;

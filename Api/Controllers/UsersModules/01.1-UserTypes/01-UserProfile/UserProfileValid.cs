@@ -5,7 +5,6 @@ using App.Shared.Interfaces.UsersModule.UserTypes.UserProfiles;
 using App.Shared.Models.Buyers;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Resources.General;
-using App.Shared.Resources.UsersModules.UserTypes;
 
 namespace Api.Controllers.UsersModules._01._1_UserTypes._01_UserProfile
 {
@@ -48,6 +47,7 @@ namespace Api.Controllers.UsersModules._01._1_UserTypes._01_UserProfile
 
             return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
         }
+
         private bool IsValidPhoneNumberSet(string countryCode, string dialCode, string phoneNumber)
         {
             if (!string.IsNullOrEmpty(countryCode) && !string.IsNullOrEmpty(dialCode) && !string.IsNullOrEmpty(phoneNumber))

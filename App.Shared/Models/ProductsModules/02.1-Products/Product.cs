@@ -1,5 +1,4 @@
-﻿using Api.Controllers.SystemBase._01._2_SystemRoleFincations;
-using App.Shared.Consts.SystemBase;
+﻿using App.Shared.Consts.SystemBase;
 using App.Shared.Models.ProductsModules._02._3_ProductWishlist;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace App.Shared.Models.Products
 {
     [Table($"{nameof(Product)}s", Schema = nameof(EnumDatabaseSchema.Products))]
-
     public class Product
     {
         public Product()

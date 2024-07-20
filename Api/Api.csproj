@@ -51,7 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\OnlineStoreModules\" />
     <Folder Include="Controllers\ProductsModules\02.3-ProductWishlist\" />
   </ItemGroup>
 

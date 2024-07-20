@@ -4,6 +4,7 @@ using App.Shared.Interfaces.UsersModule.Users;
 using App.Shared.Models.General.BaseRequstModules;
 using App.Shared.Models.General.LocalModels;
 using App.Shared.Models.General.PaginationModule;
+using App.Shared.Models.ProductsModules._02._3_ProductWishlist;
 using App.Shared.Models.Users;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -98,13 +99,13 @@ namespace Api.Controllers.UsersModule.Users
             return BaseActionDone<UserInfo>.GenrateBaseActionDone(isDone, userInfo);
         }
 
-        private void SyncProfiles(int userId, UserAddOrUpdateDTO inputModel)
+        private async void SyncProfiles(int userId, UserAddOrUpdateDTO inputModel)
         {
             //delete
             _unitOfWork.UserProfiles.AsQueryable().Where(x => x.userId == userId).ExecuteDelete();
             _unitOfWork.UserClients.AsQueryable().Where(x => x.userId == userId).ExecuteDelete();
             _unitOfWork.UserEmployees.AsQueryable().Where(x => x.userId == userId).ExecuteDelete();
-            _unitOfWork.CommitAsync();
+            await _unitOfWork.CommitAsync();
             //add
 
             //userProfile scope
@@ -112,8 +113,8 @@ namespace Api.Controllers.UsersModule.Users
                 //null save
                 inputModel.userProfileData = inputModel.userProfileData ?? new();
                 inputModel.userProfileData.userId = userId;
-                _unitOfWork.UserProfiles.AddAsync(inputModel.userProfileData);
-                _unitOfWork.CommitAsync();
+                await _unitOfWork.UserProfiles.AddAsync(inputModel.userProfileData);
+                await _unitOfWork.CommitAsync();
             }
 
             if (inputModel.userType == EnumUserType.Client)
@@ -121,16 +122,16 @@ namespace Api.Controllers.UsersModule.Users
                 //null save
                 inputModel.userClientData = inputModel.userClientData ?? new();
                 inputModel.userClientData.userId = userId;
-                _unitOfWork.UserClients.AddAsync(inputModel.userClientData);
-                _unitOfWork.CommitAsync();
+                await _unitOfWork.UserClients.AddAsync(inputModel.userClientData);
+                await _unitOfWork.CommitAsync();
             }
             else if (inputModel.userType == EnumUserType.Employe)
             {
                 //null save
                 inputModel.userEmployeeData = inputModel.userEmployeeData ?? new();
                 inputModel.userEmployeeData.userId = userId;
-                _unitOfWork.UserEmployees.AddAsync(inputModel.userEmployeeData);
-                _unitOfWork.CommitAsync();
+                await _unitOfWork.UserEmployees.AddAsync(inputModel.userEmployeeData);
+                await _unitOfWork.CommitAsync();
             }
         }
 

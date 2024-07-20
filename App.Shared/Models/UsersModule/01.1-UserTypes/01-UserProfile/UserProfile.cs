@@ -36,6 +36,7 @@ namespace App.Shared.Models.Buyers
 
         public string userContactEmail { get; set; }
         public DateOnly userBirthDate { get; set; }
+
         //relations
         [JsonIgnore, ForeignKey(nameof(User))]
         public int userId { get; set; }

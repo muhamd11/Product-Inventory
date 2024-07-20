@@ -29,9 +29,10 @@ namespace App.Shared
         #endregion AdditionsModules
 
         #region OnlineStoreModules
-         IBaseRepository<Wishlist> UserWishlists { get;}
 
-        #endregion
+        IBaseRepository<Wishlist> UserWishlists { get; }
+
+        #endregion OnlineStoreModules
 
         #region PlacesModules
 

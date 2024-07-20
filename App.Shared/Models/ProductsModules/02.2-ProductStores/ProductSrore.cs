@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace App.Shared.Models.ProductStores
 {
     [Table($"{nameof(ProductStore)}s", Schema = nameof(EnumDatabaseSchema.Products))]
-
     public class ProductStore
     {
         public int productStoreId { get; set; }

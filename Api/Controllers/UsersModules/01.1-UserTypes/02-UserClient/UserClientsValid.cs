@@ -26,20 +26,15 @@ namespace Api.Controllers.UsersModule.Users
 
         #region Methods
 
-
         public BaseValid IsValidUserClient(UserClient inputModel)
         {
             if (inputModel is not null)
             {
-                #region ValidateUserClient
-
-                #endregion ValidateUserClient
                 return BaseValid.createBaseValid(GeneralMessages.operationSuccess, EnumStatus.success);
             }
             else
                 return BaseValid.createBaseValid(GeneralMessages.errorNoData, EnumStatus.error);
         }
-
 
         #endregion Methods
     }

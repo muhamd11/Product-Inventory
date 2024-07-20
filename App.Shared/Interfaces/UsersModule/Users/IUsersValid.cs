@@ -16,6 +16,5 @@ namespace Api.Controllers.UsersModules.Users.Interfaces
         public BaseValid ValidDelete(BaseDeleteDto inputModel);
 
         public BaseValid IsValidUserId(int userId);
-
     }
 }

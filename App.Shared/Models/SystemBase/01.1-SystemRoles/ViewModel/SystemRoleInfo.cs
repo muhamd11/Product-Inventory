@@ -1,6 +1,5 @@
 ﻿using App.Shared.Consts.Users;
 using App.Shared.Models.SystemBase.BaseClass;
-using System.Text.Json.Serialization;
 
 namespace App.Shared.Models.SystemBase.Roles.ViewModel
 {

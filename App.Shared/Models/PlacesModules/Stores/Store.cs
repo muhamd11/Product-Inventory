@@ -1,5 +1,4 @@
 ﻿using App.Shared.Consts.SystemBase;
-using App.Shared.Models.ProductStores;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -8,7 +7,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace App.Shared.Models.PlacesModules.Stores
 {
     [Table($"{nameof(Store)}s", Schema = nameof(EnumDatabaseSchema.Places))]
-
     public class Store
     {
         public int storeId { get; set; }

@@ -1,5 +1,4 @@
-﻿using Api.Controllers.SystemBase._01._2_SystemRoleFincations;
-using App.Shared.Consts.SystemBase;
+﻿using App.Shared.Consts.SystemBase;
 using App.Shared.Models.Products;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,7 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace App.Shared.Models.ProductsModules.Categories
 {
     [Table($"Categories", Schema = nameof(EnumDatabaseSchema.Products))]
-
     public class Category
     {
         public Category()
